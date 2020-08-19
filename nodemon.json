@@ -1,0 +1,9 @@
+{
+  "ignore": ["**/*.test.ts", ".git", "node_modules", "build"],
+  "watch": ["src", "package.json", "tsconfig.json"],
+  "exec": "yarn build-incremental",
+  "ext": "ts",
+  "events": {
+    "crash": "yarn notify -t 'toolbelt-template-renderer: dev-watch' -m 'build failed'"
+  }
+}

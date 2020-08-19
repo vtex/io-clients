@@ -1,0 +1,9 @@
+.vscode
+coverage
+node_modules
+/build
+*-debug.log
+*-error.log
+package-lock.json
+.DS_Store
+.eslintcache

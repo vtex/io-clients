@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "types": ["node", "jest"],
+    "target": "es2019",
+    "lib": ["es2019"],
+    "outDir": "build",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "declaration": true,
+    "skipLibCheck": true,
+    "strict": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["**/*.test.ts", "**/__tests__"]
+}
