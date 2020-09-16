@@ -1,13 +1,13 @@
 {
   "name": "@vtex/clients",
-  "version": "0.0.4-beta",
+  "version": "0.0.5-beta",
   "description": "",
   "main": "build/index.js",
   "scripts": {
     "format": "prettier --config ./.prettierrc --write \"**/*.{ts,js,json}\"",
     "lint": "eslint ./src --cache --ext .ts --config .eslintrc",
     "format-lint": "yarn format && yarn lint",
-    "watch": "yarn build-clean && yarn nodemon",
+    "watch": "yarn build-clean",
     "build-clean": "rm -rf build",
     "build-incremental": "tsc --incremental",
     "build": "yarn build-clean && tsc",
