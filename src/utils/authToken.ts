@@ -1,7 +1,14 @@
 import { IOContext } from '@vtex/api'
 
 export const getAuthToken = (ctx: IOContext, method: AuthMethod) => {
-  if (method === 'ADMIN_TOKEN') return ctx.adminUserAuthToken
-  if (method === 'STORE_TOKEN') return ctx.storeUserAuthToken
-  if (method === 'AUTH_TOKEN') return ctx.authToken
+  switch (method) {
+    case 'STORE_TOKEN':
+      return ctx.storeUserAuthToken
+    case 'ADMIN_TOKEN':
+      return ctx.adminUserAuthToken
+    case 'AUTH_TOKEN':
+      return ctx.authToken
+    default:
+      return null
+  }
 }

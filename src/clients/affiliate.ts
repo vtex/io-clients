@@ -11,10 +11,6 @@ export class Affiliate extends JanusClient {
   constructor(ctx: IOContext, options?: InstanceOptions) {
     super(ctx, {
       ...options,
-      headers: {
-        ...options?.headers,
-        ...(ctx.authToken ? { VtexIdclientAutCookie: ctx.authToken } : null),
-      },
     })
   }
 

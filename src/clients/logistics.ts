@@ -11,16 +11,13 @@ export class Logistics extends JanusClient {
   constructor(ctx: IOContext, options?: InstanceOptions) {
     super(ctx, {
       ...options,
-      headers: {
-        ...options?.headers,
-        ...(ctx.authToken ? { VtexIdclientAutCookie: ctx.authToken } : null),
-      },
     })
   }
 
   public getDockById(dockId: string, authMethod: AuthMethod = 'AUTH_TOKEN', tracingConfig?: RequestTracingConfig) {
     const metric = 'logistics-getDockById'
     const token = getAuthToken(this.context, authMethod)
+
     return this.http.get(routes.docks(dockId), {
       headers: token
         ? {
