@@ -1,6 +1,6 @@
 {
   "name": "@vtex/clients",
-  "version": "0.0.4-beta",
+  "version": "0.0.5-beta",
   "description": "",
   "main": "build/index.js",
   "scripts": {
