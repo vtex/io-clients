@@ -1,27 +1,31 @@
-import { InstanceOptions, IOContext, RequestTracingConfig } from '@vtex/api'
+import { InstanceOptions, IOContext, JanusClient, RequestTracingConfig } from '@vtex/api'
 
+import { getAuthToken } from '../utils/authToken'
 import { createTracing } from '../utils/tracing'
-import VtexCommerce from './vtexCommerce'
 
 const catalogRouteEndpoint = (skuId: string) => `/pvt/stockkeepingunit/${skuId}`
 
-export class Catalog extends VtexCommerce {
+export class Catalog extends JanusClient {
   constructor(ctx: IOContext, options?: InstanceOptions) {
-    super(ctx, 'catalog', {
+    super(ctx, {
       ...options,
       headers: {
-        ...(ctx.authToken
-          ? {
-              VtexIdclientAutCookie: ctx.authToken,
-            }
-          : {}),
+        ...options?.headers,
+        ...(ctx.authToken ? { VtexIdclientAutCookie: ctx.authToken } : null),
       },
     })
   }
 
-  public getSkuById(skuId: string, tracingConfig?: RequestTracingConfig) {
+  public getSkuById(skuId: string, authMethod: AuthMethod = 'AUTH_TOKEN', tracingConfig?: RequestTracingConfig) {
     const metric = 'catalog-getSkuMetric'
+    const token = getAuthToken(this.context, authMethod)
+
     return this.http.get<OrderFormConfiguration>(catalogRouteEndpoint(skuId), {
+      headers: token
+        ? {
+            VtexIdclientAutCookie: token,
+          }
+        : {},
       metric,
       tracing: createTracing(metric, tracingConfig),
     })

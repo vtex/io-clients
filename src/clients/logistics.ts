@@ -1,29 +1,32 @@
-import { InstanceOptions, IOContext, RequestTracingConfig } from '@vtex/api'
+import { RequestTracingConfig, JanusClient, IOContext, InstanceOptions } from '@vtex/api'
 
+import { getAuthToken } from '../utils/authToken'
 import { createTracing } from '../utils/tracing'
-import VtexCommerce from './vtexCommerce'
 
 const routes = {
   docks: (dockId: string) => `pvt/configuration/docks/${dockId}`,
 }
 
-export class Logistics extends VtexCommerce {
+export class Logistics extends JanusClient {
   constructor(ctx: IOContext, options?: InstanceOptions) {
-    super(ctx, 'logistics', {
+    super(ctx, {
       ...options,
       headers: {
-        ...(ctx.adminUserAuthToken
-          ? {
-              VtexIdclientAutCookie: ctx.adminUserAuthToken,
-            }
-          : {}),
+        ...options?.headers,
+        ...(ctx.authToken ? { VtexIdclientAutCookie: ctx.authToken } : null),
       },
     })
   }
 
-  public getDockById(dockId: string, tracingConfig?: RequestTracingConfig) {
+  public getDockById(dockId: string, authMethod: AuthMethod = 'AUTH_TOKEN', tracingConfig?: RequestTracingConfig) {
     const metric = 'logistics-getDockById'
+    const token = getAuthToken(this.context, authMethod)
     return this.http.get(routes.docks(dockId), {
+      headers: token
+        ? {
+            VtexIdclientAutCookie: token,
+          }
+        : {},
       metric,
       tracing: createTracing(metric, tracingConfig),
     })

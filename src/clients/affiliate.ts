@@ -1,5 +1,6 @@
 import { InstanceOptions, IOContext, JanusClient, RequestTracingConfig } from '@vtex/api'
 
+import { getAuthToken } from '../utils/authToken'
 import { createTracing } from '../utils/tracing'
 
 const routes = {
@@ -11,17 +12,19 @@ export class Affiliate extends JanusClient {
     super(ctx, {
       ...options,
       headers: {
-        VtexIdclientAutCookie: ctx.authToken,
         ...options?.headers,
+        ...(ctx.authToken ? { VtexIdclientAutCookie: ctx.authToken } : null),
       },
     })
   }
 
   public registerAffiliate(
     { name, id, salesChannelId, searchEndpoint }: AffiliateInput,
+    authMethod: AuthMethod = 'AUTH_TOKEN',
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'affiliate-registerAffiliate'
+    const token = getAuthToken(this.context, authMethod)
     return this.http.put(
       routes.affiliate(id),
       {
@@ -35,6 +38,11 @@ export class Affiliate extends JanusClient {
         useSellerPaymentMethod: false,
       },
       {
+        headers: token
+          ? {
+              VtexIdclientAutCookie: token,
+            }
+          : {},
         metric,
         tracing: createTracing(metric, tracingConfig),
       }
