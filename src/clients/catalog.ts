@@ -3,7 +3,7 @@ import { InstanceOptions, IOContext, JanusClient, RequestTracingConfig } from '@
 import { getAuthToken } from '../utils/authToken'
 import { createTracing } from '../utils/tracing'
 
-const catalogRouteEndpoint = (skuId: string) => `/pvt/stockkeepingunit/${skuId}`
+const catalogRouteEndpoint = (skuId: string) => `/api/catalog/pvt/stockkeepingunit/${skuId}`
 
 export class Catalog extends JanusClient {
   constructor(ctx: IOContext, options?: InstanceOptions) {
