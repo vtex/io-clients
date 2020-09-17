@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.6-beta] - 2020-09-17
+
 ## [0.0.5-beta] - 2020-09-16
 ### Added
 - Parameter to the clients' methods to choose which authorization token to use
