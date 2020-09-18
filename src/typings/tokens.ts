@@ -1,1 +1,1 @@
-type AuthMethod = 'AUTH_TOKEN' | 'STORE_TOKEN' | 'ADMIN_TOKEN'
+export type AuthMethod = 'AUTH_TOKEN' | 'STORE_TOKEN' | 'ADMIN_TOKEN'
