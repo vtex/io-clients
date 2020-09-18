@@ -1,4 +1,4 @@
-interface LogisticAddress {
+export interface LogisticAddress {
   country: { acronym: string; name: string }
   location: { latitude: number; longitude: number }
   postalCode: string
@@ -11,7 +11,7 @@ interface LogisticAddress {
   reference: string
 }
 
-interface LogisticPickupPoint {
+export interface LogisticPickupPoint {
   name: string
   address: LogisticAddress
   id: string
@@ -26,24 +26,24 @@ interface LogisticPickupPoint {
   pickupHolidays: any[]
 }
 
-interface Paging {
+export interface Paging {
   page: number
   perPage: number
   total: number
   pages: number
 }
 
-interface LogisticOutput {
+export interface LogisticOutput {
   items: LogisticPickupPoint[]
   paging: Paging
 }
 
-interface NearPickupPointsArgs {
+export interface NearPickupPointsArgs {
   lat: string
   long: string
   maxDistance: number | undefined
 }
 
-interface PickupPointArgs {
+export interface PickupPointArgs {
   id: string
 }

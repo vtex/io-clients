@@ -1,5 +1,6 @@
 import { RequestTracingConfig, JanusClient, IOContext, InstanceOptions } from '@vtex/api'
 
+import { LogisticOutput, LogisticPickupPoint } from '../typings/logistics'
 import { getAuthToken } from '../utils/authToken'
 import { createTracing } from '../utils/tracing'
 

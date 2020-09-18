@@ -1,4 +1,4 @@
-interface OrderChanged {
+export interface OrderChanged {
   type: string
   invoiceNumber: string
   invoiceUrl: string
@@ -16,7 +16,7 @@ interface OrderChanged {
   cfop: any
 }
 
-interface OrderModifyTracking {
+export interface OrderModifyTracking {
   id: string
   tracking_provider: string
   tracking_number?: string
@@ -24,26 +24,26 @@ interface OrderModifyTracking {
   ship_note?: string
 }
 
-interface OrderRefund {
+export interface OrderRefund {
   id: string
   reason_code: number
   reason_note?: string
 }
 
-interface OrderItemChanged {
+export interface OrderItemChanged {
   id: string
   quantity: number
   price: number
 }
 
-interface ApprovedOrder {
+export interface ApprovedOrder {
   date: string
   marketplaceOrderId: string
   orderId: string
   receipt: string
 }
 
-interface OrderDetail {
+export interface OrderDetail {
   items: OrderItemDetail[]
   isCreatedAsync?: boolean
   marketplaceOrderId: string
@@ -53,7 +53,7 @@ interface OrderDetail {
   shippingData: ShippingDetail
 }
 
-interface ClientProfileDetail {
+export interface ClientProfileDetail {
   corporateDocument?: string
   corporateName?: string
   corporatePhone?: string
@@ -69,7 +69,7 @@ interface ClientProfileDetail {
   isCorporate?: boolean
 }
 
-interface OrderItemDetail {
+export interface OrderItemDetail {
   id: number
   price: number
   quantity: number
@@ -85,17 +85,17 @@ interface OrderItemDetail {
   isGift?: boolean
 }
 
-interface ItemAttachment {
+export interface ItemAttachment {
   name: string
   content: any
 }
 
-interface ShippingDetail {
+export interface ShippingDetail {
   address: AddressDetail
   logisticsInfo: LogisticsInfo[]
 }
 
-interface AddressDetail {
+export interface AddressDetail {
   addressId?: string
   addressType?: string
   receiverName: string
@@ -110,7 +110,7 @@ interface AddressDetail {
   number?: string
 }
 
-interface LogisticsInfo {
+export interface LogisticsInfo {
   shippingEstimate: string
   itemIndex: number
   lockTTL: string
@@ -130,7 +130,7 @@ interface LogisticsInfo {
   polygonName?: any
 }
 
-interface OrderDetailResponse {
+export interface OrderDetailResponse {
   orderId: string
   sequence: number
   marketplaceOrderId: string
@@ -178,22 +178,22 @@ interface OrderDetailResponse {
   invoicedDate: string
 }
 
-interface CustomData {
+export interface CustomData {
   customApps: CustomApps[]
 }
 
-interface CustomApps {
+export interface CustomApps {
   fields: any
   id: string
   major: number
 }
 
-interface ItemTotal {
+export interface ItemTotal {
   id: string
   name: string
   value: number
 }
-interface PriceTag {
+export interface PriceTag {
   name: string
   value: number
   isPercentual: boolean
@@ -201,7 +201,7 @@ interface PriceTag {
   rawValue: number
 }
 
-interface AdditionalInfo {
+export interface AdditionalInfo {
   brandName: string
   brandId: string
   categoriesIds: string
@@ -213,7 +213,7 @@ interface AdditionalInfo {
   offeringTypeId: any
 }
 
-interface Dimension {
+export interface Dimension {
   cubicweight: number
   height: number
   length: number
@@ -221,7 +221,7 @@ interface Dimension {
   width: number
 }
 
-interface OrderItemDetailResponse {
+export interface OrderItemDetailResponse {
   uniqueId: string
   id: string
   productId: string
@@ -261,7 +261,7 @@ interface OrderItemDetailResponse {
   productCategories: any
 }
 
-interface PaymentDetail {
+export interface PaymentDetail {
   id: any
   paymentSystem: string
   paymentSystemName: string
@@ -286,24 +286,24 @@ interface PaymentDetail {
   connectorResponses: any
 }
 
-interface TransactionDetail {
+export interface TransactionDetail {
   isActive: boolean
   transactionId: any
   merchantName: any
   payments: PaymentDetail[]
 }
 
-interface PaymentData {
+export interface PaymentData {
   transactions: TransactionDetail[]
 }
 
-interface Marketplace {
+export interface Marketplace {
   baseURL: string
   isCertified: boolean
   name: string
 }
 
-interface StorePreferencesData {
+export interface StorePreferencesData {
   countryCode: string
   currencyCode: string
   currencyFormatInfo: CurrencyFormatInfo
@@ -312,7 +312,7 @@ interface StorePreferencesData {
   timeZone: string
 }
 
-interface CurrencyFormatInfo {
+export interface CurrencyFormatInfo {
   CurrencyDecimalDigits: number
   CurrencyDecimalSeparator: string
   CurrencyGroupSeparator: string
@@ -320,23 +320,23 @@ interface CurrencyFormatInfo {
   StartsWithCurrencySymbol: boolean
 }
 
-interface SellerDetail {
+export interface SellerDetail {
   id: string
   name: string
   logo: string
 }
 
-interface CourierStatus {
+export interface CourierStatus {
   status: string
   finished: boolean
   data: any
 }
 
-interface PackageAttachment {
+export interface PackageAttachment {
   packages: PackageDetail[]
 }
 
-interface PackageDetail {
+export interface PackageDetail {
   items: ItemPackage[]
   courier: string
   invoiceNumber: string
@@ -352,7 +352,7 @@ interface PackageDetail {
   cfop: any
 }
 
-interface ItemPackage {
+export interface ItemPackage {
   itemIndex: number
   quantity: number
   price: number

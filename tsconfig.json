@@ -10,6 +10,11 @@
     "skipLibCheck": true,
     "strict": true
   },
-  "include": ["src/**/*"],
+
+  "include": [
+    "**/typings",
+    "**/typings.d.ts",
+    "**/*.ts"
+  ],
   "exclude": ["**/*.test.ts", "**/__tests__"]
 }

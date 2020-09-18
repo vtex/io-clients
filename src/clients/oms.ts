@@ -1,5 +1,7 @@
 import { InstanceOptions, IOContext, JanusClient, RequestTracingConfig } from '@vtex/api'
 
+import { OrderDetailResponse } from '../typings/oms'
+import { OrderFormConfiguration } from '../typings/orderForm'
 import { getAuthToken } from '../utils/authToken'
 import { createTracing } from '../utils/tracing'
 
