@@ -2,6 +2,7 @@ import { InstanceOptions, IOContext, JanusClient, RequestTracingConfig } from '@
 
 import { getAuthToken } from '../utils/authToken'
 import { createTracing } from '../utils/tracing'
+import { AuthMethod } from '../typings/tokens'
 
 const routes = {
   affiliate: (id: string) => `${routes.base()}/${id}`,

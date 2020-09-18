@@ -3,6 +3,7 @@ import { InstanceOptions, IOContext, JanusClient, RequestTracingConfig } from '@
 import { OrderFormConfiguration } from '../typings/orderForm'
 import { getAuthToken } from '../utils/authToken'
 import { createTracing } from '../utils/tracing'
+import { AuthMethod } from '../typings/tokens'
 
 const catalogRouteEndpoint = (skuId: string) => `/api/catalog/pvt/stockkeepingunit/${skuId}`
 

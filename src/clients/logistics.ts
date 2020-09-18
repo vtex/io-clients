@@ -3,6 +3,7 @@ import { RequestTracingConfig, JanusClient, IOContext, InstanceOptions } from '@
 import { LogisticOutput, LogisticPickupPoint } from '../typings/logistics'
 import { getAuthToken } from '../utils/authToken'
 import { createTracing } from '../utils/tracing'
+import { AuthMethod } from '../typings/tokens'
 
 export class Logistics extends JanusClient {
   constructor(ctx: IOContext, options?: InstanceOptions) {
