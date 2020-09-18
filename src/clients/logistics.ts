@@ -1,9 +1,9 @@
 import { RequestTracingConfig, JanusClient, IOContext, InstanceOptions } from '@vtex/api'
 
-import { LogisticOutput, LogisticPickupPoint } from '../typings/logistics'
 import { getAuthToken } from '../utils/authToken'
 import { createTracing } from '../utils/tracing'
 import { AuthMethod } from '../typings/tokens'
+import { LogisticOutput, LogisticPickupPoint } from '../typings/logistics'
 
 export class Logistics extends JanusClient {
   constructor(ctx: IOContext, options?: InstanceOptions) {

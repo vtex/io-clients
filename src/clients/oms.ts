@@ -1,10 +1,10 @@
 import { InstanceOptions, IOContext, JanusClient, RequestTracingConfig } from '@vtex/api'
 
-import { OrderDetailResponse } from '../typings/oms'
-import { OrderFormConfiguration } from '../typings/orderForm'
 import { getAuthToken } from '../utils/authToken'
 import { createTracing } from '../utils/tracing'
 import { AuthMethod } from '../typings/tokens'
+import { OrderDetailResponse } from '../typings/oms'
+import { OrderFormConfiguration } from '../typings/orderForm'
 
 export class OMS extends JanusClient {
   constructor(ctx: IOContext, options?: InstanceOptions) {
