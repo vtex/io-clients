@@ -7,6 +7,7 @@ const routes = {
   affiliate: (id: string) => `${routes.base()}/${id}`,
   base: () => `api/fulfillment/pvt/affiliates`,
 }
+
 export class Affiliate extends JanusClient {
   constructor(ctx: IOContext, options?: InstanceOptions) {
     super(ctx, {
@@ -21,6 +22,7 @@ export class Affiliate extends JanusClient {
   ) {
     const metric = 'affiliate-registerAffiliate'
     const token = getAuthToken(this.context, authMethod)
+
     return this.http.put(
       routes.affiliate(id),
       {

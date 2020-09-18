@@ -1,4 +1,4 @@
-interface OrderFormConfiguration {
+export interface OrderFormConfiguration {
   paymentConfiguration: PaymentConfiguration
   taxConfiguration: TaxConfiguration | null
   minimumQuantityAccumulatedForItems: number
@@ -12,21 +12,21 @@ interface OrderFormConfiguration {
   recaptchaValidation: boolean
 }
 
-interface PaymentConfiguration {
+export interface PaymentConfiguration {
   requiresAuthenticationForPreAuthorizedPaymentOption: boolean
   allowInstallmentsMerge: boolean
   blockPaymentSession: boolean
   paymentSystemToCheckFirstInstallment: boolean
 }
 
-interface TaxConfiguration {
+export interface TaxConfiguration {
   allowExecutionAfterErrors: boolean
   authorizationHeader: string
   integratedAuthentication: boolean
   url: string | null
 }
 
-interface App {
+export interface App {
   fields: string[]
   id: string
   major: number

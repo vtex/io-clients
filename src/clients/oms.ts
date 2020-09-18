@@ -1,5 +1,7 @@
 import { InstanceOptions, IOContext, JanusClient, RequestTracingConfig } from '@vtex/api'
 
+import { OrderDetailResponse } from '../typings/oms'
+import { OrderFormConfiguration } from '../typings/orderForm'
 import { getAuthToken } from '../utils/authToken'
 import { createTracing } from '../utils/tracing'
 
@@ -29,7 +31,7 @@ export class OMS extends JanusClient {
     const metric = 'oms-order'
     const token = getAuthToken(this.context, authMethod)
 
-    return this.http.get<OrderFormConfiguration>(this.routes.order(id), {
+    return this.http.get<OrderDetailResponse>(this.routes.order(id), {
       headers: token
         ? {
             VtexIdclientAutCookie: token,
