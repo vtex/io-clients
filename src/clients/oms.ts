@@ -29,7 +29,7 @@ export class OMS extends JanusClient {
     const metric = 'oms-order'
     const token = getAuthToken(this.context, authMethod)
 
-    return this.http.get<OrderFormConfiguration>(this.routes.order(id), {
+    return this.http.get<OrderDetailResponse>(this.routes.order(id), {
       headers: token
         ? {
             VtexIdclientAutCookie: token,
