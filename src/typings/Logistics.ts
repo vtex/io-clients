@@ -11,7 +11,7 @@ interface LogisticAddress {
   reference: string
 }
 
-export interface LogisticPickupPoint {
+interface LogisticPickupPoint {
   name: string
   address: LogisticAddress
   id: string
@@ -33,17 +33,17 @@ interface Paging {
   pages: number
 }
 
-export interface LogisticOutput {
+interface LogisticOutput {
   items: LogisticPickupPoint[]
   paging: Paging
 }
 
-export interface NearPickupPointsArgs {
+interface NearPickupPointsArgs {
   lat: string
   long: string
   maxDistance: number | undefined
 }
 
-export interface PickupPointArgs {
+interface PickupPointArgs {
   id: string
 }
