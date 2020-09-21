@@ -49,7 +49,7 @@ Here are the available options for that parameter:
 |-------------|--------------------------------------------------|
 | AUTH_TOKEN  | Use the current app's token _(default)_          |
 | STORE_TOKEN | Use the current authenticated store user's token |
-| Logistics   | Use the current authenticated admin user's token |
+| ADMIN_TOKEN   | Use the current authenticated admin user's token |
 
 ## API Reference
 
