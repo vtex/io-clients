@@ -11,6 +11,6 @@
     "strict": true
   },
 
-  "include": ["**/typings", "**/typings.d.ts", "**/*.ts"],
+  "include": ["**/*.ts"],
   "exclude": ["**/*.test.ts", "**/__tests__"]
 }

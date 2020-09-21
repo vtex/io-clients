@@ -1,8 +1,9 @@
 import { InstanceOptions, IOContext, JanusClient, RequestTracingConfig } from '@vtex/api'
 
-import { OrderFormConfiguration } from '../typings/orderForm'
 import { getAuthToken } from '../utils/authToken'
 import { createTracing } from '../utils/tracing'
+import { AuthMethod } from '../typings/tokens'
+import { OrderFormConfiguration } from '../typings/orderForm'
 
 const catalogRouteEndpoint = (skuId: string) => `/api/catalog/pvt/stockkeepingunit/${skuId}`
 
