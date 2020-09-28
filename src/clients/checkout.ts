@@ -46,7 +46,9 @@ export class Checkout extends JanusClient {
     })
   }
 
+  // eslint-disable-next-line max-params
   public setSingleCustomData(
+    orderFormId: string,
     customData: SingleCustomData,
     authMethod: AuthMethod = 'AUTH_TOKEN',
     tracingConfig?: RequestTracingConfig
@@ -54,17 +56,21 @@ export class Checkout extends JanusClient {
     const metric = 'checkout-setOrderForm'
     const token = getAuthToken(this.context, authMethod)
 
-    const { appId, appFieldName, orderFormId, body } = customData
+    const { appId, appFieldName, value } = customData
 
-    return this.http.put(this.routes.singleCustomData(orderFormId, appId, appFieldName), body, {
-      headers: token
-        ? {
-            VtexIdclientAutCookie: token,
-          }
-        : {},
-      metric,
-      tracing: createTracing(metric, tracingConfig),
-    })
+    return this.http.put(
+      this.routes.singleCustomData(orderFormId, appId, appFieldName),
+      { value },
+      {
+        headers: token
+          ? {
+              VtexIdclientAutCookie: token,
+            }
+          : {},
+        metric,
+        tracing: createTracing(metric, tracingConfig),
+      }
+    )
   }
 
   private get routes() {
