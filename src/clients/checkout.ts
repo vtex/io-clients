@@ -46,11 +46,34 @@ export class Checkout extends JanusClient {
     })
   }
 
+  public setSingleCustomData(
+    customData: SingleCustomData,
+    authMethod: AuthMethod = 'AUTH_TOKEN',
+    tracingConfig?: RequestTracingConfig
+  ) {
+    const metric = 'checkout-setOrderForm'
+    const token = getAuthToken(this.context, authMethod)
+
+    const { appId, appFieldName, orderFormId, body } = customData
+
+    return this.http.put(this.routes.singleCustomData(orderFormId, appId, appFieldName), body, {
+      headers: token
+        ? {
+            VtexIdclientAutCookie: token,
+          }
+        : {},
+      metric,
+      tracing: createTracing(metric, tracingConfig),
+    })
+  }
+
   private get routes() {
     const baseURL = '/api/checkout'
 
     return {
       orderFormConfiguration: `${baseURL}/pvt/configuration/orderForm`,
+      singleCustomData: (orderFormId: string, appId: string, appFieldName: string) =>
+        `${baseURL}/pub/orderForm/${orderFormId}/customData/${appId}/${appFieldName}`,
     }
   }
 }
