@@ -13,29 +13,32 @@ This exports **Clients** and Typescript **typings** to help you connecting a VTE
 | Catalog         | `getSkuById`                                                |
 | Logistics       | `getDockById`, `pickupById`, `nearPickupPoints`, `shipping` |
 | OMS             | `userLastOrder`, `order`                                    |
+| Checkout        | `getOrderFormConfiguration`, `setOrderFormConfiguration`, `setSingleCustomData` |
+| OMS Proxy       | `orders`, `orderFormId`, `customData`, `register`           |
+---
 
-
+In order to know a little bit more about the methods that the `OMS Proxy` client implements, you can check out [this document](https://www.notion.so/How-to-use-the-OMS-API-Proxy-application-e82f11ff896247c58a7e2e658d631516). It's important to emphasize that to use this client, you will have to declare a dependency and a policy, this is also describe in the document mentioned above.
 
 ## How to use
 
 1. Install this package on the `node/` folder of your VTEX IO app:
-```
-yarn add @vtex/clients
-```
+    ```
+    yarn add @vtex/clients
+    ```
 2. Import the individual Client on your app's Clients configuration (`node/clients/index.ts`):
-```typescript
-import { Catalog } from '@vtex/clients'
-```
+    ```typescript
+    import { Catalog } from '@vtex/clients'
+    ```
 3. Add a new getter on the `Clients` class with the imported Client:
-```typescript
-  public get catalog() {
-    return this.getOrSet('catalog', Catalog)
-  }
-```
+    ```typescript
+      public get catalog() {
+        return this.getOrSet('catalog', Catalog)
+      }
+    ```
 4. Now, you can use the available client's on the app's _resolver functions_!
-```typescript
-ctx.clients.catalog.getSkuById(...)
-```
+    ```typescript
+    ctx.clients.catalog.getSkuById(...)
+    ```
 
 For more information, read [How to use and create Clients on VTEX IO](https://www.notion.so/How-to-use-and-create-Clients-on-VTEX-IO-1dbd20c928c642d0ba059d5efbe7874b).
 
