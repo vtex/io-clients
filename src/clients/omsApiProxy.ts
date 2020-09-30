@@ -1,4 +1,5 @@
 import { AppClient, InstanceOptions, IOContext } from '@vtex/api'
+import { OrderDetailResponse } from '../typings'
 
 /**
  * Used to perform calls on OMS API in the VTEX infrastructure, to which you must declare an outbound policy.
@@ -14,19 +15,19 @@ export class OMSProxy extends AppClient {
     super('vtex.oms-api-proxy@0.x', context, options)
   }
 
-  public orders(id: string): Promise<string> {
-    return this.http.get(`/orders/${id}`, {
+  public orders(id: string) {
+    return this.http.get<OrderDetailResponse>(`/orders/${id}`, {
       metric: 'orders-get',
     })
   }
 
-  public orderFormId(id: string): Promise<string> {
-    return this.http.get(`orders/${id}/orderFormId`, {
+  public orderFormId(id: string) {
+    return this.http.get<string>(`orders/${id}/orderFormId`, {
       metric: 'orderFormId-get',
     })
   }
 
-  public customData(id: string, body: CustomData): Promise<string> {
+  public customData(id: string, body: CustomData): Promise<OrderDetailResponse> {
     return this.http.post(`orders/${id}/customData`, body, {
       metric: 'customData-post',
     })

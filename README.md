@@ -7,17 +7,17 @@ This exports **Clients** and Typescript **typings** to help you connecting a VTE
 
 ## Available Clients
 
-| **Client Name** | **Implemented Methods**                                     |
-|-----------------|-------------------------------------------------------------|
-| Affiliate       | `registerAffiliate`                                         |
-| Catalog         | `getSkuById`                                                |
-| Logistics       | `getDockById`, `pickupById`, `nearPickupPoints`, `shipping` |
-| OMS             | `userLastOrder`, `order`                                    |
-| Checkout        | `getOrderFormConfiguration`, `setOrderFormConfiguration`, `setSingleCustomData` |
-| OMS Proxy       | `orders`, `orderFormId`, `customData`, `register`           |
+| **Client Name** | **Implemented Methods**                                                         | Observations      |
+|-----------------|---------------------------------------------------------------------------------| -                 |
+| Affiliate       | `registerAffiliate`                                                             | -                 |
+| Catalog         | `getSkuById`                                                                    | -                 |
+| Logistics       | `getDockById`, `pickupById`, `nearPickupPoints`, `shipping`                     | -                 |
+| OMS             | `userLastOrder`, `order`                                                        | -                 |
+| Checkout        | `getOrderFormConfiguration`, `setOrderFormConfiguration`, `setSingleCustomData` | -                 |
+| OMS Proxy       | `orders`, `orderFormId`, `customData`, `register`                               | You will have to declare a dependency and a policy on your app. You can check out [this document](https://www.notion.so/How-to-use-the-OMS-API-Proxy-application-e82f11ff896247c58a7e2e658d631516). 
 ---
 
-In order to know a little bit more about the methods that the `OMS Proxy` client implements, you can check out [this document](https://www.notion.so/How-to-use-the-OMS-API-Proxy-application-e82f11ff896247c58a7e2e658d631516). It's important to emphasize that to use this client, you will have to declare a dependency and a policy, this is also describe in the document mentioned above.
+
 
 ## How to use
 
