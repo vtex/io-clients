@@ -1,4 +1,5 @@
 import { AppClient, InstanceOptions, IOContext } from '@vtex/api'
+
 import { OrderDetailResponse } from '../typings'
 
 /**
