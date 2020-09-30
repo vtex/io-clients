@@ -16,6 +16,10 @@
     "ci:test": "yarn test --ci",
     "ci:prettier-check": "prettier --check --config ./.prettierrc \"**/*.{ts,js,json}\""
   },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/vtex/commerce-io-clients"
+  },
   "files": [
     "build"
   ],

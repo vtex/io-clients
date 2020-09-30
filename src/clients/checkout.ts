@@ -32,7 +32,7 @@ export class Checkout extends JanusClient {
     authMethod: AuthMethod = 'AUTH_TOKEN',
     tracingConfig?: RequestTracingConfig
   ) {
-    const metric = 'checkout-setOrderForm'
+    const metric = 'checkout-setOrderFormConfiguration'
     const token = getAuthToken(this.context, authMethod)
 
     return this.http.post(this.routes.orderFormConfiguration, body, {
@@ -53,7 +53,7 @@ export class Checkout extends JanusClient {
     authMethod: AuthMethod = 'AUTH_TOKEN',
     tracingConfig?: RequestTracingConfig
   ) {
-    const metric = 'checkout-setOrderForm'
+    const metric = 'checkout-setSingleCustomData'
     const token = getAuthToken(this.context, authMethod)
 
     const { appId, appFieldName, value } = customData
