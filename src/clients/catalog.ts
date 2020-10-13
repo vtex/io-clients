@@ -2,6 +2,7 @@ import { InstanceOptions, IOContext, JanusClient, RequestTracingConfig } from '@
 
 import { getAuthToken } from '../utils/authToken'
 import { createTracing } from '../utils/tracing'
+import { checkSellerInformation } from '../utils/seller'
 import { AuthMethod } from '../typings/tokens'
 import { OrderFormConfiguration } from '../typings/orderForm'
 
@@ -59,71 +60,23 @@ export class Catalog extends JanusClient {
   }
 
   public createSeller(
-    {
-      SellerId,
-      Name,
-      Email,
-      Description = '',
-      ExchangeReturnPolicy = '',
-      DeliveryPolicy = '',
-      UseHybridPaymentOptions,
-      UserName = '',
-      Password = '',
-      SecurityPrivacyPolicy = '',
-      CNPJ = '',
-      CSCIdentification,
-      ArchiveId = '',
-      UrlLogo = '',
-      ProductCommissionPercentage,
-      FreightCommissionPercentage,
-      FulfillmentEndpoint,
-      CatalogSystemEndpoint,
-      IsActive = true,
-      FulfillmentSellerId = '',
-      SellerType = 1,
-      IsBetterScope = false,
-    }: SellerInput,
+    seller: SellerInput,
     authMethod: AuthMethod = 'AUTH_TOKEN',
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'catalog-createSeller'
     const token = getAuthToken(this.context, authMethod)
 
-    return this.http.post(
-      routes.seller(SellerId),
-      {
-        ArchiveId,
-        CNPJ,
-        CSCIdentification,
-        CatalogSystemEndpoint,
-        DeliveryPolicy,
-        Description,
-        Email,
-        ExchangeReturnPolicy,
-        FreightCommissionPercentage,
-        FulfillmentEndpoint,
-        FulfillmentSellerId,
-        IsActive,
-        IsBetterScope,
-        Name,
-        Password,
-        ProductCommissionPercentage,
-        SecutityPrivacyPolicy: SecurityPrivacyPolicy,
-        SellerId,
-        SellerType,
-        UrlLogo,
-        UseHybridPaymentOptions,
-        UserName,
-      },
-      {
-        headers: token
-          ? {
-              VtexIdclientAutCookie: token,
-            }
-          : {},
-        metric,
-        tracing: createTracing(metric, tracingConfig),
-      }
-    )
+    const sellerInfo = checkSellerInformation(seller)
+
+    return this.http.post(routes.seller(sellerInfo.SellerId), seller, {
+      headers: token
+        ? {
+            VtexIdclientAutCookie: token,
+          }
+        : {},
+      metric,
+      tracing: createTracing(metric, tracingConfig),
+    })
   }
 }
