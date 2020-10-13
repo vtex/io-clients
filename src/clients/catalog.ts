@@ -38,11 +38,8 @@ export class Catalog extends JanusClient {
     })
   }
 
-  // eslint-disable-next-line max-params
   public changeNotification(
-    sellerId: string,
-    skuId: string,
-    authMethod: AuthMethod = 'AUTH_TOKEN',
+    { sellerId, skuId, authMethod = 'AUTH_TOKEN' }: ChangeNotificationArgs,
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'catalog-changeNotification'
@@ -79,4 +76,10 @@ export class Catalog extends JanusClient {
       tracing: createTracing(metric, tracingConfig),
     })
   }
+}
+
+interface ChangeNotificationArgs {
+  sellerId: string
+  skuId: string
+  authMethod: AuthMethod
 }
