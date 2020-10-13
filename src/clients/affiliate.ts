@@ -4,6 +4,11 @@ import { getAuthToken } from '../utils/authToken'
 import { createTracing } from '../utils/tracing'
 import { AuthMethod } from '../typings/tokens'
 
+const baseURL = 'api/fulfillment/pvt/affiliates'
+const routes = {
+  affiliate: (id: string) => `${baseURL}/${id}`,
+}
+
 export class Affiliate extends JanusClient {
   constructor(ctx: IOContext, options?: InstanceOptions) {
     super(ctx, {
@@ -20,7 +25,7 @@ export class Affiliate extends JanusClient {
     const token = getAuthToken(this.context, authMethod)
 
     return this.http.put(
-      this.routes.affiliate(id),
+      routes.affiliate(id),
       {
         followUpEmail: 'mock@mock.com',
         id,
@@ -41,13 +46,5 @@ export class Affiliate extends JanusClient {
         tracing: createTracing(metric, tracingConfig),
       }
     )
-  }
-
-  private get routes() {
-    const baseURL = 'api/fulfillment/pvt/affiliates'
-
-    return {
-      affiliate: (id: string) => `${baseURL}/${id}`,
-    }
   }
 }

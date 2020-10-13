@@ -4,6 +4,13 @@ import { getAuthToken } from '../utils/authToken'
 import { createTracing } from '../utils/tracing'
 import { AuthMethod } from '../typings/tokens'
 
+const routes = {
+  sellerSkuId: (sellerId: string, sellerSkuId: string) => `/${sellerId}/${sellerSkuId}`,
+  versions: (sellerId: string, sellerSkuId: string) => `/${sellerId}/${sellerSkuId}/versions`,
+  versionById: (sellerId: string, sellerSkuId: string, version: string) =>
+    `/${sellerId}/${sellerSkuId}/versions/${version}`,
+}
+
 export class Suggestions extends ExternalClient {
   constructor(ctx: IOContext, options?: InstanceOptions) {
     super(`https://api.vtex.com/${ctx.account}/suggestions/`, ctx, {
@@ -36,7 +43,7 @@ export class Suggestions extends ExternalClient {
     const metric = 'suggestions-getSuggestionById'
     const token = getAuthToken(this.context, authMethod)
 
-    return this.http.get<Suggestion>(this.routes.sellerSkuId(sellerId, sellerSkuId), {
+    return this.http.get<Suggestion>(routes.sellerSkuId(sellerId, sellerSkuId), {
       headers: token
         ? {
             VtexIdclientAutCookie: token,
@@ -58,7 +65,7 @@ export class Suggestions extends ExternalClient {
     const metric = 'suggestions-sendSkuSuggestion'
     const token = getAuthToken(this.context, authMethod)
 
-    return this.http.put(this.routes.sellerSkuId(sellerId, sellerSkuId), body, {
+    return this.http.put(routes.sellerSkuId(sellerId, sellerSkuId), body, {
       headers: token
         ? {
             VtexIdclientAutCookie: token,
@@ -79,7 +86,7 @@ export class Suggestions extends ExternalClient {
     const metric = 'suggestions-deleteSkuSuggestion'
     const token = getAuthToken(this.context, authMethod)
 
-    return this.http.delete(this.routes.sellerSkuId(sellerId, sellerSkuId), {
+    return this.http.delete(routes.sellerSkuId(sellerId, sellerSkuId), {
       headers: token
         ? {
             VtexIdclientAutCookie: token,
@@ -100,7 +107,7 @@ export class Suggestions extends ExternalClient {
     const metric = 'suggestions-deleteSkuSuggestion'
     const token = getAuthToken(this.context, authMethod)
 
-    return this.http.get(this.routes.versions(sellerId, sellerSkuId), {
+    return this.http.get(routes.versions(sellerId, sellerSkuId), {
       headers: token
         ? {
             VtexIdclientAutCookie: token,
@@ -122,7 +129,7 @@ export class Suggestions extends ExternalClient {
     const metric = 'suggestions-deleteSkuSuggestion'
     const token = getAuthToken(this.context, authMethod)
 
-    return this.http.get(this.routes.versionById(sellerId, sellerSkuId, version), {
+    return this.http.get(routes.versionById(sellerId, sellerSkuId, version), {
       headers: token
         ? {
             VtexIdclientAutCookie: token,
@@ -131,14 +138,5 @@ export class Suggestions extends ExternalClient {
       metric,
       tracing: createTracing(metric, tracingConfig),
     })
-  }
-
-  private get routes() {
-    return {
-      sellerSkuId: (sellerId: string, sellerSkuId: string) => `/${sellerId}/${sellerSkuId}`,
-      versions: (sellerId: string, sellerSkuId: string) => `/${sellerId}/${sellerSkuId}/versions`,
-      versionById: (sellerId: string, sellerSkuId: string, version: string) =>
-        `/${sellerId}/${sellerSkuId}/versions/${version}`,
-    }
   }
 }

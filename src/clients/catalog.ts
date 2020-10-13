@@ -5,6 +5,16 @@ import { createTracing } from '../utils/tracing'
 import { AuthMethod } from '../typings/tokens'
 import { OrderFormConfiguration } from '../typings/orderForm'
 
+const baseURL = '/api/catalog'
+const baseURLLegacy = '/api/catalog_system'
+
+const routes = {
+  getSkuById: (skuId: string) => `${baseURL}/pvt/stockkeepingunit/${skuId}`,
+  changeNotification: (sellerId: string, skuId: string) =>
+    `${baseURLLegacy}/pvt/skuseller/changenotification/${sellerId}/${skuId}`,
+  seller: (sellerId: string) => `${baseURLLegacy}/pvt/seller/${sellerId}`,
+}
+
 export class Catalog extends JanusClient {
   constructor(ctx: IOContext, options?: InstanceOptions) {
     super(ctx, {
@@ -16,7 +26,7 @@ export class Catalog extends JanusClient {
     const metric = 'catalog-getSkuMetric'
     const token = getAuthToken(this.context, authMethod)
 
-    return this.http.get<OrderFormConfiguration>(this.routes.getSkuById(skuId), {
+    return this.http.get<OrderFormConfiguration>(routes.getSkuById(skuId), {
       headers: token
         ? {
             VtexIdclientAutCookie: token,
@@ -37,7 +47,7 @@ export class Catalog extends JanusClient {
     const metric = 'catalog-changeNotification'
     const token = getAuthToken(this.context, authMethod)
 
-    return this.http.post(this.routes.changeNotification(sellerId, skuId), {
+    return this.http.post(routes.changeNotification(sellerId, skuId), {
       headers: token
         ? {
             VtexIdclientAutCookie: token,
@@ -80,7 +90,7 @@ export class Catalog extends JanusClient {
     const token = getAuthToken(this.context, authMethod)
 
     return this.http.post(
-      this.routes.seller(SellerId),
+      routes.seller(SellerId),
       {
         ArchiveId,
         CNPJ,
@@ -115,17 +125,5 @@ export class Catalog extends JanusClient {
         tracing: createTracing(metric, tracingConfig),
       }
     )
-  }
-
-  private get routes() {
-    const baseURL = '/api/catalog'
-    const baseURLLegacy = '/api/catalog_system'
-
-    return {
-      getSkuById: (skuId: string) => `${baseURL}/pvt/stockkeepingunit/${skuId}`,
-      changeNotification: (sellerId: string, skuId: string) =>
-        `${baseURLLegacy}/pvt/skuseller/changenotification/${sellerId}/${skuId}`,
-      seller: (sellerId: string) => `${baseURLLegacy}/pvt/seller/${sellerId}`,
-    }
   }
 }

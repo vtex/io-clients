@@ -5,6 +5,13 @@ import { AuthMethod } from '../typings/tokens'
 import { createTracing } from '../utils/tracing'
 import { OrderFormConfiguration } from '../typings/orderForm'
 
+const baseURL = '/api/checkout'
+const routes = {
+  orderFormConfiguration: `${baseURL}/pvt/configuration/orderForm`,
+  singleCustomData: (orderFormId: string, appId: string, appFieldName: string) =>
+    `${baseURL}/pub/orderForm/${orderFormId}/customData/${appId}/${appFieldName}`,
+}
+
 export class Checkout extends JanusClient {
   constructor(ctx: IOContext, options?: InstanceOptions) {
     super(ctx, {
@@ -16,7 +23,7 @@ export class Checkout extends JanusClient {
     const metric = 'checkout-getOrderFormConfiguration'
     const token = getAuthToken(this.context, authMethod)
 
-    return this.http.get<OrderFormConfiguration>(this.routes.orderFormConfiguration, {
+    return this.http.get<OrderFormConfiguration>(routes.orderFormConfiguration, {
       headers: token
         ? {
             VtexIdclientAutCookie: token,
@@ -35,7 +42,7 @@ export class Checkout extends JanusClient {
     const metric = 'checkout-setOrderFormConfiguration'
     const token = getAuthToken(this.context, authMethod)
 
-    return this.http.post(this.routes.orderFormConfiguration, body, {
+    return this.http.post(routes.orderFormConfiguration, body, {
       headers: token
         ? {
             VtexIdclientAutCookie: token,
@@ -59,7 +66,7 @@ export class Checkout extends JanusClient {
     const { appId, appFieldName, value } = customData
 
     return this.http.put(
-      this.routes.singleCustomData(orderFormId, appId, appFieldName),
+      routes.singleCustomData(orderFormId, appId, appFieldName),
       { value },
       {
         headers: token
@@ -71,15 +78,5 @@ export class Checkout extends JanusClient {
         tracing: createTracing(metric, tracingConfig),
       }
     )
-  }
-
-  private get routes() {
-    const baseURL = '/api/checkout'
-
-    return {
-      orderFormConfiguration: `${baseURL}/pvt/configuration/orderForm`,
-      singleCustomData: (orderFormId: string, appId: string, appFieldName: string) =>
-        `${baseURL}/pub/orderForm/${orderFormId}/customData/${appId}/${appFieldName}`,
-    }
   }
 }
