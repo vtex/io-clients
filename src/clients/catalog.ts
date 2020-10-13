@@ -69,7 +69,7 @@ export class Catalog extends JanusClient {
 
     const sellerInfo = checkSellerInformation(seller)
 
-    return this.http.post(routes.seller(sellerInfo.SellerId), seller, {
+    return this.http.post(routes.seller(sellerInfo.SellerId), sellerInfo, {
       headers: token
         ? {
             VtexIdclientAutCookie: token,
