@@ -4,11 +4,6 @@ import { getAuthToken } from '../utils/authToken'
 import { createTracing } from '../utils/tracing'
 import { AuthMethod } from '../typings/tokens'
 
-const routes = {
-  affiliate: (id: string) => `${routes.base()}/${id}`,
-  base: () => `api/fulfillment/pvt/affiliates`,
-}
-
 export class Affiliate extends JanusClient {
   constructor(ctx: IOContext, options?: InstanceOptions) {
     super(ctx, {
@@ -25,7 +20,7 @@ export class Affiliate extends JanusClient {
     const token = getAuthToken(this.context, authMethod)
 
     return this.http.put(
-      routes.affiliate(id),
+      this.routes.affiliate(id),
       {
         followUpEmail: 'mock@mock.com',
         id,
@@ -47,10 +42,12 @@ export class Affiliate extends JanusClient {
       }
     )
   }
-}
-interface AffiliateInput {
-  name: string
-  id: string
-  salesChannelId: string
-  searchEndpoint: string
+
+  private get routes() {
+    const baseURL = 'api/fulfillment/pvt/affiliates'
+
+    return {
+      affiliate: (id: string) => `${baseURL}/${id}`,
+    }
+  }
 }
