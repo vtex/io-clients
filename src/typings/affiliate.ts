@@ -1,4 +1,4 @@
-interface AffiliateInput {
+export interface AffiliateInput {
   name: string
   id: string
   salesChannelId: string

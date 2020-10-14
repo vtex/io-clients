@@ -1,4 +1,6 @@
-export const checkSellerInformation = (sellerInformation: SellerInput) => {
+import { Seller } from '../typings/catalog'
+
+export const checkSellerInformation = (sellerInformation: Seller) => {
   const seller = {
     Description: '',
     ExchangeReturnPolicy: '',

@@ -1,4 +1,4 @@
-interface SellerInput {
+export interface Seller {
   SellerId: string
   Name: string
   Email: string
@@ -23,19 +23,19 @@ interface SellerInput {
   IsBetterScope?: boolean
 }
 
-interface Product {
+export interface Product {
   Id: number
   RefId: string
   Name: string
 }
 
-interface ProductSpecification {
+export interface ProductSpecification {
   Value: string[]
   Id: number
   Name: string
 }
 
-interface SKU {
+export interface SKU {
   Id: number
   Name: string
   RefId: string

@@ -3,6 +3,7 @@ import { InstanceOptions, IOContext, JanusClient, RequestTracingConfig } from '@
 import { getAuthToken } from '../utils/authToken'
 import { createTracing } from '../utils/tracing'
 import { AuthMethod } from '../typings/tokens'
+import { AffiliateInput } from '../typings/affiliate'
 
 const baseURL = 'api/fulfillment/pvt/affiliates'
 const routes = {

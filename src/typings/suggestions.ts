@@ -1,9 +1,9 @@
-interface SuggestionsResponse {
+export interface SuggestionsResponse {
   Data: Suggestion[]
   Next: any
 }
 
-interface Suggestion {
+export interface Suggestion {
   SellerId: string
   SellerName: string
   LatestVersionId: string
@@ -22,7 +22,7 @@ interface Suggestion {
   Pricing: DatumPricing
 }
 
-interface Content {
+export interface Content {
   ProductId: string
   ProductName: string
   NameComplete: string
@@ -51,18 +51,18 @@ interface Content {
   hookEndpoint: string
 }
 
-interface Image {
+export interface Image {
   ImageUrl: string
   ImageName: string
 }
 
-interface ContentPricing {
+export interface ContentPricing {
   Currency: string
   CurrencySymbol: string
   SalePrice: number
 }
 
-interface Mapping {
+export interface Mapping {
   CategoryId?: string
   BrandId?: string
   CategoryName?: string
@@ -71,7 +71,7 @@ interface Mapping {
   BrandName?: string
 }
 
-interface DatumPricing {
+export interface DatumPricing {
   currency: string
   salePrice: number
   currencySymbol: string

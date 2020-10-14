@@ -4,6 +4,7 @@ import { getAuthToken } from '../utils/authToken'
 import { AuthMethod } from '../typings/tokens'
 import { createTracing } from '../utils/tracing'
 import { OrderFormConfiguration } from '../typings/orderForm'
+import { SingleCustomData } from '../typings/checkout'
 
 const baseURL = '/api/checkout'
 const routes = {

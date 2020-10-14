@@ -3,6 +3,7 @@ import { ExternalClient, InstanceOptions, IOContext, RequestTracingConfig } from
 import { getAuthToken } from '../utils/authToken'
 import { createTracing } from '../utils/tracing'
 import { AuthMethod } from '../typings/tokens'
+import { Suggestion, SuggestionsResponse } from '../typings/suggestions'
 
 const routes = {
   sellerSkuId: (sellerId: string, sellerSkuId: string) => `/${sellerId}/${sellerSkuId}`,
