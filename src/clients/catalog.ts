@@ -41,14 +41,14 @@ export class Catalog extends JanusClient {
   }
 
   public changeNotification(
-    { sellerId, skuId, authMethod = 'AUTH_TOKEN' }: ChangeNotificationArgs,
+    { sellerId, sellerSkuId, authMethod = 'AUTH_TOKEN' }: ChangeNotificationArgs,
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'catalog-changeNotification'
     const token = getAuthToken(this.context, authMethod)
 
     return this.http.post(
-      routes.changeNotification(sellerId, skuId),
+      routes.changeNotification(sellerId, sellerSkuId),
       {},
       {
         headers: token
@@ -96,6 +96,6 @@ export class Catalog extends JanusClient {
 
 interface ChangeNotificationArgs {
   sellerId: string
-  skuId: string
-  authMethod: AuthMethod
+  sellerSkuId: string
+  authMethod?: AuthMethod
 }
