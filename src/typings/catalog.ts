@@ -8,7 +8,7 @@ export interface Seller {
   UseHybridPaymentOptions: boolean
   UserName?: string
   Password?: string
-  SecurityPrivacyPolicy?: string
+  SecutityPrivacyPolicy?: string
   CNPJ?: string
   CSCIdentification: string
   ArchiveId?: string

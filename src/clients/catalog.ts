@@ -47,21 +47,24 @@ export class Catalog extends JanusClient {
     const metric = 'catalog-changeNotification'
     const token = getAuthToken(this.context, authMethod)
 
-    return this.http.post(routes.changeNotification(sellerId, skuId), {
-      headers: token
-        ? {
-            VtexIdclientAutCookie: token,
-          }
-        : {},
-      metric,
-      tracing: createTracing(metric, tracingConfig),
-    })
+    return this.http.post(
+      routes.changeNotification(sellerId, skuId),
+      {},
+      {
+        headers: token
+          ? {
+              VtexIdclientAutCookie: token,
+            }
+          : {},
+        metric,
+        tracing: createTracing(metric, tracingConfig),
+      }
+    )
   }
 
   public createSeller(seller: Seller, authMethod: AuthMethod = 'AUTH_TOKEN', tracingConfig?: RequestTracingConfig) {
     const metric = 'catalog-createSeller'
     const token = getAuthToken(this.context, authMethod)
-
     const sellerInfo = checkSellerInformation(seller)
 
     return this.http.post(routes.seller(sellerInfo.SellerId), sellerInfo, {

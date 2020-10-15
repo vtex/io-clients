@@ -7,7 +7,7 @@ export const checkSellerInformation = (sellerInformation: Seller) => {
     DeliveryPolicy: '',
     UserName: '',
     Password: '',
-    SecurityPrivacyPolicy: '',
+    SecutityPrivacyPolicy: '',
     CNPJ: '',
     ArchiveId: '',
     UrlLogo: '',
