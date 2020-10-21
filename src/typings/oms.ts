@@ -359,3 +359,32 @@ export interface ItemPackage {
   description: string
   unitMultiplier: number
 }
+
+export interface NotificationResponse {
+  date: string
+  orderId: string
+  receipt: string
+}
+
+export interface NotificationInput {
+  type: string
+  invoiceNumber: string
+  courier: string
+  trackingNumber: string
+  trackingUrl: string
+  items: Item[]
+  issuanceDate: Date
+  invoiceValue: number
+}
+
+export interface Item {
+  id: string
+  quantity: number
+  price: number
+}
+
+export interface CancelResponse {
+  date: string
+  orderId: string
+  receipt: string
+}

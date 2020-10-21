@@ -5,6 +5,16 @@ import { createTracing } from '../utils/tracing'
 import { AuthMethod } from '../typings/tokens'
 import { LogisticOutput, LogisticPickupPoint } from '../typings/logistics'
 
+const baseURL = '/api/logistics'
+
+const routes = {
+  docks: (dockId: string) => `${baseURL}/pvt/configuration/docks/${dockId}`,
+  shipping: `${baseURL}/pub/shipping/configuration`,
+  nearPickupPoints: (lat: string, long: string, maxDistance: number) =>
+    `${baseURL}/pvt/configuration/pickuppoints/_search?&page=1&pageSize=100&lat=${lat}&lon=${long}&maxDistance=${maxDistance}`,
+  pickUpById: (id: string) => `${baseURL}/pvt/configuration/pickuppoints/${id}`,
+}
+
 export class Logistics extends JanusClient {
   constructor(ctx: IOContext, options?: InstanceOptions) {
     super(ctx, {
@@ -16,7 +26,7 @@ export class Logistics extends JanusClient {
     const metric = 'logistics-getDockById'
     const token = getAuthToken(this.context, authMethod)
 
-    return this.http.get(this.routes.docks(dockId), {
+    return this.http.get(routes.docks(dockId), {
       headers: token
         ? {
             VtexIdclientAutCookie: token,
@@ -31,7 +41,7 @@ export class Logistics extends JanusClient {
     const metric = 'logistics-pickupById'
     const token = getAuthToken(this.context, authMethod)
 
-    return this.http.get<LogisticPickupPoint>(this.routes.pickUpById(id), {
+    return this.http.get<LogisticPickupPoint>(routes.pickUpById(id), {
       headers: token
         ? {
             VtexIdclientAutCookie: token,
@@ -53,7 +63,7 @@ export class Logistics extends JanusClient {
     const metric = 'logistics-nearPickupPoints'
     const token = getAuthToken(this.context, authMethod)
 
-    return this.http.get<LogisticOutput>(this.routes.nearPickupPoints(lat, long, maxDistance), {
+    return this.http.get<LogisticOutput>(routes.nearPickupPoints(lat, long, maxDistance), {
       headers: token
         ? {
             VtexIdclientAutCookie: token,
@@ -68,7 +78,7 @@ export class Logistics extends JanusClient {
     const metric = 'logistics-shipping'
     const token = getAuthToken(this.context, authMethod)
 
-    return this.http.get<LogisticPickupPoint>(this.routes.shipping, {
+    return this.http.get<LogisticPickupPoint>(routes.shipping, {
       headers: token
         ? {
             VtexIdclientAutCookie: token,
@@ -77,17 +87,5 @@ export class Logistics extends JanusClient {
       metric,
       tracing: createTracing(metric, tracingConfig),
     })
-  }
-
-  private get routes() {
-    const baseURL = '/api/logistics'
-
-    return {
-      docks: (dockId: string) => `${baseURL}/pvt/configuration/docks/${dockId}`,
-      shipping: `${baseURL}/pub/shipping/configuration`,
-      nearPickupPoints: (lat: string, long: string, maxDistance: number) =>
-        `${baseURL}/pvt/configuration/pickuppoints/_search?&page=1&pageSize=100&lat=${lat}&lon=${long}&maxDistance=${maxDistance}`,
-      pickUpById: (id: string) => `${baseURL}/pvt/configuration/pickuppoints/${id}`,
-    }
   }
 }

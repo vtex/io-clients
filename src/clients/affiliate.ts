@@ -3,10 +3,11 @@ import { InstanceOptions, IOContext, JanusClient, RequestTracingConfig } from '@
 import { getAuthToken } from '../utils/authToken'
 import { createTracing } from '../utils/tracing'
 import { AuthMethod } from '../typings/tokens'
+import { AffiliateInput } from '../typings/affiliate'
 
+const baseURL = 'api/fulfillment/pvt/affiliates'
 const routes = {
-  affiliate: (id: string) => `${routes.base()}/${id}`,
-  base: () => `api/fulfillment/pvt/affiliates`,
+  affiliate: (id: string) => `${baseURL}/${id}`,
 }
 
 export class Affiliate extends JanusClient {
@@ -47,10 +48,4 @@ export class Affiliate extends JanusClient {
       }
     )
   }
-}
-interface AffiliateInput {
-  name: string
-  id: string
-  salesChannelId: string
-  searchEndpoint: string
 }
