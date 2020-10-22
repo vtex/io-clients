@@ -76,3 +76,29 @@ export interface DatumPricing {
   salePrice: number
   currencySymbol: string
 }
+
+export interface SuggestionRequest {
+  ProductName: string
+  ProductDescription: string
+  BrandName: string
+  SkuName: string
+  SellerId: string
+  ListPrice: number
+  Price: number
+  Height: number
+  Width: number
+  Length: number
+  WeightKg: number
+  RefId: null
+  EAN: string[]
+  SellerStockKeepingUnitId: string
+  Images: Image[]
+  SkuSpecifications: Specification[]
+  ProductSpecifications: Specification[]
+  CategoryFullPath: string
+}
+
+export interface Specification {
+  FieldName: string
+  FieldValues: string[]
+}

@@ -23,7 +23,7 @@
   "files": [
     "build"
   ],
-  "dependencies": {
+  "peerDependencies": {
     "@vtex/api": "^6.36.2"
   },
   "devDependencies": {

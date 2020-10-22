@@ -15,6 +15,7 @@ export const checkSellerInformation = (sellerInformation: Seller) => {
     FulfillmentSellerId: '',
     SellerType: 1,
     IsBetterScope: false,
+    MerchantName: '',
   }
 
   return {
