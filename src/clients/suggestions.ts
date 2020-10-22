@@ -3,7 +3,7 @@ import { ExternalClient, InstanceOptions, IOContext, RequestTracingConfig } from
 import { getAuthToken } from '../utils/authToken'
 import { createTracing } from '../utils/tracing'
 import { AuthMethod } from '../typings/tokens'
-import { Suggestion, SuggestionsResponse } from '../typings/suggestions'
+import { Suggestion, SuggestionRequest, SuggestionsResponse } from '../typings/suggestions'
 
 const routes = {
   sellerSkuId: (sellerId: string, sellerSkuId: string) => `/${sellerId}/${sellerSkuId}`,
@@ -57,14 +57,13 @@ export class Suggestions extends ExternalClient {
 
   // eslint-disable-next-line max-params
   public sendSkuSuggestion(
-    sellerId: string,
-    sellerSkuId: string,
-    body: Suggestion,
+    body: SuggestionRequest,
     authMethod: AuthMethod = 'AUTH_TOKEN',
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'suggestions-sendSkuSuggestion'
     const token = getAuthToken(this.context, authMethod)
+    const { SellerId: sellerId, SellerStockKeepingUnitId: sellerSkuId } = body
 
     return this.http.put(routes.sellerSkuId(sellerId, sellerSkuId), body, {
       headers: token
