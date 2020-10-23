@@ -34,5 +34,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: yarn install --ignore-scripts
+      - run: yarn install-peers
       - run: yarn build
       - run: yarn run ci:test --passWithNoTests
