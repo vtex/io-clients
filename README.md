@@ -9,15 +9,17 @@ This exports **Clients** and Typescript **typings** to help you connecting a VTE
 
 | **Client Name** | **Implemented Methods**                                                         | Observations      |
 |-----------------|---------------------------------------------------------------------------------| -                 |
-| Affiliate       | `registerAffiliate`                                                             | -                 |
+| Affiliate       | `registerAffiliate`, `changeNotification`, `createSeller`, `getSellerList`      |                   |
 | Catalog         | `getSkuById`                                                                    | -                 |
-| Logistics       | `getDockById`, `pickupById`, `nearPickupPoints`, `shipping`                     | -                 |
-| OMS             | `userLastOrder`, `order`                                                        | -                 |
 | Checkout        | `getOrderFormConfiguration`, `setOrderFormConfiguration`, `setSingleCustomData` | -                 |
-| OMS Proxy       | `orders`, `orderFormId`, `customData`, `register`                               | You will have to declare a dependency and a policy on your app. You can check out [this document](https://www.notion.so/How-to-use-the-OMS-API-Proxy-application-e82f11ff896247c58a7e2e658d631516). 
+| Logistics       | `getDockById`, `pickupById`, `nearPickupPoints`, `shipping`                     | -                 |
+| OMS             | `userLastOrder`, `order`, `orderNotification`, `cancelOrder`                    | -                 |
+| OMS Proxy       | `orders`, `orderFormId`, `customData`, `register`                               | You will have to declare a dependency and a policy on your app. You can check out [this document](https://www.notion.so/How-to-use-the-OMS-API-Proxy-application-e82f11ff896247c58a7e2e658d631516).
+| Suggestions     | `getAllSuggestions`, `getSuggestionById`, `sendSkuSuggestion`, `deleteSkuSuggestion`, `getAllVersions`, `getVersionById`| -                 |
+
 ---
 
-
+> Note: Some of the methods might need some policies to be inserted on your application's `manifest.json` file.
 
 ## How to use
 
