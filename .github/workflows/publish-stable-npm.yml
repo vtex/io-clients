@@ -17,6 +17,7 @@ jobs:
             node-version: 12
             registry-url: https://registry.npmjs.org/
       - run: yarn install --ignore-scripts
+      - run: yarn install-peers
       - run: yarn build
       - run: npm publish --access public
         env:
