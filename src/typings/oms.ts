@@ -368,13 +368,16 @@ export interface NotificationResponse {
 
 export interface NotificationInput {
   type: string
+  issuanceDate: string
   invoiceNumber: string
+  invoiceKey?: string
+  invoiceValue: number
+  invoiceUrl: string
   courier: string
   trackingNumber: string
   trackingUrl: string
+  dispatchDate?: string | null
   items: Item[]
-  issuanceDate: Date
-  invoiceValue: number
 }
 
 export interface Item {
