@@ -368,7 +368,7 @@ export interface NotificationResponse {
 
 export interface NotificationInput {
   type: string
-  issuanceDate: string
+  issuanceDate?: string
   invoiceNumber: string
   invoiceKey?: string
   invoiceValue: number
