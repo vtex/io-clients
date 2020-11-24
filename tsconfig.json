@@ -11,6 +11,6 @@
     "strict": true
   },
 
-  "include": ["**/*.ts"],
-  "exclude": ["**/*.test.ts", "**/__tests__"]
+  "include": ["**/*.ts", "**/*.d.ts"],
+  "exclude": ["**/*.test.ts", "**/__tests__", "build"]
 }

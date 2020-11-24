@@ -1,4 +1,9 @@
-import { InstanceOptions, IOContext, JanusClient, RequestTracingConfig } from '@vtex/api'
+import {
+  InstanceOptions,
+  IOContext,
+  JanusClient,
+  RequestTracingConfig,
+} from '@vtex/api'
 
 import { getAuthToken } from '../utils/authToken'
 import { createTracing } from '../utils/tracing'
