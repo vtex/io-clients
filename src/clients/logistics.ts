@@ -1,4 +1,9 @@
-import { RequestTracingConfig, JanusClient, IOContext, InstanceOptions } from '@vtex/api'
+import {
+  RequestTracingConfig,
+  JanusClient,
+  IOContext,
+  InstanceOptions,
+} from '@vtex/api'
 
 import { getAuthToken } from '../utils/authToken'
 import { createTracing } from '../utils/tracing'
@@ -22,7 +27,11 @@ export class Logistics extends JanusClient {
     })
   }
 
-  public getDockById(dockId: string, authMethod: AuthMethod = 'AUTH_TOKEN', tracingConfig?: RequestTracingConfig) {
+  public getDockById(
+    dockId: string,
+    authMethod: AuthMethod = 'AUTH_TOKEN',
+    tracingConfig?: RequestTracingConfig
+  ) {
     const metric = 'logistics-getDockById'
     const token = getAuthToken(this.context, authMethod)
 
@@ -37,7 +46,11 @@ export class Logistics extends JanusClient {
     })
   }
 
-  public pickupById(id: string, authMethod: AuthMethod = 'AUTH_TOKEN', tracingConfig?: RequestTracingConfig) {
+  public pickupById(
+    id: string,
+    authMethod: AuthMethod = 'AUTH_TOKEN',
+    tracingConfig?: RequestTracingConfig
+  ) {
     const metric = 'logistics-pickupById'
     const token = getAuthToken(this.context, authMethod)
 
@@ -63,18 +76,24 @@ export class Logistics extends JanusClient {
     const metric = 'logistics-nearPickupPoints'
     const token = getAuthToken(this.context, authMethod)
 
-    return this.http.get<LogisticOutput>(routes.nearPickupPoints(lat, long, maxDistance), {
-      headers: token
-        ? {
-            VtexIdclientAutCookie: token,
-          }
-        : {},
-      metric,
-      tracing: createTracing(metric, tracingConfig),
-    })
+    return this.http.get<LogisticOutput>(
+      routes.nearPickupPoints(lat, long, maxDistance),
+      {
+        headers: token
+          ? {
+              VtexIdclientAutCookie: token,
+            }
+          : {},
+        metric,
+        tracing: createTracing(metric, tracingConfig),
+      }
+    )
   }
 
-  public shipping(authMethod: AuthMethod = 'AUTH_TOKEN', tracingConfig?: RequestTracingConfig) {
+  public shipping(
+    authMethod: AuthMethod = 'AUTH_TOKEN',
+    tracingConfig?: RequestTracingConfig
+  ) {
     const metric = 'logistics-shipping'
     const token = getAuthToken(this.context, authMethod)
 
