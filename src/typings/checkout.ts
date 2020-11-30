@@ -28,7 +28,7 @@ export interface CheckoutAssemblyItem {
 export interface CheckoutAttachmentOffering {
   name: string
   required: boolean
-  schema: Record<string, object>
+  schema: Record<string, unknown>
 }
 
 export interface InstallmentOption {
@@ -45,39 +45,6 @@ export interface SimulationInstallment {
   interestRate: number
   total: number
   count: number
-}
-
-export interface PaymentData {
-  installmentOptions: InstallmentOption[]
-  paymentSystems: Array<{
-    id: string
-    name: string
-    groupName: string
-    validator: {
-      regex: string
-      mask: string
-      cardCodeRegex: string
-      cardCodeMask: string
-      weights: number[]
-      useCvv: boolean
-      useExpirationDate: boolean
-      useCardHolderName: boolean
-      useBillingAddress: boolean
-    }
-    stringId: string
-    template: string
-    requiresDocument: boolean
-    isCustom: boolean
-    description: string | null
-    requiresAuthentication: boolean
-    dueDate: string
-    availablePayments: any | null
-  }>
-  payments: any[]
-  giftCards: any[]
-  giftCardMessages: any[]
-  availableAccounts: any[]
-  availableTokens: any[]
 }
 
 export interface AssemblyOptionInput {
@@ -137,17 +104,6 @@ export interface SLAItem {
   pickupPointId: string | null
   pickupDistance: number
   polygonName: string | null
-}
-
-export interface LogisticsInfo {
-  itemIndex: number
-  selectedSla: string | null
-  selectedDeliveryChannel: string | null
-  addressId: string
-  slas: SLAItem[]
-  shipsTo: string[]
-  itemId: string
-  deliveryChannels: Array<{ id: string }>
 }
 
 export interface SLA {
