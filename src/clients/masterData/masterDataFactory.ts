@@ -84,10 +84,10 @@ const GLOBAL = ''
  */
 const normalizeEntityName = (str: string) => str.replace(/(\.)|-|:/gi, '_')
 
-const versionDescriptor = (isPublish: boolean, workspace: string) =>
-  isPublish ? GLOBAL : `-${workspace}`
+const versionDescriptor = (isProduction: boolean, workspace: string) =>
+  isProduction ? GLOBAL : `-${workspace}`
 
-export const masterdataFor = <TEntity extends Record<string, any>>(
+export const masterDataFor = <TEntity extends Record<string, any>>(
   entityName: string,
   providerAppId?: Maybe<string>
 ): new (context: IOContext, options?: InstanceOptions) => MasterDataEntity<
