@@ -9,9 +9,6 @@ import {
   parseAppId,
 } from '@vtex/api'
 
-export const toStringIfNot = <K>(field: ThisType<K>) =>
-  typeof field === 'string' ? field : field?.toString()
-
 export interface DocumentResponse {
   Id: string
   Href: string
@@ -146,7 +143,7 @@ export const masterDataFor = <TEntity extends Record<string, any>>(
       return this.md.searchDocuments<Pick<WithMetadata<TEntity>, K>>({
         dataEntity: this.dataEntity,
         pagination,
-        fields: fields.map(toStringIfNot),
+        fields: fields.map((field) => field.toString()),
         where,
         schema: this.schema,
       })
@@ -159,7 +156,7 @@ export const masterDataFor = <TEntity extends Record<string, any>>(
       return this.md.getDocument<Pick<WithMetadata<TEntity>, K>>({
         dataEntity: this.dataEntity,
         id,
-        fields: fields.map(toStringIfNot),
+        fields: fields.map((field) => field.toString()),
       })
     }
   }
