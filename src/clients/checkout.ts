@@ -97,7 +97,7 @@ export class Checkout extends JanusClient {
     orderFormId: string,
     items: any,
     queryString: string,
-    authMethod: AuthMethod = 'AUTH_TOKEN',
+    authMethod: AuthMethod = 'STORE_TOKEN',
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'checkout-addItem'
@@ -113,7 +113,7 @@ export class Checkout extends JanusClient {
   public cancelOrder(
     orderFormId: string,
     reason: string,
-    authMethod: AuthMethod = 'AUTH_TOKEN',
+    authMethod: AuthMethod = 'STORE_TOKEN',
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'checkout-cancelOrder'
@@ -131,7 +131,7 @@ export class Checkout extends JanusClient {
     appId: string,
     field: string,
     value: any,
-    authMethod: AuthMethod = 'AUTH_TOKEN',
+    authMethod: AuthMethod = 'STORE_TOKEN',
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'checkout-setOrderFormCustomData'
@@ -147,7 +147,7 @@ export class Checkout extends JanusClient {
   public updateItems(
     orderFormId: string,
     orderItems: any,
-    authMethod: AuthMethod = 'AUTH_TOKEN',
+    authMethod: AuthMethod = 'STORE_TOKEN',
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'checkout-updateItems'
@@ -163,7 +163,7 @@ export class Checkout extends JanusClient {
   public updateOrderFormIgnoreProfile(
     orderFormId: string,
     ignoreProfileData: boolean,
-    authMethod: AuthMethod = 'AUTH_TOKEN',
+    authMethod: AuthMethod = 'STORE_TOKEN',
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'checkout-updateOrderFormIgnoreProfile'
@@ -179,7 +179,7 @@ export class Checkout extends JanusClient {
   public updateOrderFormPayment(
     orderFormId: string,
     payments: any,
-    authMethod: AuthMethod = 'AUTH_TOKEN',
+    authMethod: AuthMethod = 'STORE_TOKEN',
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'checkout-updateOrderFormPayment'
@@ -195,7 +195,7 @@ export class Checkout extends JanusClient {
   public updateOrderFormProfile(
     orderFormId: string,
     fields: any,
-    authMethod: AuthMethod = 'AUTH_TOKEN',
+    authMethod: AuthMethod = 'STORE_TOKEN',
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'checkout-updateOrderFormProfile'
@@ -211,7 +211,7 @@ export class Checkout extends JanusClient {
   public updateOrderFormShipping(
     orderFormId: string,
     shipping: any,
-    authMethod: AuthMethod = 'AUTH_TOKEN',
+    authMethod: AuthMethod = 'STORE_TOKEN',
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'checkout-updateOrderFormShipping'
@@ -227,7 +227,7 @@ export class Checkout extends JanusClient {
   public updateOrderFormMarketingData(
     orderFormId: string,
     marketingData: any,
-    authMethod: AuthMethod = 'AUTH_TOKEN',
+    authMethod: AuthMethod = 'STORE_TOKEN',
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'checkout-updateOrderFormMarketingData'
@@ -243,7 +243,7 @@ export class Checkout extends JanusClient {
   public updateOrderFormClientPreferencesData(
     orderFormId: string,
     clientPreferencesData: OrderFormClientPreferencesData,
-    authMethod: AuthMethod = 'AUTH_TOKEN',
+    authMethod: AuthMethod = 'STORE_TOKEN',
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'checkout-updateOrderFormClientPreferencesData'
@@ -264,7 +264,7 @@ export class Checkout extends JanusClient {
     itemId: string | number,
     assemblyOptionsId: string,
     body: any,
-    authMethod: AuthMethod = 'AUTH_TOKEN',
+    authMethod: AuthMethod = 'STORE_TOKEN',
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'checkout-addAssemblyOptions'
@@ -282,7 +282,7 @@ export class Checkout extends JanusClient {
     itemId: string | number,
     assemblyOptionsId: string,
     body: any,
-    authMethod: AuthMethod = 'AUTH_TOKEN',
+    authMethod: AuthMethod = 'STORE_TOKEN',
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'checkout-removeAssemblyOptions'
@@ -297,7 +297,7 @@ export class Checkout extends JanusClient {
   public updateOrderFormCheckin(
     orderFormId: string,
     checkinPayload: any,
-    authMethod: AuthMethod = 'AUTH_TOKEN',
+    authMethod: AuthMethod = 'STORE_TOKEN',
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'checkout-updateOrderFormCheckin'
@@ -309,7 +309,7 @@ export class Checkout extends JanusClient {
     )
   }
 
-  public orderForm(orderFormId?: string, authMethod: AuthMethod = 'AUTH_TOKEN', tracingConfig?: RequestTracingConfig) {
+  public orderForm(orderFormId?: string, authMethod: AuthMethod = 'STORE_TOKEN', tracingConfig?: RequestTracingConfig) {
     const metric = 'checkout-orderForm'
 
     return this.http.post<OrderForm>(
@@ -331,7 +331,7 @@ export class Checkout extends JanusClient {
 
   public newOrderForm(
     orderFormId?: string,
-    authMethod: AuthMethod = 'AUTH_TOKEN',
+    authMethod: AuthMethod = 'STORE_TOKEN',
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'checkout-newOrderForm'
@@ -345,7 +345,7 @@ export class Checkout extends JanusClient {
 
   public changeToAnonymousUser(
     orderFormId?: string,
-    authMethod: AuthMethod = 'AUTH_TOKEN',
+    authMethod: AuthMethod = 'STORE_TOKEN',
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'checkout-change-to-anonymous'
@@ -360,7 +360,7 @@ export class Checkout extends JanusClient {
     )
   }
 
-  public orders(authMethod: AuthMethod = 'AUTH_TOKEN', tracingConfig?: RequestTracingConfig) {
+  public orders(authMethod: AuthMethod = 'STORE_TOKEN', tracingConfig?: RequestTracingConfig) {
     const metric = 'checkout-orders'
 
     return this.http.get(routes.orders, this.getRequestConfig(authMethod, metric, tracingConfig))
@@ -370,7 +370,7 @@ export class Checkout extends JanusClient {
   public simulation(
     simulation: SimulationPayload,
     queryString: string,
-    authMethod: AuthMethod = 'AUTH_TOKEN',
+    authMethod: AuthMethod = 'STORE_TOKEN',
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'checkout-simulation'
