@@ -1,9 +1,19 @@
-import { InstanceOptions, IOContext, JanusClient, RequestTracingConfig } from '@vtex/api'
+import {
+  InstanceOptions,
+  IOContext,
+  JanusClient,
+  RequestTracingConfig,
+} from '@vtex/api'
 
 import { getAuthToken } from '../utils/authToken'
 import { createTracing } from '../utils/tracing'
 import { AuthMethod } from '../typings/tokens'
-import { CancelResponse, NotificationInput, NotificationResponse, OrderDetailResponse } from '../typings/oms'
+import {
+  CancelResponse,
+  NotificationInput,
+  NotificationResponse,
+  OrderDetailResponse,
+} from '../typings/oms'
 import { OrderFormConfiguration } from '../typings/orderForm'
 
 const baseURL = '/api/oms'
@@ -22,7 +32,10 @@ export class OMS extends JanusClient {
     })
   }
 
-  public userLastOrder(authMethod: AuthMethod = 'AUTH_TOKEN', tracingConfig?: RequestTracingConfig) {
+  public userLastOrder(
+    authMethod: AuthMethod = 'AUTH_TOKEN',
+    tracingConfig?: RequestTracingConfig
+  ) {
     const metric = 'oms-userLastOrder'
     const token = getAuthToken(this.context, authMethod)
 
@@ -37,7 +50,11 @@ export class OMS extends JanusClient {
     })
   }
 
-  public order(id: string, authMethod: AuthMethod = 'AUTH_TOKEN', tracingConfig?: RequestTracingConfig) {
+  public order(
+    id: string,
+    authMethod: AuthMethod = 'AUTH_TOKEN',
+    tracingConfig?: RequestTracingConfig
+  ) {
     const metric = 'oms-order'
     const token = getAuthToken(this.context, authMethod)
 
@@ -73,7 +90,11 @@ export class OMS extends JanusClient {
     })
   }
 
-  public cancelOrder(id: string, authMethod: AuthMethod = 'AUTH_TOKEN', tracingConfig?: RequestTracingConfig) {
+  public cancelOrder(
+    id: string,
+    authMethod: AuthMethod = 'AUTH_TOKEN',
+    tracingConfig?: RequestTracingConfig
+  ) {
     const metric = 'oms-cancelOrder'
     const token = getAuthToken(this.context, authMethod)
 
