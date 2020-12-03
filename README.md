@@ -1,9 +1,15 @@
 <h1 align="center">
-  VTEX Commerce Clients
+  VTEX IO Clients
 </h1>
-<h5 align="center">Collection of <i>ready-to-use</i> VTEX IO Clients to access Commerce APIs </h5>
+<h5 align="center">Collection of <i>ready-to-use</i> VTEX IO Clients to access VTEX APIs</h5>
 
-This exports **Clients** and Typescript **typings** to help you connecting a VTEX IO application with VTEX Core Commerce modules.
+This exports **Clients**, **Client Factories** and Typescript **typings** to help you connecting a VTEX IO application with VTEX Core Commerce modules on Node.js services.
+
+## Installing
+
+```
+yarn add @vtex/clients
+```
 
 ## Available Clients
 
@@ -17,6 +23,11 @@ This exports **Clients** and Typescript **typings** to help you connecting a VTE
 | OMS Proxy       | `orders`, `orderFormId`, `customData`, `register`                               | You will have to declare a dependency and a policy on your app. You can check out [this document](https://www.notion.so/How-to-use-the-OMS-API-Proxy-application-e82f11ff896247c58a7e2e658d631516).
 | Suggestions     | `getAllSuggestions`, `getSuggestionById`, `sendSkuSuggestion`, `deleteSkuSuggestion`, `getAllVersions`, `getVersionById`| -                 |
 
+## Available Factories
+
+| **Factory** | **Implemented Methods**                                                         | Observations      |
+|-----------------|---------------------------------------------------------------------------------| -                 |
+| Master Data       | `get`, `save`, `update`, `saveOrUpdate`, `delete`, `search`      | Use the `masterDataFor` helper function. |
 ---
 
 > Note: Some of the methods might need some policies to be inserted on your application's `manifest.json` file.
@@ -27,20 +38,44 @@ This exports **Clients** and Typescript **typings** to help you connecting a VTE
     ```
     yarn add @vtex/clients
     ```
-2. Import the individual Client on your app's Clients configuration (`node/clients/index.ts`):
+
+### Clients
+
+1. Import the individual Client on your app's Clients configuration (`node/clients/index.ts`):
     ```typescript
     import { Catalog } from '@vtex/clients'
     ```
-3. Add a new getter on the `Clients` class with the imported Client:
+2. Add a new getter on the `Clients` class with the imported Client:
     ```typescript
       public get catalog() {
         return this.getOrSet('catalog', Catalog)
       }
     ```
-4. Now, you can use the available client's on the app's _resolver functions_!
+3. Now, you can use the available client's on the app's _resolver functions_!
     ```typescript
     ctx.clients.catalog.getSkuById(...)
     ```
+
+### Factories
+
+1. Import the helper method for the Factory you want to use:
+  ```typescript
+    import { masterDataFor } from '@vtex/clients 
+  ```
+2. Following the instructions for each factory, use its method to create a Client class.
+  ```typescript
+    const BooksClient = masterDataFor<MyBookType>('books') 
+  ```
+3. Add a new getter on the `Clients` class with the created Client: 
+  ```typescript
+    public get books() {
+      return this.getOrSet('books', BooksClient)
+    }
+  ```
+4. Now, you can use the client with the provided methods by the Factory on your app's resolvers.
+  ```typescript
+    ctx.clients.books.save({ name: 'Example Book' })
+  ```
 
 For more information, read [How to use and create Clients on VTEX IO](https://www.notion.so/How-to-use-and-create-Clients-on-VTEX-IO-1dbd20c928c642d0ba059d5efbe7874b).
 
@@ -63,3 +98,11 @@ To discover and learn more about VTEX Core Commerce APIs, read [VTEX Developer P
 ## Contributing
 
 Feel free to **submit new Clients** to this package, as long as they help to connect with VTEX Core Commerce APIs.
+
+## Releasing
+
+We have a Github Action configured to **release the package on NPM for every Release tag** pushed into the repository. So, in order to have this project published:
+1. Merge the Pull Request on the main branch, after having your changes approved.
+2. Run `git checkout master && git pull` on your local repository.
+3. Use the [releasy](https://www.npmjs.com/package/releasy) tool to push a new release (_e.g_: `releasy minor --stable`).
+4. Check the result of the process on Github checking the status on the latest commit.

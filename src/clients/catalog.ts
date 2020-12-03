@@ -1,4 +1,9 @@
-import { InstanceOptions, IOContext, JanusClient, RequestTracingConfig } from '@vtex/api'
+import {
+  InstanceOptions,
+  IOContext,
+  JanusClient,
+  RequestTracingConfig,
+} from '@vtex/api'
 
 import { getAuthToken } from '../utils/authToken'
 import { createTracing } from '../utils/tracing'
@@ -25,7 +30,11 @@ export class Catalog extends JanusClient {
     })
   }
 
-  public getSkuById(skuId: string, authMethod: AuthMethod = 'AUTH_TOKEN', tracingConfig?: RequestTracingConfig) {
+  public getSkuById(
+    skuId: string,
+    authMethod: AuthMethod = 'AUTH_TOKEN',
+    tracingConfig?: RequestTracingConfig
+  ) {
     const metric = 'catalog-getSkuMetric'
     const token = getAuthToken(this.context, authMethod)
 
@@ -41,7 +50,11 @@ export class Catalog extends JanusClient {
   }
 
   public changeNotification(
-    { sellerId, sellerSkuId, authMethod = 'AUTH_TOKEN' }: ChangeNotificationArgs,
+    {
+      sellerId,
+      sellerSkuId,
+      authMethod = 'AUTH_TOKEN',
+    }: ChangeNotificationArgs,
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'catalog-changeNotification'
@@ -62,7 +75,11 @@ export class Catalog extends JanusClient {
     )
   }
 
-  public createSeller(seller: Seller, authMethod: AuthMethod = 'AUTH_TOKEN', tracingConfig?: RequestTracingConfig) {
+  public createSeller(
+    seller: Seller,
+    authMethod: AuthMethod = 'AUTH_TOKEN',
+    tracingConfig?: RequestTracingConfig
+  ) {
     const metric = 'catalog-createSeller'
     const token = getAuthToken(this.context, authMethod)
     const sellerInfo = checkSellerInformation(seller)
@@ -78,7 +95,10 @@ export class Catalog extends JanusClient {
     })
   }
 
-  public getSellerList(authMethod: AuthMethod = 'AUTH_TOKEN', tracingConfig?: RequestTracingConfig) {
+  public getSellerList(
+    authMethod: AuthMethod = 'AUTH_TOKEN',
+    tracingConfig?: RequestTracingConfig
+  ) {
     const metric = 'catalog-getSellerList'
     const token = getAuthToken(this.context, authMethod)
 

@@ -1,13 +1,24 @@
-import { ExternalClient, InstanceOptions, IOContext, RequestTracingConfig } from '@vtex/api'
+import {
+  ExternalClient,
+  InstanceOptions,
+  IOContext,
+  RequestTracingConfig,
+} from '@vtex/api'
 
 import { getAuthToken } from '../utils/authToken'
 import { createTracing } from '../utils/tracing'
 import { AuthMethod } from '../typings/tokens'
-import { Suggestion, SuggestionRequest, SuggestionsResponse } from '../typings/suggestions'
+import {
+  Suggestion,
+  SuggestionRequest,
+  SuggestionsResponse,
+} from '../typings/suggestions'
 
 const routes = {
-  sellerSkuId: (sellerId: string, sellerSkuId: string) => `/${sellerId}/${sellerSkuId}`,
-  versions: (sellerId: string, sellerSkuId: string) => `/${sellerId}/${sellerSkuId}/versions`,
+  sellerSkuId: (sellerId: string, sellerSkuId: string) =>
+    `/${sellerId}/${sellerSkuId}`,
+  versions: (sellerId: string, sellerSkuId: string) =>
+    `/${sellerId}/${sellerSkuId}/versions`,
   versionById: (sellerId: string, sellerSkuId: string, version: string) =>
     `/${sellerId}/${sellerSkuId}/versions/${version}`,
 }
@@ -19,7 +30,10 @@ export class Suggestions extends ExternalClient {
     })
   }
 
-  public getAllSuggestions(authMethod: AuthMethod = 'AUTH_TOKEN', tracingConfig?: RequestTracingConfig) {
+  public getAllSuggestions(
+    authMethod: AuthMethod = 'AUTH_TOKEN',
+    tracingConfig?: RequestTracingConfig
+  ) {
     const metric = 'suggestions-getAllSuggestions'
     const token = getAuthToken(this.context, authMethod)
 
@@ -44,15 +58,18 @@ export class Suggestions extends ExternalClient {
     const metric = 'suggestions-getSuggestionById'
     const token = getAuthToken(this.context, authMethod)
 
-    return this.http.get<Suggestion>(routes.sellerSkuId(sellerId, sellerSkuId), {
-      headers: token
-        ? {
-            VtexIdclientAutCookie: token,
-          }
-        : {},
-      metric,
-      tracing: createTracing(metric, tracingConfig),
-    })
+    return this.http.get<Suggestion>(
+      routes.sellerSkuId(sellerId, sellerSkuId),
+      {
+        headers: token
+          ? {
+              VtexIdclientAutCookie: token,
+            }
+          : {},
+        metric,
+        tracing: createTracing(metric, tracingConfig),
+      }
+    )
   }
 
   // eslint-disable-next-line max-params
