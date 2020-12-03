@@ -5,12 +5,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed
+- Removes mocked field on a Affiliate client's method
 
 ## [1.1.0] - 2020-12-02
 
 ## [1.0.4] - 2020-11-09
-### Fixed
-- Removes mocked field on a Affiliate client's method
 ### Fixed
 - Missing fields on typing used in OMS client 
 
