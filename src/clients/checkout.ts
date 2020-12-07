@@ -6,6 +6,7 @@ import {
 } from '@vtex/api'
 
 import { getAuthToken } from '../utils/authToken'
+<<<<<<< HEAD
 import {
   AuthMethod,
   OrderFormConfiguration,
@@ -34,6 +35,48 @@ const routes = {
   orders: `${baseURL}/pub/orders`,
   simulation: (queryString: string) => `${baseURL}/pub/orderForms/simulation${queryString}`,
   changeToAnonymousUser: (orderFormId: string) => `/checkout/changeToAnonymousUser/${orderFormId}`,
+=======
+import { createTracing } from '../utils/tracing'
+import {
+  OrderForm,
+  OrderFormClientPreferencesData,
+  AuthMethod,
+  OrderFormConfiguration,
+  SimulationOrderForm,
+  SimulationPayload,
+  SingleCustomData,
+} from '../typings'
+
+const baseURL = '/api/checkout'
+const routes = {
+  addItem: (orderFormId: string, queryString: string) =>
+    `${baseURL}/pub/orderForm/${orderFormId}/items${queryString}`,
+  cancelOrder: (orderFormId: string) =>
+    `${baseURL}/pub/orders/${orderFormId}/user-cancel-request`,
+  orderFormCustomData: (orderFormId: string, appId: string, field: string) =>
+    `${baseURL}/pub/orderForm/${orderFormId}/customData/${appId}/${field}`,
+  updateItems: (orderFormId: string) =>
+    `${baseURL}/pub/orderForm/${orderFormId}/items/update`,
+  profile: (orderFormId: string) =>
+    `${baseURL}/pub/orderForm/${orderFormId}/profile`,
+  attachmentsData: (orderFormId: string, field: string) =>
+    `${baseURL}/pub/orderForm/${orderFormId}/attachments/${field}`,
+  assemblyOptions: (
+    orderFormId: string,
+    itemId: string | number,
+    assemblyOptionsId: string
+  ) =>
+    `${baseURL}/pub/orderForm/${orderFormId}/items/${itemId}/assemblyOptions/${assemblyOptionsId}`,
+  checkin: (orderFormId: string) =>
+    `${baseURL}/pub/orderForm/${orderFormId}/checkIn`,
+  orderForm: (orderFormId?: string) =>
+    `${baseURL}/pub/orderForm/${orderFormId ?? ''}`,
+  orders: `${baseURL}/pub/orders`,
+  simulation: (queryString: string) =>
+    `${baseURL}/pub/orderForms/simulation${queryString}`,
+  changeToAnonymousUser: (orderFormId: string) =>
+    `/checkout/changeToAnonymousUser/${orderFormId}`,
+>>>>>>> e2a1678... refactor(checkout-client): improve types
   orderFormConfiguration: `${baseURL}/pvt/configuration/orderForm`,
   singleCustomData: (
     orderFormId: string,
@@ -50,6 +93,7 @@ export class Checkout extends JanusClient {
     })
   }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
   public getOrderFormConfiguration(
     authMethod: AuthMethod = 'AUTH_TOKEN',
@@ -71,6 +115,13 @@ export class Checkout extends JanusClient {
       }
 =======
   private getRequestConfig(authMethod: AuthMethod, metric: string, tracingConfig?: RequestTracingConfig) {
+=======
+  private getRequestConfig(
+    authMethod: AuthMethod,
+    metric: string,
+    tracingConfig?: RequestTracingConfig
+  ) {
+>>>>>>> e2a1678... refactor(checkout-client): improve types
     const token = getAuthToken(this.context, authMethod)
 
     return {
@@ -84,7 +135,14 @@ export class Checkout extends JanusClient {
     }
   }
 
+<<<<<<< HEAD
   public getOrderFormConfiguration(authMethod: AuthMethod = 'AUTH_TOKEN', tracingConfig?: RequestTracingConfig) {
+=======
+  public getOrderFormConfiguration(
+    authMethod: AuthMethod = 'AUTH_TOKEN',
+    tracingConfig?: RequestTracingConfig
+  ) {
+>>>>>>> e2a1678... refactor(checkout-client): improve types
     const metric = 'checkout-getOrderFormConfiguration'
 
     return this.http.get<OrderFormConfiguration>(
@@ -101,7 +159,11 @@ export class Checkout extends JanusClient {
   ) {
     const metric = 'checkout-setOrderFormConfiguration'
 
-    return this.http.post(routes.orderFormConfiguration, body, this.getRequestConfig(authMethod, metric, tracingConfig))
+    return this.http.post(
+      routes.orderFormConfiguration,
+      body,
+      this.getRequestConfig(authMethod, metric, tracingConfig)
+    )
   }
 
   // eslint-disable-next-line max-params
@@ -279,7 +341,9 @@ export class Checkout extends JanusClient {
     const metric = 'checkout-updateOrderFormClientPreferencesData'
     // The API default value of `optinNewsLetter` is `null`, but it doesn't accept a POST with its value as `null`
     const filteredClientPreferencesData =
-      clientPreferencesData.optinNewsLetter === null ? { locale: clientPreferencesData.locale } : clientPreferencesData
+      clientPreferencesData.optinNewsLetter === null
+        ? { locale: clientPreferencesData.locale }
+        : clientPreferencesData
 
     return this.http.post(
       routes.attachmentsData(orderFormId, 'clientPreferencesData'),
@@ -317,10 +381,13 @@ export class Checkout extends JanusClient {
   ) {
     const metric = 'checkout-removeAssemblyOptions'
 
-    return this.http.delete<OrderForm>(routes.assemblyOptions(orderFormId, itemId, assemblyOptionsId), {
-      ...this.getRequestConfig(authMethod, metric, tracingConfig),
-      data: body,
-    })
+    return this.http.delete<OrderForm>(
+      routes.assemblyOptions(orderFormId, itemId, assemblyOptionsId),
+      {
+        ...this.getRequestConfig(authMethod, metric, tracingConfig),
+        data: body,
+      }
+    )
   }
 
   // eslint-disable-next-line max-params
@@ -339,7 +406,15 @@ export class Checkout extends JanusClient {
     )
   }
 
+<<<<<<< HEAD
   public orderForm(orderFormId?: string, authMethod: AuthMethod = 'AUTH_TOKEN', tracingConfig?: RequestTracingConfig) {
+=======
+  public orderForm(
+    orderFormId?: string,
+    authMethod: AuthMethod = 'STORE_TOKEN',
+    tracingConfig?: RequestTracingConfig
+  ) {
+>>>>>>> a82678d... refactor(checkout-client): improve types
     const metric = 'checkout-orderForm'
 
     return this.http.post<OrderForm>(
@@ -349,7 +424,10 @@ export class Checkout extends JanusClient {
     )
   }
 
-  public orderFormRaw(authMethod: AuthMethod = 'AUTH_TOKEN', tracingConfig?: RequestTracingConfig) {
+  public orderFormRaw(
+    authMethod: AuthMethod = 'AUTH_TOKEN',
+    tracingConfig?: RequestTracingConfig
+  ) {
     const metric = 'checkout-orderForm'
 
     return this.http.post<OrderForm>(
@@ -390,10 +468,20 @@ export class Checkout extends JanusClient {
     )
   }
 
+<<<<<<< HEAD
   public orders(authMethod: AuthMethod = 'AUTH_TOKEN', tracingConfig?: RequestTracingConfig) {
+=======
+  public orders(
+    authMethod: AuthMethod = 'STORE_TOKEN',
+    tracingConfig?: RequestTracingConfig
+  ) {
+>>>>>>> a82678d... refactor(checkout-client): improve types
     const metric = 'checkout-orders'
 
-    return this.http.get(routes.orders, this.getRequestConfig(authMethod, metric, tracingConfig))
+    return this.http.get(
+      routes.orders,
+      this.getRequestConfig(authMethod, metric, tracingConfig)
+    )
   }
 
   // eslint-disable-next-line max-params
