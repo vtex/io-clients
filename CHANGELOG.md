@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.0] - 2020-12-03
+### Fixed
+- Removes mocked field on a Affiliate client's method
+
+## [1.1.0] - 2020-12-02
+
 ## [1.0.4] - 2020-11-09
 ### Fixed
 - Missing fields on typing used in OMS client 

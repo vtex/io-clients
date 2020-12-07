@@ -28,7 +28,10 @@ export class OMSProxy extends AppClient {
     })
   }
 
-  public customData(id: string, body: CustomData): Promise<OrderDetailResponse> {
+  public customData(
+    id: string,
+    body: CustomData
+  ): Promise<OrderDetailResponse> {
     return this.http.post(`orders/${id}/customData`, body, {
       metric: 'customData-post',
     })
