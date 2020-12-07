@@ -18,6 +18,7 @@ const routes = {
   nearPickupPoints: (lat: string, long: string, maxDistance: number) =>
     `${baseURL}/pvt/configuration/pickuppoints/_search?&page=1&pageSize=100&lat=${lat}&lon=${long}&maxDistance=${maxDistance}`,
   pickUpById: (id: string) => `${baseURL}/pvt/configuration/pickuppoints/${id}`,
+  pickupPoints: `${baseURL}/pvt/configuration/pickuppoints/_search`,
 }
 
 export class Logistics extends JanusClient {
@@ -55,6 +56,24 @@ export class Logistics extends JanusClient {
     const token = getAuthToken(this.context, authMethod)
 
     return this.http.get<LogisticPickupPoint>(routes.pickUpById(id), {
+      headers: token
+        ? {
+            VtexIdclientAutCookie: token,
+          }
+        : {},
+      metric,
+      tracing: createTracing(metric, tracingConfig),
+    })
+  }
+
+  public listPickupPoints(
+    authMethod: AuthMethod = 'AUTH_TOKEN',
+    tracingConfig?: RequestTracingConfig
+  ) {
+    const metric = 'logistics-listPickupPoints'
+    const token = getAuthToken(this.context, authMethod)
+
+    return this.http.get<LogisticOutput>(routes.pickupPoints, {
       headers: token
         ? {
             VtexIdclientAutCookie: token,
