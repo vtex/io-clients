@@ -1,5 +1,10 @@
 import { MetadataItem } from './catalog'
-import { CheckoutAssemblyItem, CheckoutAddress, CheckoutAttachmentOffering, AssemblyOptionInput } from './checkout'
+import {
+  CheckoutAssemblyItem,
+  CheckoutAddress,
+  CheckoutAttachmentOffering,
+  AssemblyOptionInput,
+} from './checkout'
 import { PaymentData, LogisticsInfo } from './oms'
 
 export interface OrderFormConfiguration {

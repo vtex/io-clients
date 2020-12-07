@@ -98,7 +98,6 @@ export class Checkout extends JanusClient {
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'checkout-setOrderFormConfiguration'
-    const token = getAuthToken(this.context, authMethod)
 
     return this.http.post(
       routes.orderFormConfiguration,
