@@ -10,6 +10,7 @@ import { createTracing } from '../utils/tracing'
 import { AuthMethod } from '../typings/tokens'
 import {
   CancelResponse,
+  ListOrdersResponse,
   NotificationInput,
   NotificationResponse,
   OrderDetailResponse,
@@ -19,6 +20,7 @@ import { OrderFormConfiguration } from '../typings/orderForm'
 const baseURL = '/api/oms'
 
 const routes = {
+  orders: `${baseURL}/pvt/orders`,
   lastOrder: `${baseURL}/user/orders/last`,
   order: (id: string) => `${baseURL}/pvt/orders/${id}`,
   notification: (id: string) => `${baseURL}/pvt/orders/${id}/invoice`,
@@ -29,6 +31,24 @@ export class OMS extends JanusClient {
   constructor(ctx: IOContext, options?: InstanceOptions) {
     super(ctx, {
       ...options,
+    })
+  }
+
+  public listOrders(
+    authMethod: AuthMethod = 'AUTH_TOKEN',
+    tracingConfig?: RequestTracingConfig
+  ) {
+    const metric = 'oms-listOrders'
+    const token = getAuthToken(this.context, authMethod)
+
+    return this.http.get<ListOrdersResponse>(routes.orders, {
+      headers: token
+        ? {
+            VtexIdclientAutCookie: token,
+          }
+        : {},
+      metric,
+      tracing: createTracing(metric, tracingConfig),
     })
   }
 
