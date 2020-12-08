@@ -16,10 +16,10 @@ yarn add @vtex/clients
 | **Client Name** | **Implemented Methods**                                                         | Observations      |
 |-----------------|---------------------------------------------------------------------------------| -                 |
 | Affiliate       | `registerAffiliate`, `changeNotification`, `createSeller`, `getSellerList`      |                   |
-| Catalog         | `getSkuById`                                                                    | -                 |
+| Catalog         | `getProductsAndSkus`, `getSkuById`, `changeNotification`, `createSeller`, `getSellerList`| -                 |
 | Checkout        | `getOrderFormConfiguration`, `setOrderFormConfiguration`, `setSingleCustomData` | -                 |
-| Logistics       | `getDockById`, `pickupById`, `nearPickupPoints`, `shipping`                     | -                 |
-| OMS             | `userLastOrder`, `order`, `orderNotification`, `cancelOrder`                    | -                 |
+| Logistics       | `getDockById`, `pickupById`, `listPickupPoints`, `nearPickupPoints`, `shipping`                     | -                 |
+| OMS             | `listOrders`, `userLastOrder`, `order`, `orderNotification`, `cancelOrder`                    | -                 |
 | OMS Proxy       | `orders`, `orderFormId`, `customData`, `register`                               | You will have to declare a dependency and a policy on your app. You can check out [this document](https://www.notion.so/How-to-use-the-OMS-API-Proxy-application-e82f11ff896247c58a7e2e658d631516).
 | Suggestions     | `getAllSuggestions`, `getSuggestionById`, `sendSkuSuggestion`, `deleteSkuSuggestion`, `getAllVersions`, `getVersionById`| -                 |
 

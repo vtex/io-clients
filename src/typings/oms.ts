@@ -391,3 +391,36 @@ export interface CancelResponse {
   orderId: string
   receipt: string
 }
+
+export interface ListOrdersResponse {
+  list: ListOrdersItem[]
+}
+
+export interface ListOrdersItem {
+  orderId: string
+  creationDate: string
+  clientName: string
+  items: Item[]
+  totalValue: number
+  paymentNames: string
+  status: string
+  statusDescription: string
+  marketPlaceOrderId: string | null
+  sequence: string
+  salesChannel: string
+  affiliateId: string
+  origin: string
+  workflowInErrorState: boolean
+  workflowInRetry: boolean
+  lastMessageUnread: string
+  ShippingEstimatedDate: string | null
+  ShippingEstimatedDateMax: string | null
+  ShippingEstimatedDateMin: string | null
+  orderIsComplete: boolean
+  listId: string | null
+  listType: any
+  authorizedDate: string
+  callCenterOperatorName: string | null
+  totalItems: number
+  currencyCode: string
+}

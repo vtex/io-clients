@@ -16,6 +16,7 @@ const baseURL = '/api/catalog'
 const baseURLLegacy = '/api/catalog_system'
 
 const routes = {
+  productsAndSkus: `${baseURLLegacy}/pvt/products/GetProductAndSkuIds`,
   getSkuById: (skuId: string) => `${baseURL}/pvt/stockkeepingunit/${skuId}`,
   changeNotification: (sellerId: string, skuId: string) =>
     `${baseURLLegacy}/pvt/skuseller/changenotification/${sellerId}/${skuId}`,
@@ -27,6 +28,24 @@ export class Catalog extends JanusClient {
   constructor(ctx: IOContext, options?: InstanceOptions) {
     super(ctx, {
       ...options,
+    })
+  }
+
+  public getProductsAndSkus(
+    authMethod: AuthMethod = 'AUTH_TOKEN',
+    tracingConfig?: RequestTracingConfig
+  ) {
+    const metric = 'catalog-getProductsAndSkus'
+    const token = getAuthToken(this.context, authMethod)
+
+    return this.http.get(routes.productsAndSkus, {
+      headers: token
+        ? {
+            VtexIdclientAutCookie: token,
+          }
+        : {},
+      metric,
+      tracing: createTracing(metric, tracingConfig),
     })
   }
 

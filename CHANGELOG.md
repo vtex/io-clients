@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.0] - 2020-12-07
+### Added
+- New methods to Catalog, OMS and Logistics clients
+
 ## [2.0.0] - 2020-12-03
 ### Fixed
 - Removes mocked field on a Affiliate client's method
