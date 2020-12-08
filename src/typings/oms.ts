@@ -395,7 +395,7 @@ export interface CancelResponse {
 export interface ListOrdersResponse {
   list: ListOrdersItem[]
   facets: any[]
-  paging: Paging
+  paging: Pages
   stats: Stats
   reportRecordsLimit: number
 }
@@ -419,7 +419,7 @@ export interface Total {
   Facets: any
 }
 
-export interface Paging {
+export interface Pages {
   total: number
   pages: number
   currentPage: number
