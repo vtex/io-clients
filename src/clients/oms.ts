@@ -36,12 +36,17 @@ export class OMS extends JanusClient {
 
   public listOrders(
     authMethod: AuthMethod = 'AUTH_TOKEN',
+    range?: Range,
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'oms-listOrders'
     const token = getAuthToken(this.context, authMethod)
 
-    return this.http.get<ListOrdersResponse>(routes.orders, {
+    const path = range
+      ? `${routes.orders}?f_creationDate=creationDate:[${range.startDate} TO ${range.endDate}]`
+      : routes.orders
+
+    return this.http.get<ListOrdersResponse>(path, {
       headers: token
         ? {
             VtexIdclientAutCookie: token,
@@ -128,4 +133,9 @@ export class OMS extends JanusClient {
       tracing: createTracing(metric, tracingConfig),
     })
   }
+}
+
+interface Range {
+  startDate: string
+  endDate: string
 }
