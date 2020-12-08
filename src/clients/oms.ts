@@ -10,7 +10,6 @@ import { createTracing } from '../utils/tracing'
 import { AuthMethod } from '../typings/tokens'
 import {
   CancelResponse,
-  ListOrdersResponse,
   NotificationInput,
   NotificationResponse,
   OrderDetailResponse,
