@@ -128,7 +128,7 @@ export class Checkout extends JanusClient {
   public addItem(
     orderFormId: string,
     items: any,
-    queryString: string,
+    queryString = '',
     authMethod: AuthMethod = 'STORE_TOKEN',
     tracingConfig?: RequestTracingConfig
   ) {
@@ -419,7 +419,7 @@ export class Checkout extends JanusClient {
   // eslint-disable-next-line max-params
   public simulation(
     simulation: SimulationPayload,
-    queryString: string,
+    queryString = '',
     authMethod: AuthMethod = 'STORE_TOKEN',
     tracingConfig?: RequestTracingConfig
   ) {
