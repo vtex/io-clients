@@ -528,4 +528,23 @@ export class Checkout extends JanusClient {
       this.getRequestConfig(authMethod, metric, tracingConfig)
     )
   }
+<<<<<<< HEAD
+=======
+
+  // eslint-disable-next-line max-params
+  public updateOrderFormIgnoreProfile(
+    orderFormId: string,
+    ignoreProfileData: boolean,
+    authMethod: AuthMethod = 'STORE_TOKEN',
+    tracingConfig?: RequestTracingConfig
+  ) {
+    const metric = 'checkout-updateOrderFormIgnoreProfile'
+
+    return this.http.patch(
+      routes.profile(orderFormId),
+      { ignoreProfileData },
+      this.getRequestConfig(authMethod, metric, tracingConfig)
+    )
+  }
+>>>>>>> 97b586b... feat(checkout-client): remove comment
 }
