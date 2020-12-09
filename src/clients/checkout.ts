@@ -37,7 +37,7 @@ const routes = {
   assemblyOptions: (
     orderFormId: string,
     itemId: string | number,
-    assemblyOptionsId: string
+    assemblyOptionsId: string,
   ) =>
     `${baseURL}/pub/orderForm/${orderFormId}/items/${itemId}/assemblyOptions/${assemblyOptionsId}`,
   checkin: (orderFormId: string) =>
@@ -53,7 +53,7 @@ const routes = {
   singleCustomData: (
     orderFormId: string,
     appId: string,
-    appFieldName: string
+    appFieldName: string,
   ) =>
     `${baseURL}/pub/orderForm/${orderFormId}/customData/${appId}/${appFieldName}`,
 }
@@ -68,15 +68,15 @@ export class Checkout extends JanusClient {
   private getRequestConfig(
     authMethod: AuthMethod,
     metric: string,
-    tracingConfig?: RequestTracingConfig
+    tracingConfig?: RequestTracingConfig,
   ) {
     const token = getAuthToken(this.context, authMethod)
 
     return {
       headers: token
         ? {
-            VtexIdclientAutCookie: token,
-          }
+          VtexIdclientAutCookie: token,
+        }
         : {},
       metric,
       tracing: createTracing(metric, tracingConfig),
@@ -85,27 +85,27 @@ export class Checkout extends JanusClient {
 
   public getOrderFormConfiguration(
     authMethod: AuthMethod = 'AUTH_TOKEN',
-    tracingConfig?: RequestTracingConfig
+    tracingConfig?: RequestTracingConfig,
   ) {
     const metric = 'checkout-getOrderFormConfiguration'
 
     return this.http.get<OrderFormConfiguration>(
       routes.orderFormConfiguration,
-      this.getRequestConfig(authMethod, metric, tracingConfig)
+      this.getRequestConfig(authMethod, metric, tracingConfig),
     )
   }
 
   public setOrderFormConfiguration(
     body: OrderFormConfiguration,
     authMethod: AuthMethod = 'AUTH_TOKEN',
-    tracingConfig?: RequestTracingConfig
+    tracingConfig?: RequestTracingConfig,
   ) {
     const metric = 'checkout-setOrderFormConfiguration'
 
     return this.http.post(
       routes.orderFormConfiguration,
       body,
-      this.getRequestConfig(authMethod, metric, tracingConfig)
+      this.getRequestConfig(authMethod, metric, tracingConfig),
     )
   }
 
@@ -114,7 +114,7 @@ export class Checkout extends JanusClient {
     orderFormId: string,
     customData: SingleCustomData,
     authMethod: AuthMethod = 'AUTH_TOKEN',
-    tracingConfig?: RequestTracingConfig
+    tracingConfig?: RequestTracingConfig,
   ) {
     const metric = 'checkout-setSingleCustomData'
 
@@ -123,7 +123,7 @@ export class Checkout extends JanusClient {
     return this.http.put(
       routes.singleCustomData(orderFormId, appId, appFieldName),
       { value },
-      this.getRequestConfig(authMethod, metric, tracingConfig)
+      this.getRequestConfig(authMethod, metric, tracingConfig),
     )
   }
 
@@ -133,14 +133,14 @@ export class Checkout extends JanusClient {
     items: any,
     queryString = '',
     authMethod: AuthMethod = 'STORE_TOKEN',
-    tracingConfig?: RequestTracingConfig
+    tracingConfig?: RequestTracingConfig,
   ) {
     const metric = 'checkout-addItem'
 
     return this.http.post<OrderForm>(
       routes.addItem(orderFormId, queryString),
       { orderItems: items },
-      this.getRequestConfig(authMethod, metric, tracingConfig)
+      this.getRequestConfig(authMethod, metric, tracingConfig),
     )
   }
 
@@ -149,14 +149,14 @@ export class Checkout extends JanusClient {
     orderFormId: string,
     reason: string,
     authMethod: AuthMethod = 'STORE_TOKEN',
-    tracingConfig?: RequestTracingConfig
+    tracingConfig?: RequestTracingConfig,
   ) {
     const metric = 'checkout-cancelOrder'
 
     return this.http.post(
       routes.cancelOrder(orderFormId),
       { reason },
-      this.getRequestConfig(authMethod, metric, tracingConfig)
+      this.getRequestConfig(authMethod, metric, tracingConfig),
     )
   }
 
@@ -167,14 +167,14 @@ export class Checkout extends JanusClient {
     field: string,
     value: any,
     authMethod: AuthMethod = 'STORE_TOKEN',
-    tracingConfig?: RequestTracingConfig
+    tracingConfig?: RequestTracingConfig,
   ) {
     const metric = 'checkout-setOrderFormCustomData'
 
     return this.http.put(
       routes.orderFormCustomData(orderFormId, appId, field),
       { value },
-      this.getRequestConfig(authMethod, metric, tracingConfig)
+      this.getRequestConfig(authMethod, metric, tracingConfig),
     )
   }
 
@@ -183,14 +183,14 @@ export class Checkout extends JanusClient {
     orderFormId: string,
     orderItems: any,
     authMethod: AuthMethod = 'STORE_TOKEN',
-    tracingConfig?: RequestTracingConfig
+    tracingConfig?: RequestTracingConfig,
   ) {
     const metric = 'checkout-updateItems'
 
     return this.http.post(
       routes.updateItems(orderFormId),
       { orderItems },
-      this.getRequestConfig(authMethod, metric, tracingConfig)
+      this.getRequestConfig(authMethod, metric, tracingConfig),
     )
   }
 
@@ -199,14 +199,14 @@ export class Checkout extends JanusClient {
     orderFormId: string,
     payments: OrderFormPayment[],
     authMethod: AuthMethod = 'STORE_TOKEN',
-    tracingConfig?: RequestTracingConfig
+    tracingConfig?: RequestTracingConfig,
   ) {
     const metric = 'checkout-updateOrderFormPayment'
 
     return this.http.post(
       routes.attachmentsData(orderFormId, 'paymentData'),
       { payments },
-      this.getRequestConfig(authMethod, metric, tracingConfig)
+      this.getRequestConfig(authMethod, metric, tracingConfig),
     )
   }
 
@@ -215,14 +215,14 @@ export class Checkout extends JanusClient {
     orderFormId: string,
     fields: Record<string, string | boolean>,
     authMethod: AuthMethod = 'STORE_TOKEN',
-    tracingConfig?: RequestTracingConfig
+    tracingConfig?: RequestTracingConfig,
   ) {
     const metric = 'checkout-updateOrderFormProfile'
 
     return this.http.post(
       routes.attachmentsData(orderFormId, 'clientProfileData'),
       fields,
-      this.getRequestConfig(authMethod, metric, tracingConfig)
+      this.getRequestConfig(authMethod, metric, tracingConfig),
     )
   }
 
@@ -231,14 +231,14 @@ export class Checkout extends JanusClient {
     orderFormId: string,
     shippingAddress: CheckoutAddress,
     authMethod: AuthMethod = 'STORE_TOKEN',
-    tracingConfig?: RequestTracingConfig
+    tracingConfig?: RequestTracingConfig,
   ) {
     const metric = 'checkout-updateOrderFormShipping'
 
     this.http.post(
       routes.attachmentsData(orderFormId, 'shippingData'),
       shippingAddress,
-      this.getRequestConfig(authMethod, metric, tracingConfig)
+      this.getRequestConfig(authMethod, metric, tracingConfig),
     )
   }
 
@@ -247,14 +247,14 @@ export class Checkout extends JanusClient {
     orderFormId: string,
     marketingData: any,
     authMethod: AuthMethod = 'STORE_TOKEN',
-    tracingConfig?: RequestTracingConfig
+    tracingConfig?: RequestTracingConfig,
   ) {
     const metric = 'checkout-updateOrderFormMarketingData'
 
     return this.http.post(
       routes.attachmentsData(orderFormId, 'marketingData'),
       marketingData,
-      this.getRequestConfig(authMethod, metric, tracingConfig)
+      this.getRequestConfig(authMethod, metric, tracingConfig),
     )
   }
 
@@ -263,7 +263,7 @@ export class Checkout extends JanusClient {
     orderFormId: string,
     clientPreferencesData: OrderFormClientPreferencesData,
     authMethod: AuthMethod = 'STORE_TOKEN',
-    tracingConfig?: RequestTracingConfig
+    tracingConfig?: RequestTracingConfig,
   ) {
     const metric = 'checkout-updateOrderFormClientPreferencesData'
     // The API default value of `optinNewsLetter` is `null`, but it doesn't accept a POST with its value as `null`
@@ -275,7 +275,7 @@ export class Checkout extends JanusClient {
     return this.http.post(
       routes.attachmentsData(orderFormId, 'clientPreferencesData'),
       filteredClientPreferencesData,
-      this.getRequestConfig(authMethod, metric, tracingConfig)
+      this.getRequestConfig(authMethod, metric, tracingConfig),
     )
   }
 
@@ -286,14 +286,14 @@ export class Checkout extends JanusClient {
     assemblyOptionsId: string,
     body: any,
     authMethod: AuthMethod = 'STORE_TOKEN',
-    tracingConfig?: RequestTracingConfig
+    tracingConfig?: RequestTracingConfig,
   ) {
     const metric = 'checkout-addAssemblyOptions'
 
     return this.http.post<OrderForm>(
       routes.assemblyOptions(orderFormId, itemId, assemblyOptionsId),
       body,
-      this.getRequestConfig(authMethod, metric, tracingConfig)
+      this.getRequestConfig(authMethod, metric, tracingConfig),
     )
   }
 
@@ -304,7 +304,7 @@ export class Checkout extends JanusClient {
     assemblyOptionsId: string,
     body: any,
     authMethod: AuthMethod = 'STORE_TOKEN',
-    tracingConfig?: RequestTracingConfig
+    tracingConfig?: RequestTracingConfig,
   ) {
     const metric = 'checkout-removeAssemblyOptions'
 
@@ -313,7 +313,7 @@ export class Checkout extends JanusClient {
       {
         ...this.getRequestConfig(authMethod, metric, tracingConfig),
         data: body,
-      }
+      },
     )
   }
 
@@ -322,67 +322,67 @@ export class Checkout extends JanusClient {
     orderFormId: string,
     checkinPayload: any,
     authMethod: AuthMethod = 'STORE_TOKEN',
-    tracingConfig?: RequestTracingConfig
+    tracingConfig?: RequestTracingConfig,
   ) {
     const metric = 'checkout-updateOrderFormCheckin'
 
     return this.http.post(
       routes.checkin(orderFormId),
       checkinPayload,
-      this.getRequestConfig(authMethod, metric, tracingConfig)
+      this.getRequestConfig(authMethod, metric, tracingConfig),
     )
   }
 
   public orderForm(
     orderFormId?: string,
     authMethod: AuthMethod = 'STORE_TOKEN',
-    tracingConfig?: RequestTracingConfig
+    tracingConfig?: RequestTracingConfig,
   ) {
     const metric = 'checkout-orderForm'
 
     return this.http.post<OrderForm>(
       routes.orderForm(orderFormId),
       { expectedOrderFormSections: ['items'] },
-      this.getRequestConfig(authMethod, metric, tracingConfig)
+      this.getRequestConfig(authMethod, metric, tracingConfig),
     )
   }
 
   public orderFormRaw(
     authMethod: AuthMethod = 'AUTH_TOKEN',
-    tracingConfig?: RequestTracingConfig
+    tracingConfig?: RequestTracingConfig,
   ) {
     const metric = 'checkout-orderForm'
 
     return this.http.post<OrderForm>(
       routes.orderForm(),
       { expectedOrderFormSections: ['items'] },
-      this.getRequestConfig(authMethod, metric, tracingConfig)
+      this.getRequestConfig(authMethod, metric, tracingConfig),
     )
   }
 
   public newOrderForm(
     orderFormId?: string,
     authMethod: AuthMethod = 'STORE_TOKEN',
-    tracingConfig?: RequestTracingConfig
+    tracingConfig?: RequestTracingConfig,
   ) {
     const metric = 'checkout-newOrderForm'
 
     return this.http.post(
       routes.orderForm(orderFormId),
       undefined,
-      this.getRequestConfig(authMethod, metric, tracingConfig)
+      this.getRequestConfig(authMethod, metric, tracingConfig),
     )
   }
 
   public orders(
     authMethod: AuthMethod = 'STORE_TOKEN',
-    tracingConfig?: RequestTracingConfig
+    tracingConfig?: RequestTracingConfig,
   ) {
     const metric = 'checkout-orders'
 
     return this.http.get(
       routes.orders,
-      this.getRequestConfig(authMethod, metric, tracingConfig)
+      this.getRequestConfig(authMethod, metric, tracingConfig),
     )
   }
 
@@ -391,14 +391,14 @@ export class Checkout extends JanusClient {
     simulation: SimulationPayload,
     queryString = '',
     authMethod: AuthMethod = 'STORE_TOKEN',
-    tracingConfig?: RequestTracingConfig
+    tracingConfig?: RequestTracingConfig,
   ) {
     const metric = 'checkout-simulation'
 
     return this.http.post<SimulationOrderForm>(
       routes.simulation(queryString),
       simulation,
-      this.getRequestConfig(authMethod, metric, tracingConfig)
+      this.getRequestConfig(authMethod, metric, tracingConfig),
     )
   }
 
@@ -407,14 +407,14 @@ export class Checkout extends JanusClient {
     orderFormId: string,
     ignoreProfileData: boolean,
     authMethod: AuthMethod = 'STORE_TOKEN',
-    tracingConfig?: RequestTracingConfig
+    tracingConfig?: RequestTracingConfig,
   ) {
     const metric = 'checkout-updateOrderFormIgnoreProfile'
 
     return this.http.patch(
       routes.profile(orderFormId),
       { ignoreProfileData },
-      this.getRequestConfig(authMethod, metric, tracingConfig)
+      this.getRequestConfig(authMethod, metric, tracingConfig),
     )
   }
 }
