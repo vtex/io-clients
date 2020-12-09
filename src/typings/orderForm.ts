@@ -1,21 +1,11 @@
 import { MetadataItem } from './catalog'
 import {
-<<<<<<< HEAD
-  LogisticsInfo,
-  CheckoutAssemblyItem,
-  CheckoutAddress,
-  PaymentData,
-  CheckoutAttachmentOffering,
-  AssemblyOptionInput,
-} from './checkout'
-=======
   CheckoutAssemblyItem,
   CheckoutAddress,
   CheckoutAttachmentOffering,
   AssemblyOptionInput,
 } from './checkout'
 import { PaymentData, LogisticsInfo } from './oms'
->>>>>>> e8e9694... refactor(checkout-client): improve types
 
 export interface OrderFormConfiguration {
   paymentConfiguration: PaymentConfiguration
