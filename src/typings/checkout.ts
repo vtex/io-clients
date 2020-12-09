@@ -187,3 +187,10 @@ export interface ItemWithSimulationInput {
     sellerId: string
   }>
 }
+
+export interface OrderFormPayment {
+  paymentSystem: number
+  referenceValue: number
+  bin: number
+  tokenId: string
+}

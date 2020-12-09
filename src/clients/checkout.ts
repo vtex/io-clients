@@ -45,6 +45,8 @@ import {
   SimulationOrderForm,
   SimulationPayload,
   SingleCustomData,
+  OrderFormPayment,
+  CheckoutAddress,
 } from '../typings'
 
 const baseURL = '/api/checkout'
@@ -139,6 +141,7 @@ export class Checkout extends JanusClient {
   public getOrderFormConfiguration(authMethod: AuthMethod = 'AUTH_TOKEN', tracingConfig?: RequestTracingConfig) {
 =======
   public getOrderFormConfiguration(
+    // checked
     authMethod: AuthMethod = 'AUTH_TOKEN',
     tracingConfig?: RequestTracingConfig
   ) {
@@ -153,6 +156,7 @@ export class Checkout extends JanusClient {
   }
 
   public setOrderFormConfiguration(
+    // checked
     body: OrderFormConfiguration,
     authMethod: AuthMethod = 'AUTH_TOKEN',
     tracingConfig?: RequestTracingConfig
@@ -168,6 +172,7 @@ export class Checkout extends JanusClient {
 
   // eslint-disable-next-line max-params
   public setSingleCustomData(
+    // checked
     orderFormId: string,
     customData: SingleCustomData,
     authMethod: AuthMethod = 'AUTH_TOKEN',
@@ -186,6 +191,7 @@ export class Checkout extends JanusClient {
 
   // eslint-disable-next-line max-params
   public addItem(
+    // checked
     orderFormId: string,
     items: any,
     queryString: string,
@@ -203,6 +209,7 @@ export class Checkout extends JanusClient {
 
   // eslint-disable-next-line max-params
   public cancelOrder(
+    // checked
     orderFormId: string,
     reason: string,
     authMethod: AuthMethod = 'AUTH_TOKEN',
@@ -219,6 +226,7 @@ export class Checkout extends JanusClient {
 
   // eslint-disable-next-line max-params
   public setOrderFormCustomData(
+    // checked
     orderFormId: string,
     appId: string,
     field: string,
@@ -237,6 +245,7 @@ export class Checkout extends JanusClient {
 
   // eslint-disable-next-line max-params
   public updateItems(
+    // checked
     orderFormId: string,
     orderItems: any,
     authMethod: AuthMethod = 'AUTH_TOKEN',
@@ -255,7 +264,11 @@ export class Checkout extends JanusClient {
   public updateOrderFormIgnoreProfile(
     orderFormId: string,
     ignoreProfileData: boolean,
+<<<<<<< HEAD
     authMethod: AuthMethod = 'AUTH_TOKEN',
+=======
+    authMethod: AuthMethod = 'STORE_TOKEN', // Forbidden with all tokens
+>>>>>>> 5010226... feat(checkout-client): remove methods that was not working
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'checkout-updateOrderFormIgnoreProfile'
@@ -269,9 +282,15 @@ export class Checkout extends JanusClient {
 
   // eslint-disable-next-line max-params
   public updateOrderFormPayment(
+    // checked
     orderFormId: string,
+<<<<<<< HEAD
     payments: any,
     authMethod: AuthMethod = 'AUTH_TOKEN',
+=======
+    payments: OrderFormPayment[],
+    authMethod: AuthMethod = 'STORE_TOKEN',
+>>>>>>> 5010226... feat(checkout-client): remove methods that was not working
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'checkout-updateOrderFormPayment'
@@ -285,9 +304,15 @@ export class Checkout extends JanusClient {
 
   // eslint-disable-next-line max-params
   public updateOrderFormProfile(
+    // checked
     orderFormId: string,
+<<<<<<< HEAD
     fields: any,
     authMethod: AuthMethod = 'AUTH_TOKEN',
+=======
+    fields: Record<string, string | boolean>,
+    authMethod: AuthMethod = 'STORE_TOKEN',
+>>>>>>> 5010226... feat(checkout-client): remove methods that was not working
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'checkout-updateOrderFormProfile'
@@ -301,22 +326,29 @@ export class Checkout extends JanusClient {
 
   // eslint-disable-next-line max-params
   public updateOrderFormShipping(
+    // checked
     orderFormId: string,
+<<<<<<< HEAD
     shipping: any,
     authMethod: AuthMethod = 'AUTH_TOKEN',
+=======
+    shippingAddress: CheckoutAddress,
+    authMethod: AuthMethod = 'STORE_TOKEN',
+>>>>>>> 5010226... feat(checkout-client): remove methods that was not working
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'checkout-updateOrderFormShipping'
 
     this.http.post(
       routes.attachmentsData(orderFormId, 'shippingData'),
-      shipping,
+      shippingAddress,
       this.getRequestConfig(authMethod, metric, tracingConfig)
     )
   }
 
   // eslint-disable-next-line max-params
   public updateOrderFormMarketingData(
+    // not checked
     orderFormId: string,
     marketingData: any,
     authMethod: AuthMethod = 'AUTH_TOKEN',
@@ -333,6 +365,7 @@ export class Checkout extends JanusClient {
 
   // eslint-disable-next-line max-params
   public updateOrderFormClientPreferencesData(
+    // checked
     orderFormId: string,
     clientPreferencesData: OrderFormClientPreferencesData,
     authMethod: AuthMethod = 'AUTH_TOKEN',
@@ -354,6 +387,7 @@ export class Checkout extends JanusClient {
 
   // eslint-disable-next-line max-params
   public addAssemblyOptions(
+    // checked
     orderFormId: string,
     itemId: string | number,
     assemblyOptionsId: string,
@@ -372,6 +406,7 @@ export class Checkout extends JanusClient {
 
   // eslint-disable-next-line max-params
   public async removeAssemblyOptions(
+    // checked
     orderFormId: string,
     itemId: string | number,
     assemblyOptionsId: string,
@@ -392,6 +427,7 @@ export class Checkout extends JanusClient {
 
   // eslint-disable-next-line max-params
   public updateOrderFormCheckin(
+    // checked
     orderFormId: string,
     checkinPayload: any,
     authMethod: AuthMethod = 'AUTH_TOKEN',
@@ -410,6 +446,7 @@ export class Checkout extends JanusClient {
   public orderForm(orderFormId?: string, authMethod: AuthMethod = 'AUTH_TOKEN', tracingConfig?: RequestTracingConfig) {
 =======
   public orderForm(
+    // checked
     orderFormId?: string,
     authMethod: AuthMethod = 'STORE_TOKEN',
     tracingConfig?: RequestTracingConfig
@@ -425,6 +462,7 @@ export class Checkout extends JanusClient {
   }
 
   public orderFormRaw(
+    // checked
     authMethod: AuthMethod = 'AUTH_TOKEN',
     tracingConfig?: RequestTracingConfig
   ) {
@@ -438,6 +476,7 @@ export class Checkout extends JanusClient {
   }
 
   public newOrderForm(
+    // checked
     orderFormId?: string,
     authMethod: AuthMethod = 'AUTH_TOKEN',
     tracingConfig?: RequestTracingConfig
@@ -452,6 +491,7 @@ export class Checkout extends JanusClient {
   }
 
   public changeToAnonymousUser(
+    // 302
     orderFormId?: string,
     authMethod: AuthMethod = 'AUTH_TOKEN',
     tracingConfig?: RequestTracingConfig
@@ -472,6 +512,7 @@ export class Checkout extends JanusClient {
   public orders(authMethod: AuthMethod = 'AUTH_TOKEN', tracingConfig?: RequestTracingConfig) {
 =======
   public orders(
+    // checked
     authMethod: AuthMethod = 'STORE_TOKEN',
     tracingConfig?: RequestTracingConfig
   ) {
@@ -486,6 +527,7 @@ export class Checkout extends JanusClient {
 
   // eslint-disable-next-line max-params
   public simulation(
+    // checked
     simulation: SimulationPayload,
     queryString: string,
     authMethod: AuthMethod = 'AUTH_TOKEN',
