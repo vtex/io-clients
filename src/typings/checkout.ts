@@ -28,7 +28,7 @@ export interface CheckoutAssemblyItem {
 export interface CheckoutAttachmentOffering {
   name: string
   required: boolean
-  schema: Record<string, object>
+  schema: Record<string, unknown>
 }
 
 export interface InstallmentOption {
