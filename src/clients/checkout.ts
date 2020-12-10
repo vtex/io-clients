@@ -348,7 +348,7 @@ export class Checkout extends JanusClient {
   }
 
   public orderFormRaw(
-    authMethod: AuthMethod = 'AUTH_TOKEN',
+    authMethod: AuthMethod = 'STORE_TOKEN',
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'checkout-orderForm'
