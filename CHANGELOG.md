@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ## [2.1.0] - 2020-12-07
+### Fixed
+- Response typing of Catalog method
 ### Added
 - New methods to Catalog, OMS and Logistics clients
 
