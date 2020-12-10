@@ -9,8 +9,7 @@ import { getAuthToken } from '../utils/authToken'
 import { createTracing } from '../utils/tracing'
 import { checkSellerInformation } from '../utils/seller'
 import { AuthMethod } from '../typings/tokens'
-import { OrderFormConfiguration } from '../typings/orderForm'
-import { Seller } from '../typings/catalog'
+import { GetSkuResponse, Seller } from '../typings/catalog'
 
 const baseURL = '/api/catalog'
 const baseURLLegacy = '/api/catalog_system'
@@ -57,7 +56,7 @@ export class Catalog extends JanusClient {
     const metric = 'catalog-getSkuMetric'
     const token = getAuthToken(this.context, authMethod)
 
-    return this.http.get<OrderFormConfiguration>(routes.getSkuById(skuId), {
+    return this.http.get<GetSkuResponse>(routes.getSkuById(skuId), {
       headers: token
         ? {
             VtexIdclientAutCookie: token,
