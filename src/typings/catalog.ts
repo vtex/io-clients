@@ -102,4 +102,3 @@ export interface AssemblyOption {
   name: string
   composition: Composition | null
 }
-
