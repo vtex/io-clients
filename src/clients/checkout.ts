@@ -5,8 +5,7 @@ import {
   RequestTracingConfig,
 } from '@vtex/api'
 
-import { getAuthToken } from '../utils/authToken'
-import { createTracing } from '../utils/tracing'
+import { getRequestConfig } from '../utils/request'
 import {
   OrderForm,
   OrderFormClientPreferencesData,
@@ -65,24 +64,6 @@ export class Checkout extends JanusClient {
     })
   }
 
-  private getRequestConfig(
-    authMethod: AuthMethod,
-    metric: string,
-    tracingConfig?: RequestTracingConfig
-  ) {
-    const token = getAuthToken(this.context, authMethod)
-
-    return {
-      headers: token
-        ? {
-            VtexIdclientAutCookie: token,
-          }
-        : {},
-      metric,
-      tracing: createTracing(metric, tracingConfig),
-    }
-  }
-
   public getOrderFormConfiguration(
     authMethod: AuthMethod = 'AUTH_TOKEN',
     tracingConfig?: RequestTracingConfig
@@ -91,7 +72,7 @@ export class Checkout extends JanusClient {
 
     return this.http.get<OrderFormConfiguration>(
       routes.orderFormConfiguration,
-      this.getRequestConfig(authMethod, metric, tracingConfig)
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
     )
   }
 
@@ -105,7 +86,7 @@ export class Checkout extends JanusClient {
     return this.http.post(
       routes.orderFormConfiguration,
       body,
-      this.getRequestConfig(authMethod, metric, tracingConfig)
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
     )
   }
 
@@ -123,7 +104,7 @@ export class Checkout extends JanusClient {
     return this.http.put(
       routes.singleCustomData(orderFormId, appId, appFieldName),
       { value },
-      this.getRequestConfig(authMethod, metric, tracingConfig)
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
     )
   }
 
@@ -140,7 +121,7 @@ export class Checkout extends JanusClient {
     return this.http.post<OrderForm>(
       routes.addItem(orderFormId, queryString),
       { orderItems: items },
-      this.getRequestConfig(authMethod, metric, tracingConfig)
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
     )
   }
 
@@ -156,7 +137,7 @@ export class Checkout extends JanusClient {
     return this.http.post(
       routes.cancelOrder(orderFormId),
       { reason },
-      this.getRequestConfig(authMethod, metric, tracingConfig)
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
     )
   }
 
@@ -174,7 +155,7 @@ export class Checkout extends JanusClient {
     return this.http.put(
       routes.orderFormCustomData(orderFormId, appId, field),
       { value },
-      this.getRequestConfig(authMethod, metric, tracingConfig)
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
     )
   }
 
@@ -190,7 +171,7 @@ export class Checkout extends JanusClient {
     return this.http.post(
       routes.updateItems(orderFormId),
       { orderItems },
-      this.getRequestConfig(authMethod, metric, tracingConfig)
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
     )
   }
 
@@ -206,7 +187,7 @@ export class Checkout extends JanusClient {
     return this.http.post(
       routes.attachmentsData(orderFormId, 'paymentData'),
       { payments },
-      this.getRequestConfig(authMethod, metric, tracingConfig)
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
     )
   }
 
@@ -222,7 +203,7 @@ export class Checkout extends JanusClient {
     return this.http.post(
       routes.attachmentsData(orderFormId, 'clientProfileData'),
       fields,
-      this.getRequestConfig(authMethod, metric, tracingConfig)
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
     )
   }
 
@@ -238,7 +219,7 @@ export class Checkout extends JanusClient {
     this.http.post(
       routes.attachmentsData(orderFormId, 'shippingData'),
       shippingAddress,
-      this.getRequestConfig(authMethod, metric, tracingConfig)
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
     )
   }
 
@@ -254,7 +235,7 @@ export class Checkout extends JanusClient {
     return this.http.post(
       routes.attachmentsData(orderFormId, 'marketingData'),
       marketingData,
-      this.getRequestConfig(authMethod, metric, tracingConfig)
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
     )
   }
 
@@ -275,7 +256,7 @@ export class Checkout extends JanusClient {
     return this.http.post(
       routes.attachmentsData(orderFormId, 'clientPreferencesData'),
       filteredClientPreferencesData,
-      this.getRequestConfig(authMethod, metric, tracingConfig)
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
     )
   }
 
@@ -293,7 +274,7 @@ export class Checkout extends JanusClient {
     return this.http.post<OrderForm>(
       routes.assemblyOptions(orderFormId, itemId, assemblyOptionsId),
       body,
-      this.getRequestConfig(authMethod, metric, tracingConfig)
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
     )
   }
 
@@ -311,7 +292,7 @@ export class Checkout extends JanusClient {
     return this.http.delete<OrderForm>(
       routes.assemblyOptions(orderFormId, itemId, assemblyOptionsId),
       {
-        ...this.getRequestConfig(authMethod, metric, tracingConfig),
+        ...getRequestConfig(this.context, authMethod, metric, tracingConfig),
         data: body,
       }
     )
@@ -329,7 +310,7 @@ export class Checkout extends JanusClient {
     return this.http.post(
       routes.checkin(orderFormId),
       checkinPayload,
-      this.getRequestConfig(authMethod, metric, tracingConfig)
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
     )
   }
 
@@ -343,7 +324,7 @@ export class Checkout extends JanusClient {
     return this.http.post<OrderForm>(
       routes.orderForm(orderFormId),
       { expectedOrderFormSections: ['items'] },
-      this.getRequestConfig(authMethod, metric, tracingConfig)
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
     )
   }
 
@@ -356,7 +337,7 @@ export class Checkout extends JanusClient {
     return this.http.post<OrderForm>(
       routes.orderForm(),
       { expectedOrderFormSections: ['items'] },
-      this.getRequestConfig(authMethod, metric, tracingConfig)
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
     )
   }
 
@@ -370,7 +351,7 @@ export class Checkout extends JanusClient {
     return this.http.post(
       routes.orderForm(orderFormId),
       undefined,
-      this.getRequestConfig(authMethod, metric, tracingConfig)
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
     )
   }
 
@@ -382,7 +363,7 @@ export class Checkout extends JanusClient {
 
     return this.http.get(
       routes.orders,
-      this.getRequestConfig(authMethod, metric, tracingConfig)
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
     )
   }
 
@@ -398,7 +379,7 @@ export class Checkout extends JanusClient {
     return this.http.post<SimulationOrderForm>(
       routes.simulation(queryString),
       simulation,
-      this.getRequestConfig(authMethod, metric, tracingConfig)
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
     )
   }
 
@@ -414,7 +395,7 @@ export class Checkout extends JanusClient {
     return this.http.patch(
       routes.profile(orderFormId),
       { ignoreProfileData },
-      this.getRequestConfig(authMethod, metric, tracingConfig)
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
     )
   }
 }
