@@ -1,19 +1,25 @@
 <h1 align="center">
-  VTEX Commerce Clients
+  VTEX IO Clients
 </h1>
-<h5 align="center">Collection of <i>ready-to-use</i> VTEX IO Clients to access Commerce APIs </h5>
+<h5 align="center">Collection of <i>ready-to-use</i> VTEX IO Clients to access VTEX APIs</h5>
 
-This exports **Clients** and Typescript **typings** to help you connecting a VTEX IO application with VTEX Core Commerce modules.
+This exports **Clients**, **Client Factories** and Typescript **typings** to help you connecting a VTEX IO application with VTEX Core Commerce modules on Node.js services.
+
+## Installing
+
+```
+yarn add @vtex/clients
+```
 
 ## Available Clients
 
 | **Client Name** | **Implemented Methods**                                                         | Observations      |
 |-----------------|---------------------------------------------------------------------------------| -                 |
 | Affiliate       | `registerAffiliate`, `changeNotification`, `createSeller`, `getSellerList`      |                   |
-| Catalog         | `getSkuById`                                                                    | -                 |
+| Catalog         | `getProductsAndSkus`, `getSkuById`, `changeNotification`, `createSeller`, `getSellerList`| -                 |
 | Checkout        | `getOrderFormConfiguration`, `setOrderFormConfiguration`, `setSingleCustomData` | -                 |
-| Logistics       | `getDockById`, `pickupById`, `nearPickupPoints`, `shipping`                     | -                 |
-| OMS             | `userLastOrder`, `order`, `orderNotification`, `cancelOrder`                    | -                 |
+| Logistics       | `getDockById`, `pickupById`, `listPickupPoints`, `nearPickupPoints`, `shipping`                     | -                 |
+| OMS             | `listOrders`, `userLastOrder`, `order`, `orderNotification`, `cancelOrder`                    | -                 |
 | OMS Proxy       | `orders`, `orderFormId`, `customData`, `register`                               | You will have to declare a dependency and a policy on your app. You can check out [this document](https://www.notion.so/How-to-use-the-OMS-API-Proxy-application-e82f11ff896247c58a7e2e658d631516).
 | Suggestions     | `getAllSuggestions`, `getSuggestionById`, `sendSkuSuggestion`, `deleteSkuSuggestion`, `getAllVersions`, `getVersionById`| -                 |
 
@@ -92,3 +98,11 @@ To discover and learn more about VTEX Core Commerce APIs, read [VTEX Developer P
 ## Contributing
 
 Feel free to **submit new Clients** to this package, as long as they help to connect with VTEX Core Commerce APIs.
+
+## Releasing
+
+We have a Github Action configured to **release the package on NPM for every Release tag** pushed into the repository. So, in order to have this project published:
+1. Merge the Pull Request on the main branch, after having your changes approved.
+2. Run `git checkout master && git pull` on your local repository.
+3. Use the [releasy](https://www.npmjs.com/package/releasy) tool to push a new release (_e.g_: `releasy minor --stable`).
+4. Check the result of the process on Github checking the status on the latest commit.

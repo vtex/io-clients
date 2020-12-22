@@ -40,3 +40,31 @@ export interface SKU {
   Name: string
   RefId: string
 }
+
+export interface GetSkuResponse {
+  id: number
+  ProductId: number
+  IsActive: boolean
+  Name: string
+  RefId: number
+  PackagedHeight: number
+  PackagedLength: number
+  PackagedWidth: number
+  PackagedWeightKg: number
+  Height: number
+  Length: number
+  WeightKg: number
+  Width: number
+  CubicWeight: number
+  IsKit: boolean
+  CreationDate: string
+  RewardValue: string
+  EstimatedDateArrival: string
+  ManufacturerCode: string
+  CommercialConditionId: number
+  MeasurementUnit: number
+  UnitMultiplier: number
+  ModalType: string
+  KitItensSellApart: string
+  Videos: string
+}

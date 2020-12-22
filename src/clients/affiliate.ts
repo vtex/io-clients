@@ -23,7 +23,7 @@ export class Affiliate extends JanusClient {
   }
 
   public registerAffiliate(
-    { name, id, salesChannelId, searchEndpoint }: AffiliateInput,
+    { name, id, salesChannelId, searchEndpoint, followUpEmail }: AffiliateInput,
     authMethod: AuthMethod = 'AUTH_TOKEN',
     tracingConfig?: RequestTracingConfig
   ) {
@@ -33,7 +33,7 @@ export class Affiliate extends JanusClient {
     return this.http.put(
       routes.affiliate(id),
       {
-        followUpEmail: 'mock@mock.com',
+        followUpEmail,
         id,
         name,
         salesChannel: salesChannelId,
