@@ -68,3 +68,37 @@ export interface GetSkuResponse {
   KitItensSellApart: string
   Videos: string
 }
+
+export interface MetadataItem {
+  id: string
+  name: string
+  imageUrl: string
+  detailUrl: string
+  seller: string
+  assemblyOptions: AssemblyOption[]
+  skuName: string
+  productId: string
+  refId: string
+  ean: string | null
+}
+
+export interface CompositionItem {
+  id: string
+  minQuantity: number
+  maxQuantity: number
+  initialQuantity: number
+  priceTable: string
+  seller: string
+}
+
+export interface Composition {
+  minQuantity: number
+  maxQuantity: number
+  items: CompositionItem[]
+}
+
+export interface AssemblyOption {
+  id: string
+  name: string
+  composition: Composition | null
+}
