@@ -116,7 +116,7 @@ export class Catalog extends JanusClient {
 
   public search(
     query: string,
-    authMethod: AuthMethod = 'AUTH_TOKEN',
+    authMethod: AuthMethod = 'STORE_TOKEN',
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'catalog-search'
