@@ -1,3 +1,5 @@
+import { InstallmentOption } from './checkout'
+
 export interface Seller {
   SellerId: string
   Name: string
@@ -28,11 +30,11 @@ export interface SearchProductInfo {
   productName: string
   brand: string
   brandId: number
-  brandImageUrl: null
+  brandImageUrl: string | null
   linkText: string
   productReference: string
   categoryId: string
-  productTitle: null
+  productTitle: string | null
   metaTagDescription: string
   releaseDate: Date
   clusterHighlights: any
@@ -56,15 +58,15 @@ export interface SkuInfo {
   unitMultiplier: number
   modalType: null
   isKit: boolean
-  images: Image[]
+  images: SearchImage[]
   sellers: SearchInfoSeller[]
   Videos: any[]
   estimatedDateArrival: null
 }
 
-export interface Image {
+export interface SearchImage {
   imageId: string
-  imageLabel: null
+  imageLabel: string | null
   imageTag: string
   imageUrl: string
   imageText: string
@@ -131,15 +133,6 @@ export interface PaymentOptions {
   availableTokens: any[]
 }
 
-export interface InstallmentOption {
-  paymentSystem: string
-  bin: null
-  paymentName: string
-  paymentGroupName: string
-  value: number
-  installments: InstallmentElement[]
-}
-
 export interface InstallmentElement {
   count: number
   hasInterestRate: boolean
@@ -154,7 +147,7 @@ export interface PaymentSystem {
   id: number
   name: string
   groupName: string
-  validator: null
+  validator: any
   stringId: string
   template: string
   requiresDocument: boolean
@@ -162,7 +155,7 @@ export interface PaymentSystem {
   description: string
   requiresAuthentication: boolean
   dueDate: Date
-  availablePayments: null
+  availablePayments: any
 }
 
 export interface Product {
