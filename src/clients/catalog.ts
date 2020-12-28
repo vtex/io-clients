@@ -5,11 +5,10 @@ import {
   RequestTracingConfig,
 } from '@vtex/api'
 
-import { getAuthToken } from '../utils/authToken'
-import { createTracing } from '../utils/tracing'
 import { checkSellerInformation } from '../utils/seller'
 import { AuthMethod } from '../typings/tokens'
 import { GetSkuResponse, Seller } from '../typings/catalog'
+import { getRequestConfig } from '../utils/request'
 
 const baseURL = '/api/catalog'
 const baseURLLegacy = '/api/catalog_system'
@@ -35,17 +34,11 @@ export class Catalog extends JanusClient {
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'catalog-getProductsAndSkus'
-    const token = getAuthToken(this.context, authMethod)
 
-    return this.http.get(routes.productsAndSkus, {
-      headers: token
-        ? {
-            VtexIdclientAutCookie: token,
-          }
-        : {},
-      metric,
-      tracing: createTracing(metric, tracingConfig),
-    })
+    return this.http.get(
+      routes.productsAndSkus,
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
+    )
   }
 
   public getSkuById(
@@ -54,17 +47,11 @@ export class Catalog extends JanusClient {
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'catalog-getSkuMetric'
-    const token = getAuthToken(this.context, authMethod)
 
-    return this.http.get<GetSkuResponse>(routes.getSkuById(skuId), {
-      headers: token
-        ? {
-            VtexIdclientAutCookie: token,
-          }
-        : {},
-      metric,
-      tracing: createTracing(metric, tracingConfig),
-    })
+    return this.http.get<GetSkuResponse>(
+      routes.getSkuById(skuId),
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
+    )
   }
 
   public changeNotification(
@@ -76,20 +63,11 @@ export class Catalog extends JanusClient {
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'catalog-changeNotification'
-    const token = getAuthToken(this.context, authMethod)
 
     return this.http.post(
       routes.changeNotification(sellerId, sellerSkuId),
       {},
-      {
-        headers: token
-          ? {
-              VtexIdclientAutCookie: token,
-            }
-          : {},
-        metric,
-        tracing: createTracing(metric, tracingConfig),
-      }
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
     )
   }
 
@@ -99,18 +77,13 @@ export class Catalog extends JanusClient {
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'catalog-createSeller'
-    const token = getAuthToken(this.context, authMethod)
     const sellerInfo = checkSellerInformation(seller)
 
-    return this.http.post(routes.seller(sellerInfo.SellerId), sellerInfo, {
-      headers: token
-        ? {
-            VtexIdclientAutCookie: token,
-          }
-        : {},
-      metric,
-      tracing: createTracing(metric, tracingConfig),
-    })
+    return this.http.post(
+      routes.seller(sellerInfo.SellerId),
+      sellerInfo,
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
+    )
   }
 
   public getSellerList(
@@ -118,17 +91,11 @@ export class Catalog extends JanusClient {
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'catalog-getSellerList'
-    const token = getAuthToken(this.context, authMethod)
 
-    return this.http.get<Seller[]>(routes.sellerList, {
-      headers: token
-        ? {
-            VtexIdclientAutCookie: token,
-          }
-        : {},
-      metric,
-      tracing: createTracing(metric, tracingConfig),
-    })
+    return this.http.get<Seller[]>(
+      routes.sellerList,
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
+    )
   }
 }
 
