@@ -122,7 +122,7 @@ export class Catalog extends JanusClient {
     const metric = 'catalog-search'
     const token = getAuthToken(this.context, authMethod)
 
-    return this.http.get(routes.search(query), {
+    return this.http.getRaw(routes.search(query), {
       headers: token
         ? {
             VtexIdclientAutCookie: token,
