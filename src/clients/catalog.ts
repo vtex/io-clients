@@ -7,7 +7,7 @@ import {
 
 import { checkSellerInformation } from '../utils/seller'
 import { AuthMethod } from '../typings/tokens'
-import { GetSkuResponse, Seller } from '../typings/catalog'
+import { GetSkuResponse, SearchProductInfo, Seller } from '../typings/catalog'
 import { getRequestConfig } from '../utils/request'
 
 const baseURL = '/api/catalog'
