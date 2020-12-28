@@ -93,17 +93,11 @@ export class Catalog extends JanusClient {
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'catalog-search'
-    const token = getAuthToken(this.context, authMethod)
 
-    return this.http.get(routes.search(query), {
-      headers: token
-        ? {
-            VtexIdclientAutCookie: token,
-          }
-        : {},
-      metric,
-      tracing: createTracing(metric, tracingConfig),
-    })
+    return this.http.get(
+      routes.search(query),
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
+    )
   }
 
   public getSellerList(
