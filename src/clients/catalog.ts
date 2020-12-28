@@ -19,6 +19,7 @@ const routes = {
   getSkuById: (skuId: string) => `${baseURL}/pvt/stockkeepingunit/${skuId}`,
   changeNotification: (sellerId: string, skuId: string) =>
     `${baseURLLegacy}/pvt/skuseller/changenotification/${sellerId}/${skuId}`,
+  search: (query: string) => `${baseURLLegacy}/pub/products/search/${query}`,
   seller: (sellerId: string) => `${baseURLLegacy}/pvt/seller/${sellerId}`,
   sellerList: `${baseURLLegacy}/pvt/seller/list`,
 }
@@ -103,6 +104,25 @@ export class Catalog extends JanusClient {
     const sellerInfo = checkSellerInformation(seller)
 
     return this.http.post(routes.seller(sellerInfo.SellerId), sellerInfo, {
+      headers: token
+        ? {
+            VtexIdclientAutCookie: token,
+          }
+        : {},
+      metric,
+      tracing: createTracing(metric, tracingConfig),
+    })
+  }
+
+  public search(
+    query: string,
+    authMethod: AuthMethod = 'STORE_TOKEN',
+    tracingConfig?: RequestTracingConfig
+  ) {
+    const metric = 'catalog-search'
+    const token = getAuthToken(this.context, authMethod)
+
+    return this.http.get(routes.search(query), {
       headers: token
         ? {
             VtexIdclientAutCookie: token,
