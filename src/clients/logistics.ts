@@ -5,10 +5,9 @@ import {
   InstanceOptions,
 } from '@vtex/api'
 
-import { getAuthToken } from '../utils/authToken'
-import { createTracing } from '../utils/tracing'
 import { AuthMethod } from '../typings/tokens'
 import { LogisticOutput, LogisticPickupPoint } from '../typings/logistics'
+import { getRequestConfig } from '../utils/request'
 
 const baseURL = '/api/logistics'
 
@@ -34,17 +33,11 @@ export class Logistics extends JanusClient {
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'logistics-getDockById'
-    const token = getAuthToken(this.context, authMethod)
 
-    return this.http.get(routes.docks(dockId), {
-      headers: token
-        ? {
-            VtexIdclientAutCookie: token,
-          }
-        : {},
-      metric,
-      tracing: createTracing(metric, tracingConfig),
-    })
+    return this.http.get(
+      routes.docks(dockId),
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
+    )
   }
 
   public pickupById(
@@ -53,17 +46,11 @@ export class Logistics extends JanusClient {
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'logistics-pickupById'
-    const token = getAuthToken(this.context, authMethod)
 
-    return this.http.get<LogisticPickupPoint>(routes.pickUpById(id), {
-      headers: token
-        ? {
-            VtexIdclientAutCookie: token,
-          }
-        : {},
-      metric,
-      tracing: createTracing(metric, tracingConfig),
-    })
+    return this.http.get<LogisticPickupPoint>(
+      routes.pickUpById(id),
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
+    )
   }
 
   public listPickupPoints(
@@ -71,17 +58,11 @@ export class Logistics extends JanusClient {
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'logistics-listPickupPoints'
-    const token = getAuthToken(this.context, authMethod)
 
-    return this.http.get<LogisticOutput>(routes.pickupPoints, {
-      headers: token
-        ? {
-            VtexIdclientAutCookie: token,
-          }
-        : {},
-      metric,
-      tracing: createTracing(metric, tracingConfig),
-    })
+    return this.http.get<LogisticOutput>(
+      routes.pickupPoints,
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
+    )
   }
 
   // eslint-disable-next-line max-params
@@ -93,19 +74,10 @@ export class Logistics extends JanusClient {
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'logistics-nearPickupPoints'
-    const token = getAuthToken(this.context, authMethod)
 
     return this.http.get<LogisticOutput>(
       routes.nearPickupPoints(lat, long, maxDistance),
-      {
-        headers: token
-          ? {
-              VtexIdclientAutCookie: token,
-            }
-          : {},
-        metric,
-        tracing: createTracing(metric, tracingConfig),
-      }
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
     )
   }
 
@@ -114,16 +86,10 @@ export class Logistics extends JanusClient {
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'logistics-shipping'
-    const token = getAuthToken(this.context, authMethod)
 
-    return this.http.get<LogisticPickupPoint>(routes.shipping, {
-      headers: token
-        ? {
-            VtexIdclientAutCookie: token,
-          }
-        : {},
-      metric,
-      tracing: createTracing(metric, tracingConfig),
-    })
+    return this.http.get<LogisticPickupPoint>(
+      routes.shipping,
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
+    )
   }
 }

@@ -5,14 +5,13 @@ import {
   RequestTracingConfig,
 } from '@vtex/api'
 
-import { getAuthToken } from '../utils/authToken'
-import { createTracing } from '../utils/tracing'
 import { AuthMethod } from '../typings/tokens'
 import {
   Suggestion,
   SuggestionRequest,
   SuggestionsResponse,
 } from '../typings/suggestions'
+import { getRequestConfig } from '../utils/request'
 
 const routes = {
   sellerSkuId: (sellerId: string, sellerSkuId: string) =>
@@ -35,17 +34,11 @@ export class Suggestions extends ExternalClient {
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'suggestions-getAllSuggestions'
-    const token = getAuthToken(this.context, authMethod)
 
-    return this.http.get<SuggestionsResponse>('', {
-      headers: token
-        ? {
-            VtexIdclientAutCookie: token,
-          }
-        : {},
-      metric,
-      tracing: createTracing(metric, tracingConfig),
-    })
+    return this.http.get<SuggestionsResponse>(
+      '',
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
+    )
   }
 
   // eslint-disable-next-line max-params
@@ -56,19 +49,10 @@ export class Suggestions extends ExternalClient {
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'suggestions-getSuggestionById'
-    const token = getAuthToken(this.context, authMethod)
 
     return this.http.get<Suggestion>(
       routes.sellerSkuId(sellerId, sellerSkuId),
-      {
-        headers: token
-          ? {
-              VtexIdclientAutCookie: token,
-            }
-          : {},
-        metric,
-        tracing: createTracing(metric, tracingConfig),
-      }
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
     )
   }
 
@@ -79,18 +63,13 @@ export class Suggestions extends ExternalClient {
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'suggestions-sendSkuSuggestion'
-    const token = getAuthToken(this.context, authMethod)
     const { SellerId: sellerId, SellerStockKeepingUnitId: sellerSkuId } = body
 
-    return this.http.put(routes.sellerSkuId(sellerId, sellerSkuId), body, {
-      headers: token
-        ? {
-            VtexIdclientAutCookie: token,
-          }
-        : {},
-      metric,
-      tracing: createTracing(metric, tracingConfig),
-    })
+    return this.http.put(
+      routes.sellerSkuId(sellerId, sellerSkuId),
+      body,
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
+    )
   }
 
   // eslint-disable-next-line max-params
@@ -101,17 +80,11 @@ export class Suggestions extends ExternalClient {
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'suggestions-deleteSkuSuggestion'
-    const token = getAuthToken(this.context, authMethod)
 
-    return this.http.delete(routes.sellerSkuId(sellerId, sellerSkuId), {
-      headers: token
-        ? {
-            VtexIdclientAutCookie: token,
-          }
-        : {},
-      metric,
-      tracing: createTracing(metric, tracingConfig),
-    })
+    return this.http.delete(
+      routes.sellerSkuId(sellerId, sellerSkuId),
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
+    )
   }
 
   // eslint-disable-next-line max-params
@@ -122,17 +95,11 @@ export class Suggestions extends ExternalClient {
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'suggestions-deleteSkuSuggestion'
-    const token = getAuthToken(this.context, authMethod)
 
-    return this.http.get(routes.versions(sellerId, sellerSkuId), {
-      headers: token
-        ? {
-            VtexIdclientAutCookie: token,
-          }
-        : {},
-      metric,
-      tracing: createTracing(metric, tracingConfig),
-    })
+    return this.http.get(
+      routes.versions(sellerId, sellerSkuId),
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
+    )
   }
 
   // eslint-disable-next-line max-params
@@ -144,16 +111,10 @@ export class Suggestions extends ExternalClient {
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'suggestions-deleteSkuSuggestion'
-    const token = getAuthToken(this.context, authMethod)
 
-    return this.http.get(routes.versionById(sellerId, sellerSkuId, version), {
-      headers: token
-        ? {
-            VtexIdclientAutCookie: token,
-          }
-        : {},
-      metric,
-      tracing: createTracing(metric, tracingConfig),
-    })
+    return this.http.get(
+      routes.versionById(sellerId, sellerSkuId, version),
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
+    )
   }
 }

@@ -5,8 +5,6 @@ import {
   RequestTracingConfig,
 } from '@vtex/api'
 
-import { getAuthToken } from '../utils/authToken'
-import { createTracing } from '../utils/tracing'
 import { AuthMethod } from '../typings/tokens'
 import {
   CancelResponse,
@@ -16,6 +14,7 @@ import {
   OrderDetailResponse,
 } from '../typings/oms'
 import { OrderFormConfiguration } from '../typings/orderForm'
+import { getRequestConfig } from '../utils/request'
 
 const baseURL = '/api/oms'
 
@@ -39,17 +38,11 @@ export class OMS extends JanusClient {
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'oms-listOrders'
-    const token = getAuthToken(this.context, authMethod)
 
-    return this.http.get<ListOrdersResponse>(routes.orders, {
-      headers: token
-        ? {
-            VtexIdclientAutCookie: token,
-          }
-        : {},
-      metric,
-      tracing: createTracing(metric, tracingConfig),
-    })
+    return this.http.get<ListOrdersResponse>(
+      routes.orders,
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
+    )
   }
 
   public userLastOrder(
@@ -57,17 +50,11 @@ export class OMS extends JanusClient {
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'oms-userLastOrder'
-    const token = getAuthToken(this.context, authMethod)
 
-    return this.http.get<OrderFormConfiguration>(routes.lastOrder, {
-      headers: token
-        ? {
-            VtexIdclientAutCookie: token,
-          }
-        : {},
-      metric,
-      tracing: createTracing(metric, tracingConfig),
-    })
+    return this.http.get<OrderFormConfiguration>(
+      routes.lastOrder,
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
+    )
   }
 
   public order(
@@ -76,17 +63,11 @@ export class OMS extends JanusClient {
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'oms-order'
-    const token = getAuthToken(this.context, authMethod)
 
-    return this.http.get<OrderDetailResponse>(routes.order(id), {
-      headers: token
-        ? {
-            VtexIdclientAutCookie: token,
-          }
-        : {},
-      metric,
-      tracing: createTracing(metric, tracingConfig),
-    })
+    return this.http.get<OrderDetailResponse>(
+      routes.order(id),
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
+    )
   }
 
   // eslint-disable-next-line max-params
@@ -97,17 +78,12 @@ export class OMS extends JanusClient {
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'oms-orderNotification'
-    const token = getAuthToken(this.context, authMethod)
 
-    return this.http.post<NotificationResponse>(routes.notification(id), body, {
-      headers: token
-        ? {
-            VtexIdclientAutCookie: token,
-          }
-        : {},
-      metric,
-      tracing: createTracing(metric, tracingConfig),
-    })
+    return this.http.post<NotificationResponse>(
+      routes.notification(id),
+      body,
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
+    )
   }
 
   public cancelOrder(
@@ -116,16 +92,10 @@ export class OMS extends JanusClient {
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'oms-cancelOrder'
-    const token = getAuthToken(this.context, authMethod)
 
-    return this.http.post<CancelResponse>(routes.cancel(id), {
-      headers: token
-        ? {
-            VtexIdclientAutCookie: token,
-          }
-        : {},
-      metric,
-      tracing: createTracing(metric, tracingConfig),
-    })
+    return this.http.post<CancelResponse>(
+      routes.cancel(id),
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
+    )
   }
 }
