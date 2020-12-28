@@ -9,7 +9,7 @@ import { getAuthToken } from '../utils/authToken'
 import { createTracing } from '../utils/tracing'
 import { checkSellerInformation } from '../utils/seller'
 import { AuthMethod } from '../typings/tokens'
-import { GetSkuResponse, Seller } from '../typings/catalog'
+import { GetSkuResponse, SearchProductInfo, Seller } from '../typings/catalog'
 
 const baseURL = '/api/catalog'
 const baseURLLegacy = '/api/catalog_system'
@@ -122,7 +122,7 @@ export class Catalog extends JanusClient {
     const metric = 'catalog-search'
     const token = getAuthToken(this.context, authMethod)
 
-    return this.http.getRaw(routes.search(query), {
+    return this.http.getRaw<SearchProductInfo[]>(routes.search(query), {
       headers: token
         ? {
             VtexIdclientAutCookie: token,
