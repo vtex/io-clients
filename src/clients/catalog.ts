@@ -94,7 +94,7 @@ export class Catalog extends JanusClient {
   ) {
     const metric = 'catalog-search'
 
-    return this.http.get(
+    return this.http.getRaw<SearchProductInfo[]>(
       routes.search(query),
       getRequestConfig(this.context, authMethod, metric, tracingConfig)
     )
