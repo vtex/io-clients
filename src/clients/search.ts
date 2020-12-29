@@ -38,7 +38,9 @@ enum SimulationBehavior {
 
 const inflightKey = ({ baseURL, url, params, headers }: RequestConfig) => {
   return `${
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     baseURL! +
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     url! +
     stringify(params, { arrayFormat: 'repeat', addQueryPrefix: true })
   }&segmentToken=${headers['x-vtex-segment']}`
@@ -247,7 +249,7 @@ export class Search extends AppClient {
 
     return this.get<SearchFacets>(
       `/pub/facets/search/${encodeURI(
-        this.searchEncodeURI(`${path.trim()}${options ? '?' + options : ''}`)
+        this.searchEncodeURI(`${path.trim()}${options ? `?${options}` : ''}`)
       )}`,
       { metric: 'search-facets' }
     )
@@ -283,6 +285,7 @@ export class Search extends AppClient {
     )
 
   private get = <T = any>(url: string, config: RequestConfig = {}) => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const segmentData: SegmentData | undefined = (this
       .context! as CustomIOContext).segment
 
@@ -303,6 +306,7 @@ export class Search extends AppClient {
     })
 
   private getRaw = <T = any>(url: string, config: RequestConfig = {}) => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const segmentData: SegmentData | undefined = (this
       .context! as CustomIOContext).segment
 
@@ -339,7 +343,7 @@ export class Search extends AppClient {
     if (hideUnavailableItems) {
       const segmentData = (this.context as CustomIOContext).segment
 
-      salesChannel = segmentData?.channel.toString() || ''
+      salesChannel = segmentData?.channel.toString() ?? ''
     }
 
     let url = `/pub/products/search/${sanitizedQuery}?`
