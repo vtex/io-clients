@@ -1,10 +1,3 @@
-import { OrderFormItem } from './orderForm'
-
-interface Range {
-  from: number
-  to: number
-}
-
 interface SelectedFacets {
   key: string
   value: string
@@ -28,11 +21,6 @@ export interface SearchArgs extends QueryArgs {
   hideUnavailableItems: boolean | null
   simulationBehavior: 'skip' | 'default' | null
   completeSpecifications: boolean
-}
-
-interface Metadata {
-  metaTagDescription?: string
-  titleTag?: string
 }
 
 export interface Brand {
@@ -67,17 +55,6 @@ export interface CategoryByIdResponse {
   children: null
   Title: string
   MetaTagDescription: string
-}
-
-interface FacetsArgs extends QueryArgs {
-  hideUnavailableItems?: boolean
-  behavior?: FacetsBehavior
-}
-
-// eslint-disable-next-line no-restricted-syntax
-enum FacetsBehavior {
-  STATIC = 'Static',
-  DYNAMIC = 'Dynamic',
 }
 
 export interface SearchProduct {
@@ -157,10 +134,6 @@ interface CompleteSpecificationValue {
   Id: string
   Position: number
   Value: string
-}
-
-interface SearchItemExtended extends SearchItem {
-  skuSpecifications?: SkuSpecification[]
 }
 
 interface SkuSpecification {
@@ -330,22 +303,6 @@ export interface FieldResponseAPI {
   FieldGroupName: string
 }
 
-interface SearchMetadataArgs {
-  query?: string | null
-  map?: string | null
-  selectedFacets?: SelectedFacets[]
-}
-
-interface SearchMetadata {
-  titleTag?: string | null
-  metaTagDescription?: string | null
-  id?: string | null
-}
-
-/**
- * Assembly options related types
- */
-
 interface CompositionItem {
   id: string
   minQuantity: number
@@ -388,33 +345,6 @@ interface SearchMetadataItem {
   seller: string
   assemblyOptions: AssemblyOption[]
 }
-
-interface MetadataItem {
-  id: string
-  name: string
-  imageUrl: string
-  detailUrl: string
-  seller: string
-  assemblyOptions: AssemblyOption[]
-  skuName: string
-  productId: string
-  refId: string
-  ean: string | null
-}
-interface AddedItem {
-  choiceType: string
-  compositionItem: CompositionItem
-  extraQuantity: number
-  item: OrderFormItem
-  normalizedQuantity: number
-}
-
-interface RemovedItem {
-  initialQuantity: number
-  name: string
-  removedQuantity: number
-}
-
 export interface FilterListTreeCategoryById {
   Name: string
   CategoryId: number
