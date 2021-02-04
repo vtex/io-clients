@@ -69,7 +69,9 @@ abstract class MasterDataEntity<
   abstract search<K extends keyof WithMetadata<TEntity>>(
     pagination: PaginationArgs,
     fields: Array<ThisType<K>> | ['_all'],
-    where?: string
+    where?: string,
+    keyword?: string,
+    sort?: string,
   ): Promise<Array<Pick<WithMetadata<TEntity>, K>>>
 }
 
@@ -138,7 +140,9 @@ export const masterDataFor = <TEntity extends Record<string, any>>(
     public search<K extends keyof WithMetadata<TEntity>>(
       pagination: PaginationArgs,
       fields: Array<ThisType<K> | '_all'>,
-      where?: string
+      where?: string,
+      keyword?: string,
+      sort?: string,
     ): Promise<Array<Pick<WithMetadata<TEntity>, K>>> {
       return this.md.searchDocuments<Pick<WithMetadata<TEntity>, K>>({
         dataEntity: this.dataEntity,
@@ -146,6 +150,8 @@ export const masterDataFor = <TEntity extends Record<string, any>>(
         fields: fields.map((field) => field.toString()),
         where,
         schema: this.schema,
+        keyword: keyword,
+        sort: sort,
       })
     }
 
