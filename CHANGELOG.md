@@ -5,7 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-
+### Fixed
+- Removing wrong dependency
+### Added
+- Sort paramater to search method on MD Factory class
 ## [2.5.2-beta] - 2020-12-29
 
 ## [2.5.1-beta] - 2020-12-29

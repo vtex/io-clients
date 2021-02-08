@@ -69,6 +69,7 @@ abstract class MasterDataEntity<
   abstract search<K extends keyof WithMetadata<TEntity>>(
     pagination: PaginationArgs,
     fields: Array<ThisType<K>> | ['_all'],
+    sort?: string,
     where?: string
   ): Promise<Array<Pick<WithMetadata<TEntity>, K>>>
 }
@@ -135,15 +136,18 @@ export const masterDataFor = <TEntity extends Record<string, any>>(
       return this.md.deleteDocument({ dataEntity: this.dataEntity, id })
     }
 
+    // eslint-disable-next-line max-params
     public search<K extends keyof WithMetadata<TEntity>>(
       pagination: PaginationArgs,
       fields: Array<ThisType<K> | '_all'>,
+      sort?: string,
       where?: string
     ): Promise<Array<Pick<WithMetadata<TEntity>, K>>> {
       return this.md.searchDocuments<Pick<WithMetadata<TEntity>, K>>({
         dataEntity: this.dataEntity,
         pagination,
         fields: fields.map((field) => field.toString()),
+        sort,
         where,
         schema: this.schema,
       })
