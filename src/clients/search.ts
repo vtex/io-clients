@@ -37,6 +37,7 @@ enum SimulationBehavior {
 }
 
 const inflightKey = ({ baseURL, url, params, headers }: RequestConfig) => {
+  // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
   return `${
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     baseURL! +
