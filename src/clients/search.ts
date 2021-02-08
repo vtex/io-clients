@@ -37,14 +37,11 @@ enum SimulationBehavior {
 }
 
 const inflightKey = ({ baseURL, url, params, headers }: RequestConfig) => {
-  // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-  return `${
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    baseURL! +
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    url! +
-    stringify(params, { arrayFormat: 'repeat', addQueryPrefix: true })
-  }&segmentToken=${headers['x-vtex-segment']}`
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  return `${baseURL!}${url!}${stringify(params, {
+    arrayFormat: 'repeat',
+    addQueryPrefix: true,
+  })}&segmentToken=${headers['x-vtex-segment']}`
 }
 
 interface SearchPageTypeResponse {
