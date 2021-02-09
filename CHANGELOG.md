@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+### Added
+- Add method to get seller by id  in catalog client
+
 ## [2.5.3-beta] - 2021-02-08
 ### Fixed
 - Removing wrong dependency
