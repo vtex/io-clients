@@ -13,15 +13,16 @@ yarn add @vtex/clients
 
 ## Available Clients
 
-| **Client Name** | **Implemented Methods**                                                         | Observations      |
-|-----------------|---------------------------------------------------------------------------------| -                 |
-| Affiliate       | `registerAffiliate`, `changeNotification`, `createSeller`, `getSellerList`      |                   |
-| Catalog         | `getProductsAndSkus`, `getSkuById`, `changeNotification`, `createSeller`, `getSellerList`| -                 |
-| Checkout        | `getOrderFormConfiguration`, `setOrderFormConfiguration`, `setSingleCustomData` | -                 |
-| Logistics       | `getDockById`, `pickupById`, `listPickupPoints`, `nearPickupPoints`, `shipping`                     | -                 |
-| OMS             | `listOrders`, `userLastOrder`, `order`, `orderNotification`, `cancelOrder`                    | -                 |
-| OMS Proxy       | `orders`, `orderFormId`, `customData`, `register`                               | You will have to declare a dependency and a policy on your app. You can check out [this document](https://www.notion.so/How-to-use-the-OMS-API-Proxy-application-e82f11ff896247c58a7e2e658d631516).
-| Suggestions     | `getAllSuggestions`, `getSuggestionById`, `sendSkuSuggestion`, `deleteSkuSuggestion`, `getAllVersions`, `getVersionById`| -                 |
+| **Client Name**      | **Implemented Methods**                                                                   | Observations      |
+|----------------------|-------------------------------------------------------------------------------------------| -                 |
+| Affiliate            | `registerAffiliate`, `changeNotification`, `createSeller`, `getSellerList`                | -                 |
+| Catalog              | `getProductsAndSkus`, `getSkuById`, `changeNotification`, `createSeller`, `getSellerList` | -                 |
+| Checkout             | `getOrderFormConfiguration`, `setOrderFormConfiguration`, `setSingleCustomData`           | -                 |
+| Logistics            | `getDockById`, `pickupById`, `listPickupPoints`, `nearPickupPoints`, `shipping`           | -                 |
+| OMS                  | `listOrders`, `userLastOrder`, `order`, `orderNotification`, `cancelOrder`                | -                 |
+| OMS Proxy            | `orders`, `orderFormId`, `customData`, `register`                                         | You will have to declare a dependency and a policy on your app. You can check out [this document](https://www.notion.so/How-to-use-the-OMS-API-Proxy-application-e82f11ff896247c58a7e2e658d631516).
+| Rates and Benefits   | `getAllBenefits`, `getPromotionById`, `createOrUpdatePromotion`, `createMultipleSkuPromotion`, `updateMultipleSkuPromotion` | Uses ADMIN_TOKEN as authMethod by default.                 |
+| Suggestions          | `getAllSuggestions`, `getSuggestionById`, `sendSkuSuggestion`, `deleteSkuSuggestion`, `getAllVersions`, `getVersionById`| -                 |
 
 ## Available Factories
 

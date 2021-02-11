@@ -12,14 +12,19 @@ export const getRequestConfig = (
   // eslint-disable-next-line max-params
 ) => {
   const token = getAuthToken(context, authMethod)
+  const headers: Headers = token
+    ? {
+        VtexIdclientAutCookie: token,
+      }
+    : {}
 
   return {
-    headers: token
-      ? {
-          VtexIdclientAutCookie: token,
-        }
-      : {},
+    headers,
     metric,
     tracing: createTracing(metric, tracingConfig),
   }
+}
+
+export interface Headers {
+  [key: string]: string
 }
