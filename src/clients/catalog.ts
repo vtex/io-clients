@@ -97,6 +97,19 @@ export class Catalog extends JanusClient {
       getRequestConfig(this.context, authMethod, metric, tracingConfig)
     )
   }
+
+  public seller(
+    id: string,
+    authMethod: AuthMethod = 'AUTH_TOKEN',
+    tracingConfig?: RequestTracingConfig
+  ) {
+    const metric = 'catalog-seller'
+
+    return this.http.get<Seller>(
+      routes.seller(id),
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
+    )
+  }
 }
 
 interface ChangeNotificationArgs {
