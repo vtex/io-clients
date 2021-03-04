@@ -42,7 +42,7 @@ export interface SKU {
 }
 
 export interface GetSkuResponse {
-  id: number
+  Id: number
   ProductId: number
   IsActive: boolean
   Name: string
