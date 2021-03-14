@@ -72,6 +72,13 @@ abstract class MasterDataEntity<
     sort?: string,
     where?: string
   ): Promise<Array<Pick<WithMetadata<TEntity>, K>>>
+
+  abstract searchRaw<K extends keyof WithMetadata<TEntity>>(
+    pagination: PaginationArgs,
+    fields: Array<ThisType<K>> | ['_all'],
+    sort?: string,
+    where?: string
+  ): Promise<Array<Pick<WithMetadata<TEntity>, K>>>
 }
 
 const GLOBAL = ''
@@ -144,6 +151,25 @@ export const masterDataFor = <TEntity extends Record<string, any>>(
       where?: string
     ): Promise<Array<Pick<WithMetadata<TEntity>, K>>> {
       return this.md.searchDocuments<Pick<WithMetadata<TEntity>, K>>({
+        dataEntity: this.dataEntity,
+        pagination,
+        fields: fields.map((field) => field.toString()),
+        sort,
+        where,
+        schema: this.schema,
+      })
+    }
+
+    // eslint-disable-next-line max-params
+    public searchRaw<K extends keyof WithMetadata<TEntity>>(
+      pagination: PaginationArgs,
+      fields: Array<ThisType<K> | '_all'>,
+      sort?: string,
+      where?: string
+    ): Promise<Array<Pick<WithMetadata<TEntity>, K>>> {
+      return this.md.searchDocumentsWithPaginationInfo<
+        Pick<WithMetadata<TEntity>, K>
+      >({
         dataEntity: this.dataEntity,
         pagination,
         fields: fields.map((field) => field.toString()),
