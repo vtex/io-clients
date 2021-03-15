@@ -51,6 +51,7 @@ export interface EntityMetadata {
 
 type WithMetadata<TEntity extends Record<string, any>> = TEntity &
   EntityMetadata
+
 abstract class MasterDataEntity<
   TEntity extends Record<string, any>
 > extends JanusClient {
@@ -78,7 +79,10 @@ abstract class MasterDataEntity<
     fields: Array<ThisType<K>> | ['_all'],
     sort?: string,
     where?: string
-  ): Promise<Array<Pick<WithMetadata<TEntity>, K>>>
+  ): Promise<{
+    data: Array<Pick<WithMetadata<TEntity>, K>>
+    pagination: { total: number; page: number; pageSize: number }
+  }>
 }
 
 const GLOBAL = ''
@@ -95,9 +99,10 @@ const versionDescriptor = (isProduction: boolean, workspace: string) =>
 export const masterDataFor = <TEntity extends Record<string, any>>(
   entityName: string,
   providerAppId?: Maybe<string>
-): new (context: IOContext, options?: InstanceOptions) => MasterDataEntity<
-  TEntity
-> => {
+): new (
+  context: IOContext,
+  options?: InstanceOptions
+) => MasterDataEntity<TEntity> => {
   return class extends MasterDataEntity<TEntity> {
     private dataEntity: string
     private schema: string
@@ -166,10 +171,11 @@ export const masterDataFor = <TEntity extends Record<string, any>>(
       fields: Array<ThisType<K> | '_all'>,
       sort?: string,
       where?: string
-    ): Promise<Array<Pick<WithMetadata<TEntity>, K>>> {
-      return this.md.searchDocumentsWithPaginationInfo<
-        Pick<WithMetadata<TEntity>, K>
-      >({
+    ): Promise<{
+      data: Array<Pick<WithMetadata<TEntity>, K>>
+      pagination: { total: number; page: number; pageSize: number }
+    }> {
+      return this.md.searchDocumentsWithPaginationInfo({
         dataEntity: this.dataEntity,
         pagination,
         fields: fields.map((field) => field.toString()),
