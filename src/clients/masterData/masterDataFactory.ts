@@ -1,13 +1,7 @@
-import { OutgoingHttpHeaders } from 'http'
+import type { OutgoingHttpHeaders } from 'http'
 
-import {
-  InstanceOptions,
-  IOContext,
-  IOResponse,
-  JanusClient,
-  MasterData,
-  parseAppId,
-} from '@vtex/api'
+import type { InstanceOptions, IOContext, IOResponse } from '@vtex/api'
+import { JanusClient, MasterData, parseAppId } from '@vtex/api'
 
 export interface DocumentResponse {
   Id: string
