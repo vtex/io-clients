@@ -28,7 +28,7 @@ yarn add @vtex/clients
 
 | **Factory** | **Implemented Methods**                                                         | Observations      |
 |-----------------|---------------------------------------------------------------------------------| -                 |
-| Master Data       | `get`, `save`, `update`, `saveOrUpdate`, `delete`, `search`      | Use the `masterDataFor` helper function. |
+| Master Data       | `get`, `save`, `update`, `saveOrUpdate`, `delete`, `search`, `searchRaw`      | Use the `masterDataFor` helper function. |
 ---
 
 > Note: Some of the methods might need some policies to be inserted on your application's `manifest.json` file.
