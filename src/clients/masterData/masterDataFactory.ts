@@ -1,13 +1,7 @@
-import { OutgoingHttpHeaders } from 'http'
+import type { OutgoingHttpHeaders } from 'http'
 
-import {
-  InstanceOptions,
-  IOContext,
-  IOResponse,
-  JanusClient,
-  MasterData,
-  parseAppId,
-} from '@vtex/api'
+import type { InstanceOptions, IOContext, IOResponse } from '@vtex/api'
+import { JanusClient, MasterData, parseAppId } from '@vtex/api'
 
 export interface DocumentResponse {
   Id: string
@@ -51,6 +45,7 @@ export interface EntityMetadata {
 
 type WithMetadata<TEntity extends Record<string, any>> = TEntity &
   EntityMetadata
+
 abstract class MasterDataEntity<
   TEntity extends Record<string, any>
 > extends JanusClient {
@@ -72,6 +67,16 @@ abstract class MasterDataEntity<
     sort?: string,
     where?: string
   ): Promise<Array<Pick<WithMetadata<TEntity>, K>>>
+
+  abstract searchRaw<K extends keyof WithMetadata<TEntity>>(
+    pagination: PaginationArgs,
+    fields: Array<ThisType<K>> | ['_all'],
+    sort?: string,
+    where?: string
+  ): Promise<{
+    data: Array<Pick<WithMetadata<TEntity>, K>>
+    pagination: { total: number; page: number; pageSize: number }
+  }>
 }
 
 const GLOBAL = ''
@@ -88,9 +93,10 @@ const versionDescriptor = (isProduction: boolean, workspace: string) =>
 export const masterDataFor = <TEntity extends Record<string, any>>(
   entityName: string,
   providerAppId?: Maybe<string>
-): new (context: IOContext, options?: InstanceOptions) => MasterDataEntity<
-  TEntity
-> => {
+): new (
+  context: IOContext,
+  options?: InstanceOptions
+) => MasterDataEntity<TEntity> => {
   return class extends MasterDataEntity<TEntity> {
     private dataEntity: string
     private schema: string
@@ -144,6 +150,26 @@ export const masterDataFor = <TEntity extends Record<string, any>>(
       where?: string
     ): Promise<Array<Pick<WithMetadata<TEntity>, K>>> {
       return this.md.searchDocuments<Pick<WithMetadata<TEntity>, K>>({
+        dataEntity: this.dataEntity,
+        pagination,
+        fields: fields.map((field) => field.toString()),
+        sort,
+        where,
+        schema: this.schema,
+      })
+    }
+
+    // eslint-disable-next-line max-params
+    public searchRaw<K extends keyof WithMetadata<TEntity>>(
+      pagination: PaginationArgs,
+      fields: Array<ThisType<K> | '_all'>,
+      sort?: string,
+      where?: string
+    ): Promise<{
+      data: Array<Pick<WithMetadata<TEntity>, K>>
+      pagination: { total: number; page: number; pageSize: number }
+    }> {
+      return this.md.searchDocumentsWithPaginationInfo({
         dataEntity: this.dataEntity,
         pagination,
         fields: fields.map((field) => field.toString()),
