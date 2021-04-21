@@ -46,6 +46,13 @@ export interface EntityMetadata {
 type WithMetadata<TEntity extends Record<string, any>> = TEntity &
   EntityMetadata
 
+type ScrollInput<K> = {
+  fields: Array<ThisType<K> | '_all'>
+  sort?: string
+  size?: number
+  mdToken?: string
+}
+
 abstract class MasterDataEntity<
   TEntity extends Record<string, any>
 > extends JanusClient {
@@ -76,6 +83,13 @@ abstract class MasterDataEntity<
   ): Promise<{
     data: Array<Pick<WithMetadata<TEntity>, K>>
     pagination: { total: number; page: number; pageSize: number }
+  }>
+
+  abstract scroll<K extends keyof WithMetadata<TEntity>>(
+    input: ScrollInput<K>
+  ): Promise<{
+    data: Array<Pick<WithMetadata<TEntity>, K>>
+    mdToken: string
   }>
 }
 
@@ -188,6 +202,26 @@ export const masterDataFor = <TEntity extends Record<string, any>>(
         id,
         fields: fields.map((field) => field.toString()),
       })
+    }
+
+    // eslint-disable-next-line max-params
+    public async scroll<K extends keyof WithMetadata<TEntity>>(
+      input: ScrollInput<K>
+    ) {
+      const { mdToken, data } = await this.md.scrollDocuments({
+        ...input,
+        dataEntity: this.dataEntity,
+        fields: input.fields.map((field) => field.toString()),
+        schema: this.schema,
+      })
+
+      /**
+       * The scroll method on Master Data's client is mistyped (duplicating the object)
+       */
+      return {
+        mdToken,
+        data: (data as unknown) as Array<Pick<WithMetadata<TEntity>, K>>,
+      }
     }
   }
 }
