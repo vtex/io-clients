@@ -105,7 +105,7 @@ Every Client method should accept an option `authMethod` parameter that declares
 Here are the available options for that parameter:
 | **Option** | **Description** |
 |-------------|--------------------------------------------------|
-| AUTH*TOKEN | Use the current app's token *(default)\_ |
+| AUTH_TOKEN | Use the current app's token _(default)_ |
 | STORE_TOKEN | Use the current authenticated store user's token |
 | ADMIN_TOKEN | Use the current authenticated admin user's token |
 
