@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/vtex/commerce-io-clients"
+    "url": "git://github.com/vtex/io-clients"
   },
   "files": [
     "build"
