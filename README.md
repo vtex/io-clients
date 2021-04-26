@@ -71,7 +71,7 @@ yarn add @vtex/clients
 
 ```typescript
 const BooksClient = masterDataFor<MyBookType>('books')
-const ContractsClient = vbaseFor<MyContractType>('contracts')
+const ContractsClient = vbaseFor<string, MyContractType>('contracts')
 
 // Optional - Export the type to be able to use it as a type parameter
 export type ContractsClient = InstanceType<typeof Contracts>
