@@ -1,1 +1,1 @@
-export * from './vBaseFactory'
+export * from './vbaseFactory'
