@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - vbase Factory similar to how MD Factory works
 
+### Fixed
+- package.json repository.url entry
+
 ## [2.8.0] - 2021-03-17
 ### Added
 - Method on MD Factory to search documents and also get pagination info
