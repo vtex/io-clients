@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- vbase Factory similar to how MD Factory works
+
 ### Fixed
 - package.json repository.url entry
 
