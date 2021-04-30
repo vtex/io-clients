@@ -11,42 +11,44 @@ export interface EntityWithMetadata<V> {
   metadata: EntityMetadata
 }
 
-abstract class VBaseEntityRepository<
-  K extends string,
-  V extends object
-> extends VBase {
-  abstract save(k: K, entity: V, ifMatch?: string): Promise<void>
-  abstract trySaveIfHashMatches(k: K, hash: string, entity: V): Promise<void>
-  abstract get(k: K, nullIfNotfound?: boolean): Promise<V>
-  abstract get(k: K, nullIfNotfound: true): Promise<V | null>
-  abstract getRaw(k: K, nullIfNotfound?: boolean): Promise<IOResponse<V>>
+abstract class VBaseEntityRepository<V extends object> extends VBase {
+  abstract save(key: string, entity: V, ifMatch?: string): Promise<void>
+  abstract trySaveIfHashMatches(
+    key: string,
+    hash: string,
+    entity: V
+  ): Promise<void>
+
+  abstract get(key: string, nullIfNotfound?: boolean): Promise<V>
+  abstract get(key: string, nullIfNotfound: true): Promise<V | null>
+  abstract getRaw(key: string, nullIfNotfound?: boolean): Promise<IOResponse<V>>
   abstract getWithMetadata(
-    k: K,
+    key: string,
     nullIfNotFound?: boolean
   ): Promise<EntityWithMetadata<V>>
 }
 
 export const vbaseFor = <K extends string, V extends object>(
   bucket: string
-): new (context: IOContext, options?: InstanceOptions) => VBaseEntityRepository<
-  K,
-  V
-> => {
-  return class extends VBaseEntityRepository<K, V> {
-    public save(k: K, entity: V, ifMatch?: string | undefined) {
-      return this.saveJSON(bucket, k, entity, undefined, ifMatch)
+): new (
+  context: IOContext,
+  options?: InstanceOptions
+) => VBaseEntityRepository<V> => {
+  return class extends VBaseEntityRepository<V> {
+    public save(key: string, entity: V, ifMatch?: string | undefined) {
+      return this.saveJSON(bucket, key, entity, undefined, ifMatch)
     }
 
-    public get(k: K, nullIfNotfound = false) {
-      return this.getJSON<V>(bucket, k, nullIfNotfound)
+    public get(key: string, nullIfNotfound = false) {
+      return this.getJSON<V>(bucket, key, nullIfNotfound)
     }
 
-    public getRaw(k: K, nullIfNotfound = false) {
-      return this.getRawJSON<V>(bucket, k, nullIfNotfound)
+    public getRaw(key: string, nullIfNotfound = false) {
+      return this.getRawJSON<V>(bucket, key, nullIfNotfound)
     }
 
-    public getWithMetadata(k: K, nullIfNotfound = false) {
-      return this.getRaw(k, nullIfNotfound).then((res) => {
+    public getWithMetadata(key: string, nullIfNotfound = false) {
+      return this.getRaw(key, nullIfNotfound).then((res) => {
         const { etag } = res.headers
         const isNotFound = res.status === 404
         const metadata: EntityMetadata = { hash: etag }
@@ -59,8 +61,12 @@ export const vbaseFor = <K extends string, V extends object>(
       })
     }
 
-    public trySaveIfHashMatches(k: K, hash: string, entity: V): Promise<void> {
-      return this.saveJSON(bucket, k, entity, undefined, hash)
+    public trySaveIfHashMatches(
+      key: string,
+      hash: string,
+      entity: V
+    ): Promise<void> {
+      return this.saveJSON(bucket, key, entity, undefined, hash)
     }
   }
 }
