@@ -43,10 +43,10 @@ export interface EntityMetadata {
   dataInstanceId: string
 }
 
-type WithMetadata<TEntity extends Record<string, any>> = TEntity &
+export type WithMetadata<TEntity extends Record<string, any>> = TEntity &
   EntityMetadata
 
-abstract class MasterDataEntity<
+export abstract class MasterDataEntity<
   TEntity extends Record<string, any>
 > extends JanusClient {
   abstract get<K extends keyof WithMetadata<TEntity>>(
