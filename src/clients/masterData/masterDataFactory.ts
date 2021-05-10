@@ -49,6 +49,8 @@ export type WithMetadata<TEntity extends Record<string, any>> = TEntity &
 export abstract class MasterDataEntity<
   TEntity extends Record<string, any>
 > extends JanusClient {
+  abstract schema: string
+  abstract dataEntity: string
   abstract get<K extends keyof WithMetadata<TEntity>>(
     id: string,
     fields: Array<ThisType<K>> | ['_all']
