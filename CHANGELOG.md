@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.11.1-beta] - 2021-05-10
+
 ### Changed
 
 - Export MasterDataEntity abstract class
