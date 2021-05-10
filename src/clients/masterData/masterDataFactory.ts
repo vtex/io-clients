@@ -98,14 +98,14 @@ export const masterDataFor = <TEntity extends Record<string, any>>(
   options?: InstanceOptions
 ) => MasterDataEntity<TEntity> => {
   return class extends MasterDataEntity<TEntity> {
-    private dataEntity: string
-    private schema: string
-    private md: MasterData
+    public dataEntity: string
+    public schema: string
+    private inner: MasterData
     constructor(ctx: IOContext, options?: InstanceOptions) {
       super(ctx, options)
       const app = parseAppId(providerAppId ?? process.env.VTEX_APP_ID)
 
-      this.md = new MasterData(ctx, options)
+      this.inner = new MasterData(ctx, options)
       this.schema = `${app.version}${versionDescriptor(
         ctx.production,
         ctx.workspace
@@ -114,7 +114,7 @@ export const masterDataFor = <TEntity extends Record<string, any>>(
     }
 
     public save(entity: TEntity) {
-      return this.md.createDocument({
+      return this.inner.createDocument({
         dataEntity: this.dataEntity,
         fields: entity,
         schema: this.schema,
@@ -122,7 +122,7 @@ export const masterDataFor = <TEntity extends Record<string, any>>(
     }
 
     public update(id: string, fields: Partial<TEntity>) {
-      return this.md.updatePartialDocument({
+      return this.inner.updatePartialDocument({
         dataEntity: this.dataEntity,
         id,
         fields,
@@ -131,7 +131,7 @@ export const masterDataFor = <TEntity extends Record<string, any>>(
     }
 
     public saveOrUpdate(fields: TEntity & { id: string }) {
-      return this.md.createOrUpdateEntireDocument({
+      return this.inner.createOrUpdateEntireDocument({
         dataEntity: this.dataEntity,
         fields,
         schema: this.schema,
@@ -139,7 +139,7 @@ export const masterDataFor = <TEntity extends Record<string, any>>(
     }
 
     public delete(id: string) {
-      return this.md.deleteDocument({ dataEntity: this.dataEntity, id })
+      return this.inner.deleteDocument({ dataEntity: this.dataEntity, id })
     }
 
     // eslint-disable-next-line max-params
@@ -149,7 +149,7 @@ export const masterDataFor = <TEntity extends Record<string, any>>(
       sort?: string,
       where?: string
     ): Promise<Array<Pick<WithMetadata<TEntity>, K>>> {
-      return this.md.searchDocuments<Pick<WithMetadata<TEntity>, K>>({
+      return this.inner.searchDocuments<Pick<WithMetadata<TEntity>, K>>({
         dataEntity: this.dataEntity,
         pagination,
         fields: fields.map((field) => field.toString()),
@@ -169,7 +169,7 @@ export const masterDataFor = <TEntity extends Record<string, any>>(
       data: Array<Pick<WithMetadata<TEntity>, K>>
       pagination: { total: number; page: number; pageSize: number }
     }> {
-      return this.md.searchDocumentsWithPaginationInfo({
+      return this.inner.searchDocumentsWithPaginationInfo({
         dataEntity: this.dataEntity,
         pagination,
         fields: fields.map((field) => field.toString()),
@@ -183,7 +183,7 @@ export const masterDataFor = <TEntity extends Record<string, any>>(
       id: string,
       fields: Array<ThisType<K> | '_all'>
     ) {
-      return this.md.getDocument<Pick<WithMetadata<TEntity>, K>>({
+      return this.inner.getDocument<Pick<WithMetadata<TEntity>, K>>({
         dataEntity: this.dataEntity,
         id,
         fields: fields.map((field) => field.toString()),
