@@ -28,7 +28,7 @@ yarn add @vtex/clients
 
 | **Factory** | **Implemented Methods**                                                  | Observations                             |
 | ----------- | ------------------------------------------------------------------------ | ---------------------------------------- |
-| Master Data | `get`, `save`, `update`, `saveOrUpdate`, `delete`, `search`, `searchRaw` | Use the `masterDataFor` helper function. |
+| Master Data | `get`, `save`, `update`, `saveOrUpdate`, `delete`, `search`, `searchRaw`, `scroll` | Use the `masterDataFor` helper function. |
 | VBase       | `get`, `getRaw`, `getWithMetadata`, `save`, `trySaveIfhashMatches`       | Use the `vbaseFor` helper function.      |
 
 ---
