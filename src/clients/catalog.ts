@@ -7,7 +7,11 @@ import {
 
 import { checkSellerInformation } from '../utils/seller'
 import { AuthMethod } from '../typings/tokens'
-import { GetSkuResponse, Seller } from '../typings/catalog'
+import {
+  GetSkuResponse,
+  GetSkuContextResponse,
+  Seller,
+} from '../typings/catalog'
 import { getRequestConfig } from '../utils/request'
 
 const baseURL = '/api/catalog'
@@ -16,6 +20,8 @@ const baseURLLegacy = '/api/catalog_system'
 const routes = {
   productsAndSkus: `${baseURLLegacy}/pvt/products/GetProductAndSkuIds`,
   getSkuById: (skuId: string) => `${baseURL}/pvt/stockkeepingunit/${skuId}`,
+  getSkuContext: (skuId: string) =>
+    `${baseURLLegacy}/pvt/sku/stockkeepingunitbyid/${skuId}`,
   changeNotification: (sellerId: string, skuId: string) =>
     `${baseURLLegacy}/pvt/skuseller/changenotification/${sellerId}/${skuId}`,
   seller: (sellerId: string) => `${baseURLLegacy}/pvt/seller/${sellerId}`,
@@ -50,6 +56,19 @@ export class Catalog extends JanusClient {
 
     return this.http.get<GetSkuResponse>(
       routes.getSkuById(skuId),
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
+    )
+  }
+
+  public getSkuContext(
+    skuId: string,
+    authMethod: AuthMethod = 'AUTH_TOKEN',
+    tracingConfig?: RequestTracingConfig
+  ) {
+    const metric = 'catalog-getSkuContextMetric'
+
+    return this.http.get<GetSkuContextResponse>(
+      routes.getSkuContext(skuId),
       getRequestConfig(this.context, authMethod, metric, tracingConfig)
     )
   }
