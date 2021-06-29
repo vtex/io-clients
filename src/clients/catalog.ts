@@ -1,16 +1,17 @@
-import {
+import type {
   InstanceOptions,
   IOContext,
-  JanusClient,
   RequestTracingConfig,
 } from '@vtex/api'
+import { JanusClient } from '@vtex/api'
 
 import { checkSellerInformation } from '../utils/seller'
-import { AuthMethod } from '../typings/tokens'
-import {
+import type { AuthMethod } from '../typings/tokens'
+import type {
   GetSkuResponse,
   GetSkuContextResponse,
   Seller,
+  Category,
 } from '../typings/catalog'
 import { getRequestConfig } from '../utils/request'
 
@@ -19,6 +20,8 @@ const baseURLLegacy = '/api/catalog_system'
 
 const routes = {
   productsAndSkus: `${baseURLLegacy}/pvt/products/GetProductAndSkuIds`,
+  getCategoryById: (categoryId: string) =>
+    `${baseURL}/pvt/category/${categoryId}`,
   getSkuById: (skuId: string) => `${baseURL}/pvt/stockkeepingunit/${skuId}`,
   getSkuContext: (skuId: string) =>
     `${baseURLLegacy}/pvt/sku/stockkeepingunitbyid/${skuId}`,
@@ -33,6 +36,19 @@ export class Catalog extends JanusClient {
     super(ctx, {
       ...options,
     })
+  }
+
+  public getCategoryById(
+    categoryId: string,
+    authMethod: AuthMethod = 'AUTH_TOKEN',
+    tracingConfig?: RequestTracingConfig
+  ): Promise<Category | undefined> {
+    const metric = 'catalog-getCategoryMetric'
+
+    return this.http.get<Category>(
+      routes.getCategoryById(categoryId),
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
+    )
   }
 
   public getProductsAndSkus(

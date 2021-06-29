@@ -220,3 +220,23 @@ interface SkuAlternateId {
   Ean: string
   RefId: string
 }
+
+export interface Category {
+  Id: string
+  Name: string
+  FatherCategoryId: string | null
+  Title: string
+  Description: string
+  Keywords: string
+  IsActive: boolean
+  LoomadeeCapaignCode: string
+  AdWordsRemarketingCode: string
+  ShowInStoreFront: boolean
+  ShowBrandFilter: boolean
+  ActiveStoreFrontLink: boolean
+  GlobalCategoryId: number
+  StockKeepingUnitSelectionMode: string
+  Score: number | null
+  LinkId: string
+  HasChildren: boolean
+}
