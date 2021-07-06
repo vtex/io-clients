@@ -1,13 +1,18 @@
-import {
+import type {
   InstanceOptions,
   IOContext,
-  JanusClient,
   RequestTracingConfig,
 } from '@vtex/api'
+import { JanusClient } from '@vtex/api'
 
 import { checkSellerInformation } from '../utils/seller'
-import { AuthMethod } from '../typings/tokens'
-import { GetSkuResponse, Seller } from '../typings/catalog'
+import type { AuthMethod } from '../typings/tokens'
+import type {
+  GetBrandResponse,
+  GetCategoryResponse,
+  GetSkuResponse,
+  Seller,
+} from '../typings/catalog'
 import { getRequestConfig } from '../utils/request'
 
 const baseURL = '/api/catalog'
@@ -20,6 +25,9 @@ const routes = {
     `${baseURLLegacy}/pvt/skuseller/changenotification/${sellerId}/${skuId}`,
   seller: (sellerId: string) => `${baseURLLegacy}/pvt/seller/${sellerId}`,
   sellerList: `${baseURLLegacy}/pvt/seller/list`,
+  getBrandById: (brandId: string) => `${baseURLLegacy}/pvt/brand/${brandId}`,
+  getCategoryById: (categoryId: number) =>
+    `${baseURL}/pvt/category/${categoryId}`,
 }
 
 export class Catalog extends JanusClient {
@@ -107,6 +115,32 @@ export class Catalog extends JanusClient {
 
     return this.http.get<Seller>(
       routes.seller(id),
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
+    )
+  }
+
+  public getBrandById(
+    brandId: string,
+    authMethod: AuthMethod = 'AUTH_TOKEN',
+    tracingConfig?: RequestTracingConfig
+  ) {
+    const metric = 'catalog-getBrandMetric'
+
+    return this.http.get<GetBrandResponse>(
+      routes.getBrandById(brandId),
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
+    )
+  }
+
+  public getCategoryById(
+    categoryId: number,
+    authMethod: AuthMethod = 'AUTH_TOKEN',
+    tracingConfig?: RequestTracingConfig
+  ) {
+    const metric = 'catalog-getCategoryMetric'
+
+    return this.http.get<GetCategoryResponse>(
+      routes.getCategoryById(categoryId),
       getRequestConfig(this.context, authMethod, metric, tracingConfig)
     )
   }
