@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - `scroll` method to MD Factory client.
+- `getSkuContext` and `getCategoryById` methods to Catalog client.
 
 ## [2.12.0] - 2021-05-11
 
