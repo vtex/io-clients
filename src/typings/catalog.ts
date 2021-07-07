@@ -103,6 +103,144 @@ export interface AssemblyOption {
   composition: Composition | null
 }
 
+export interface GetSkuContextResponse {
+  Id: number
+  ProductId: number
+  NameComplete: string
+  ComplementName: string
+  ProductName: string
+  ProductDescription: string
+  ProductRefId: string
+  TaxCode?: string
+  SkuName: string
+  IsActive: boolean
+  IsTransported: boolean
+  IsInventoried: boolean
+  IsGiftCardRecharge: boolean
+  ImageUrl?: string
+  DetailUrl: string
+  CSCIdentification: string
+  BrandId: string
+  BrandName: string
+  IsBrandActive: boolean
+  Dimension: SkuDimension
+  RealDimension: SkuRealDimension
+  ManufacturerCode?: string
+  IsKit: boolean
+  KitItems: string[]
+  Services: string[]
+  Categories: string[]
+  Attachments: SkuAttachment[]
+  Collections: string[]
+  SkuSellers: SkuSeller[]
+  SalesChannels: number[]
+  Images: SkuImage[]
+  SkuSpecifications: SkuSpecification[]
+  ProductSpecifications: SkuProductSpecification[]
+  ProductClustersIds: string
+  ProductCategoryIds: string
+  IsDirectCategoryActive: boolean
+  ProductGlobalCategoryId: number
+  ProductCategories: SkuProductCategories
+  CommercialConditionId: number
+  RewardValue: number
+  AlternateIds: SkuAlternateId[]
+  AlternateIdValues: string[]
+  EstimatedDateArrival: string
+  MeasurementUnit: string
+  UnitMultiplier: number
+  InformationSource: string
+  ModalType: string
+}
+interface SkuDimension {
+  cubicweight: number
+  height: number
+  length: number
+  weight: number
+  width: number
+}
+
+interface SkuRealDimension {
+  realCubicweight: number
+  realHeight: number
+  realLength: number
+  realWeight: number
+  realWidth: number
+}
+
+interface SkuAttachmentFields {
+  FieldName: string
+  MaxCaracters: string
+  DomainValues: string
+}
+
+interface SkuAttachment {
+  Id: number
+  Name: string
+  Keys: string[]
+  Fields: SkuAttachmentFields
+  IsActive: boolean
+  IsRequired: boolean
+}
+
+interface SkuSeller {
+  SellerId: string
+  StockKeepingUnitId: number
+  SellerStockKeepingUnitId: string
+  IsActive: boolean
+  FreightCommissionPercentage: number
+  ProductCommissionPercentage: number
+}
+
+interface SkuImage {
+  ImageUrl: string
+  ImageName: string
+  FileId: number
+}
+
+interface SkuSpecification {
+  FieldId: number
+  FieldName: string
+  FieldValueIds: number[]
+  FieldValues: string[]
+}
+
+interface SkuProductSpecification {
+  FieldId: number
+  FieldName: string
+  FieldValueIds: number[]
+  FieldValues: string[]
+}
+
+interface SkuProductCategories {
+  [key: string]: string
+}
+
+interface SkuAlternateId {
+  Ean: string
+  RefId: string
+}
+
+export interface Category {
+  Id: string
+  Name: string
+  FatherCategoryId: string | null
+  Title: string
+  Description: string
+  Keywords: string
+  IsActive: boolean
+  LoomadeeCapaignCode: string
+  AdWordsRemarketingCode: string
+  ShowInStoreFront: boolean
+  ShowBrandFilter: boolean
+  ActiveStoreFrontLink: boolean
+  GlobalCategoryId: number
+  StockKeepingUnitSelectionMode: string
+  Score: number | null
+  LinkId: string
+  HasChildren: boolean
+}
+
 export interface GetBrandResponse {
   id: number
   name: string

@@ -6,13 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
-- `scroll` method to MD Factory client.
 - `getBrandById` method to the Catalog client
 - `listInventoryBySku` method to the Logistics client
 
 ### Changed
-
 - Added `from` and `to` query params to `getProductsAndSkus` in the Catalog client
+
+## [2.14.0] - 2021-07-07
+### Added
+- `scroll` method to MD Factory client.
+- `getSkuContext` and `getCategoryById` methods to Catalog client.
 
 ## [2.12.0] - 2021-05-11
 
