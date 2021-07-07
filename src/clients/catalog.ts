@@ -9,7 +9,6 @@ import { checkSellerInformation } from '../utils/seller'
 import type { AuthMethod } from '../typings/tokens'
 import type {
   GetBrandResponse,
-  GetCategoryResponse,
   GetSkuResponse,
   Seller,
 } from '../typings/catalog'
@@ -19,7 +18,8 @@ const baseURL = '/api/catalog'
 const baseURLLegacy = '/api/catalog_system'
 
 const routes = {
-  productsAndSkus: `${baseURLLegacy}/pvt/products/GetProductAndSkuIds`,
+  productsAndSkus: (from: number, to: number) =>
+    `${baseURLLegacy}/pvt/products/GetProductAndSkuIds?_from=${from}&_to=${to}`,
   getSkuById: (skuId: string) => `${baseURL}/pvt/stockkeepingunit/${skuId}`,
   changeNotification: (sellerId: string, skuId: string) =>
     `${baseURLLegacy}/pvt/skuseller/changenotification/${sellerId}/${skuId}`,
@@ -37,14 +37,17 @@ export class Catalog extends JanusClient {
     })
   }
 
+  // eslint-disable-next-line max-params
   public getProductsAndSkus(
+    from = 1,
+    to = 20,
     authMethod: AuthMethod = 'AUTH_TOKEN',
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'catalog-getProductsAndSkus'
 
     return this.http.get(
-      routes.productsAndSkus,
+      routes.productsAndSkus(from, to),
       getRequestConfig(this.context, authMethod, metric, tracingConfig)
     )
   }
@@ -128,19 +131,6 @@ export class Catalog extends JanusClient {
 
     return this.http.get<GetBrandResponse>(
       routes.getBrandById(brandId),
-      getRequestConfig(this.context, authMethod, metric, tracingConfig)
-    )
-  }
-
-  public getCategoryById(
-    categoryId: number,
-    authMethod: AuthMethod = 'AUTH_TOKEN',
-    tracingConfig?: RequestTracingConfig
-  ) {
-    const metric = 'catalog-getCategoryMetric'
-
-    return this.http.get<GetCategoryResponse>(
-      routes.getCategoryById(categoryId),
       getRequestConfig(this.context, authMethod, metric, tracingConfig)
     )
   }
