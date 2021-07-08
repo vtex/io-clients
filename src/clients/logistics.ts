@@ -6,7 +6,11 @@ import type {
 import { JanusClient } from '@vtex/api'
 
 import type { AuthMethod } from '../typings/tokens'
-import type { LogisticOutput, LogisticPickupPoint } from '../typings/logistics'
+import type {
+  LogisticOutput,
+  LogisticPickupPoint,
+  InventoryBySkuResponse,
+} from '../typings/logistics'
 import { getRequestConfig } from '../utils/request'
 
 const baseURL = '/api/logistics'
@@ -102,7 +106,7 @@ export class Logistics extends JanusClient {
   ) {
     const metric = 'logistics-listInventoryBySku'
 
-    return this.http.get<LogisticPickupPoint>(
+    return this.http.get<InventoryBySkuResponse>(
       routes.listInventoryBySku(skuId),
       getRequestConfig(this.context, authMethod, metric, tracingConfig)
     )
