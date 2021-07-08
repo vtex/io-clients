@@ -1,12 +1,12 @@
-import {
+import type {
   RequestTracingConfig,
-  JanusClient,
   IOContext,
   InstanceOptions,
 } from '@vtex/api'
+import { JanusClient } from '@vtex/api'
 
-import { AuthMethod } from '../typings/tokens'
-import { LogisticOutput, LogisticPickupPoint } from '../typings/logistics'
+import type { AuthMethod } from '../typings/tokens'
+import type { LogisticOutput, LogisticPickupPoint } from '../typings/logistics'
 import { getRequestConfig } from '../utils/request'
 
 const baseURL = '/api/logistics'
@@ -18,6 +18,8 @@ const routes = {
     `${baseURL}/pvt/configuration/pickuppoints/_search?&page=1&pageSize=100&lat=${lat}&lon=${long}&maxDistance=${maxDistance}`,
   pickUpById: (id: string) => `${baseURL}/pvt/configuration/pickuppoints/${id}`,
   pickupPoints: `${baseURL}/pvt/configuration/pickuppoints/_search`,
+  listInventoryBySku: (skuId: string) =>
+    `${baseURL}/pvt/inventory/skus/${skuId}`,
 }
 
 export class Logistics extends JanusClient {
@@ -89,6 +91,19 @@ export class Logistics extends JanusClient {
 
     return this.http.get<LogisticPickupPoint>(
       routes.shipping,
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
+    )
+  }
+
+  public listInventoryBySku(
+    skuId: string,
+    authMethod: AuthMethod = 'AUTH_TOKEN',
+    tracingConfig?: RequestTracingConfig
+  ) {
+    const metric = 'logistics-listInventoryBySku'
+
+    return this.http.get<LogisticPickupPoint>(
+      routes.listInventoryBySku(skuId),
       getRequestConfig(this.context, authMethod, metric, tracingConfig)
     )
   }

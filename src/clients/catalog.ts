@@ -12,6 +12,7 @@ import type {
   GetSkuContextResponse,
   Seller,
   Category,
+  GetBrandResponse,
 } from '../typings/catalog'
 import { getRequestConfig } from '../utils/request'
 
@@ -19,7 +20,8 @@ const baseURL = '/api/catalog'
 const baseURLLegacy = '/api/catalog_system'
 
 const routes = {
-  productsAndSkus: `${baseURLLegacy}/pvt/products/GetProductAndSkuIds`,
+  productsAndSkus: (from: number, to: number) =>
+    `${baseURLLegacy}/pvt/products/GetProductAndSkuIds?_from=${from}&_to=${to}`,
   getCategoryById: (categoryId: string) =>
     `${baseURL}/pvt/category/${categoryId}`,
   getSkuById: (skuId: string) => `${baseURL}/pvt/stockkeepingunit/${skuId}`,
@@ -29,6 +31,7 @@ const routes = {
     `${baseURLLegacy}/pvt/skuseller/changenotification/${sellerId}/${skuId}`,
   seller: (sellerId: string) => `${baseURLLegacy}/pvt/seller/${sellerId}`,
   sellerList: `${baseURLLegacy}/pvt/seller/list`,
+  getBrandById: (brandId: string) => `${baseURLLegacy}/pvt/brand/${brandId}`,
 }
 
 export class Catalog extends JanusClient {
@@ -51,14 +54,17 @@ export class Catalog extends JanusClient {
     )
   }
 
+  // eslint-disable-next-line max-params
   public getProductsAndSkus(
+    from = 1,
+    to = 20,
     authMethod: AuthMethod = 'AUTH_TOKEN',
     tracingConfig?: RequestTracingConfig
   ) {
     const metric = 'catalog-getProductsAndSkus'
 
     return this.http.get(
-      routes.productsAndSkus,
+      routes.productsAndSkus(from, to),
       getRequestConfig(this.context, authMethod, metric, tracingConfig)
     )
   }
@@ -142,6 +148,19 @@ export class Catalog extends JanusClient {
 
     return this.http.get<Seller>(
       routes.seller(id),
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
+    )
+  }
+
+  public getBrandById(
+    brandId: string,
+    authMethod: AuthMethod = 'AUTH_TOKEN',
+    tracingConfig?: RequestTracingConfig
+  ) {
+    const metric = 'catalog-getBrandMetric'
+
+    return this.http.get<GetBrandResponse>(
+      routes.getBrandById(brandId),
       getRequestConfig(this.context, authMethod, metric, tracingConfig)
     )
   }
