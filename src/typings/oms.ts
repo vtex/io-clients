@@ -256,7 +256,7 @@ export interface OrderItemDetailResponse {
   shippingPrice: any
   rewardValue: number
   freightCommission: number
-  priceDefinitions: any
+  priceDefinition: any
   taxCode: string
   productCategories: any
 }
