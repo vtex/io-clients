@@ -153,6 +153,14 @@ export const masterDataFor = <TEntity extends Record<string, any>>(
         schema: this.schema,
       })
     }
+    
+    public saveOrUpdatePartial(fields: TEntity & { id: string }) {
+      return this.inner.createOrUpdatePartialDocument({
+        dataEntity: this.dataEntity,
+        fields,
+        schema: this.schema,
+      })
+    }
 
     public delete(id: string) {
       return this.inner.deleteDocument({ dataEntity: this.dataEntity, id })

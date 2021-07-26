@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- saveOrUpdatePartial method on Master Data factory
+
 ## [2.15.2] - 2021-07-08
 ### Changed
 
