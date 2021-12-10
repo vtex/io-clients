@@ -398,4 +398,18 @@ export class Checkout extends JanusClient {
       getRequestConfig(this.context, authMethod, metric, tracingConfig)
     )
   }
+
+  public changeToAnonymousUser(
+    orderFormId: string,
+    authMethod: AuthMethod = 'STORE_TOKEN',
+    tracingConfig?: RequestTracingConfig
+  ) {
+    const metric = 'checkout-changeToAnonymousUser'
+
+    return this.http.get(
+      routes.changeToAnonymousUser(orderFormId),
+      getRequestConfig(this.context, authMethod, metric, tracingConfig)
+    )
+
+  }
 }
