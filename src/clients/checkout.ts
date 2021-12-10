@@ -1,12 +1,12 @@
-import {
+import type {
   InstanceOptions,
   IOContext,
-  JanusClient,
   RequestTracingConfig,
 } from '@vtex/api'
+import { JanusClient } from '@vtex/api'
 
 import { getRequestConfig } from '../utils/request'
-import {
+import type {
   OrderForm,
   OrderFormClientPreferencesData,
   AuthMethod,
@@ -399,6 +399,7 @@ export class Checkout extends JanusClient {
     )
   }
 
+  // eslint-disable-next-line max-params
   public changeToAnonymousUser(
     orderFormId: string,
     authMethod: AuthMethod = 'STORE_TOKEN',
@@ -410,6 +411,5 @@ export class Checkout extends JanusClient {
       routes.changeToAnonymousUser(orderFormId),
       getRequestConfig(this.context, authMethod, metric, tracingConfig)
     )
-
   }
 }
