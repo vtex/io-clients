@@ -1,7 +1,10 @@
-/* eslint-disable max-params */
-
-import type { InstanceOptions, IOContext } from '@vtex/api'
 import { JanusClient } from '@vtex/api'
+import type {
+  RequestTracingConfig,
+  InstanceOptions,
+  IOContext,
+} from '@vtex/api'
+/* eslint-disable max-params */
 
 import type { Condition, ListConditionsResponse } from '../typings/conditions'
 import { getRequestConfig } from '../utils/request'
