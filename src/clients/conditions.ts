@@ -1,9 +1,9 @@
 /* eslint-disable max-params */
-import { Condition, ListConditionsResponse } from './../typings/conditions'
 
 import type { InstanceOptions, IOContext } from '@vtex/api'
 import { JanusClient } from '@vtex/api'
 
+import type { Condition, ListConditionsResponse } from '../typings/conditions'
 import { getRequestConfig } from '../utils/request'
 import type { AuthMethod } from '../typings'
 
