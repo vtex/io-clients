@@ -70,7 +70,7 @@ export class ConditionsClient extends JanusClient {
       'conditionId' in condition ? this.http.put : this.http.post
 
     return requestMethod<Condition>(
-      this.routes.ConditionsById(this.context.account, type, id),
+      this.routes.ConditionsByType(this.context.account, type),
       condition,
       getRequestConfig(this.context, authMethod, metric, tracingConfig)
     )
