@@ -1,5 +1,5 @@
 /* eslint-disable max-params */
-import { Condition, ListConditionsResponse } from './../typings/conditions';
+import { Condition, ListConditionsResponse } from './../typings/conditions'
 
 import type { InstanceOptions, IOContext } from '@vtex/api'
 import { JanusClient } from '@vtex/api'
