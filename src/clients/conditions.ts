@@ -50,7 +50,7 @@ export class ConditionsClient extends JanusClient {
     authMethod: AuthMethod = 'AUTH_TOKEN',
     tracingConfig?: RequestTracingConfig
   ) {
-    const metric = 'conditions-getById'
+    const metric = 'conditions-deleteById'
 
     return this.http.delete(
       this.routes.ConditionsById(this.context.account, type, id),
