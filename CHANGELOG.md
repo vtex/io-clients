@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- conditions client
+
 ## [2.18.0] - 2021-12-10
 
 ## [2.17.0] - 2021-07-26
