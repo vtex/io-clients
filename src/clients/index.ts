@@ -1,5 +1,6 @@
 export * from './affiliate'
 export * from './catalog'
+export * from './conditions'
 export * from './logistics'
 export * from './oms'
 export * from './checkout'
