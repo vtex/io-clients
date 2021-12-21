@@ -1,16 +1,16 @@
+/* eslint-disable max-params */
 import { JanusClient } from '@vtex/api'
 import type {
   RequestTracingConfig,
   InstanceOptions,
   IOContext,
 } from '@vtex/api'
-/* eslint-disable max-params */
 
 import type { Condition, ListConditionsResponse } from '../typings/conditions'
 import { getRequestConfig } from '../utils/request'
 import type { AuthMethod } from '../typings'
 
-export class ConditionsClient extends JanusClient {
+export class Conditions extends JanusClient {
   constructor(ctx: IOContext, options?: InstanceOptions) {
     super(ctx, {
       ...options,
