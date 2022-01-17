@@ -101,7 +101,7 @@ export class Checkout extends JanusClient {
 
     const { appId, appFieldName, value } = customData
 
-    return this.http.put(
+    return this.http.put<OrderForm>(
       routes.singleCustomData(orderFormId, appId, appFieldName),
       { value },
       getRequestConfig(this.context, authMethod, metric, tracingConfig)
