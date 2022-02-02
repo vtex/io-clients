@@ -29,6 +29,9 @@ export interface Condition {
   dateRange: DateRange
   conditionMetadata: ConditionMetadata
 }
+export interface EvaluationsResponse {
+  validConditions: unknown[]
+}
 
 export interface ListConditionsResponse {
   conditionsLimit: number
