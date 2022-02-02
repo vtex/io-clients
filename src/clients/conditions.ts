@@ -6,7 +6,11 @@ import type {
   IOContext,
 } from '@vtex/api'
 
-import type { Condition, ListConditionsResponse } from '../typings/conditions'
+import type {
+  Condition,
+  EvaluationsResponse,
+  ListConditionsResponse,
+} from '../typings/conditions'
 import { getRequestConfig } from '../utils/request'
 import type { AuthMethod } from '../typings'
 
@@ -84,7 +88,7 @@ export class Conditions extends JanusClient {
   ) {
     const metric = 'conditions-doEvaluation'
 
-    return this.http.post(
+    return this.http.post<EvaluationsResponse>(
       this.routes.ApplyConditions(this.context.account, type),
       subject,
       getRequestConfig(this.context, authMethod, metric, tracingConfig)
