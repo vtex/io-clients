@@ -6,7 +6,11 @@ import type {
   IOContext,
 } from '@vtex/api'
 
-import type { Condition, EvaluationsResponse, ListConditionsResponse } from '../typings/conditions'
+import type {
+  Condition,
+  EvaluationsResponse,
+  ListConditionsResponse,
+} from '../typings/conditions'
 import { getRequestConfig } from '../utils/request'
 import type { AuthMethod } from '../typings'
 
