@@ -100,7 +100,7 @@ export class Conditions extends JanusClient {
       ApplyConditions: (an: string, type: string) =>
         `${this.routes.Conditions(an)}/${type}/evaluate`,
       ConditionsById: (an: string, type: string, id: string) =>
-        `${this.routes.ConditionsByType(an, type)}/condition/${id}`,
+        `${this.routes.ConditionsByType(an, type)}/${id}`,
       ConditionsByType: (an: string, type: string) =>
         `${this.routes.Conditions(an)}/${type}/condition`,
       Conditions: (an: string) => `/${an}/conditions`,

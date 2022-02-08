@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Condition by id route
+
 ## [2.19.3] - 2022-02-02
 
 - Strong typing conditions response
