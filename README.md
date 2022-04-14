@@ -117,6 +117,15 @@ To discover and learn more about VTEX Core Commerce APIs, read [VTEX Developer P
 
 Feel free to **submit new Clients** to this package, as long as they help to connect with VTEX Core Commerce APIs.
 
+In order to test your new feature or fix using `vtex link` (command used for linking a service application, for example), follow these steps:
+- Guarantee that `@vtex/api` version is the same in both service and `@vtex/clients`;
+- Run `yarn && yarn install-peers` in package;
+- Run `yarn build && yarn unlink && yarn link` in package;
+- Delete `node_modules` inside your service application (this step is not obligatory but might fix some issues);
+- You might need to remove the dependency `@vtex/clients` from your service's `package.json` to avoid conflicts;
+- Run `yarn unlink @vtex/clients && yarn link @vtex/clients && yarn` in your service;
+- Now you can link your service application with `vtex link`.
+
 ## Releasing
 
 We have a Github Action configured to **release the package on NPM for every Release tag** pushed into the repository. So, in order to have this project published:
