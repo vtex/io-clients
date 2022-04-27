@@ -49,6 +49,7 @@ export type WithMetadata<TEntity extends Record<string, any>> = TEntity &
 type ScrollInput<K> = {
   fields: Array<ThisType<K> | '_all'>
   sort?: string
+  where?: string
   size?: number
   mdToken?: string
 }
