@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- New masterdataFor decorator that interacts with masterdata builder 2.x
+
 ## [2.19.5] - 2022-04-28
 
 ### Added
