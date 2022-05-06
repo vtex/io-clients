@@ -117,8 +117,8 @@ To discover and learn more about VTEX Core Commerce APIs, read [VTEX Developer P
 
 Feel free to **submit new Clients** to this package, as long as they help to connect with VTEX Core Commerce APIs.
 
-In order to test your new feature or fix using `vtex link` (command used for linking a service application, for example), follow these steps:
-- Guarantee that `@vtex/api` version is the same in both service and `@vtex/clients`;
+In order to test your new feature or fix using `vtex link` (command used for linking a service application in IO, for example), follow these steps:
+- Guarantee that `@vtex/api` version is the same in both IO service and `@vtex/clients`;
 - Run `yarn && yarn install-peers` in package;
 - Run `yarn build && yarn unlink && yarn link` in package;
 - Delete `node_modules` inside your service application (this step is not obligatory but might fix some issues);

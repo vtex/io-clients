@@ -128,7 +128,6 @@ export class MasterDataEntityV1<
     })
   }
 
-  // eslint-disable-next-line max-params
   public async scroll<K extends keyof WithMetadata<TEntity>>(
     input: ScrollInput<K>
   ) {
@@ -144,7 +143,7 @@ export class MasterDataEntityV1<
      */
     return {
       mdToken,
-      data: data as unknown as Array<Pick<WithMetadata<TEntity>, K>>,
+      data: (data as unknown) as Array<Pick<WithMetadata<TEntity>, K>>,
     }
   }
 }

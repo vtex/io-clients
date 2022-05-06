@@ -37,6 +37,7 @@ export type WithMetadata<TEntity extends Record<string, any>> = TEntity &
 export type ScrollInput<K> = {
   fields: Array<ThisType<K> | '_all'>
   sort?: string
+  where?: string
   size?: number
   mdToken?: string
 }
@@ -46,7 +47,6 @@ export abstract class MasterDataEntity<
   > extends JanusClient {
   abstract schema: string
   abstract dataEntity: string
-
   abstract get<K extends keyof WithMetadata<TEntity>>(
     id: string,
     fields: Array<ThisType<K>> | ['_all']
