@@ -30,7 +30,10 @@ export function buildSchemaService({
 
   const schemaBuilderInstance = `executeSchemaBuilderV${schemaBuilderVersion}`
 
-  return schemaBuilders.schemaBuilderExecutors[schemaBuilderInstance]
+  return (
+    schemaBuilders.schemaBuilderExecutors[schemaBuilderInstance] ??
+    schemaBuilders.schemaBuilderExecutors.executeSchemaBuilderDefault
+  )
 }
 
 class SchemaBuilders {
@@ -42,6 +45,7 @@ class SchemaBuilders {
   public schemaBuilderExecutors: {
     [key: string]: () => Promise<string> | string
   } = {
+      executeSchemaBuilderDefault: this.schemaBuilderV1.bind(this),
       executeSchemaBuilderV1: this.schemaBuilderV1.bind(this),
       executeSchemaBuilderV2: this.schemaBuilderV2.bind(this),
     }
