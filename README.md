@@ -77,6 +77,8 @@ const ContractsClient = vbaseFor<string, MyContractType>('contracts')
 export type ContractsClient = InstanceType<typeof Contracts>
 ```
 
+> 🚨 Warning: If you are NOT using the version 1.x of Masterdata builder, you should call masterDataFor passing the major version being used as the third parameter ```masterDataFor<MyBookType>('books', undefined, 2)```.
+
 3. Add new getters on the `Clients` class with the created Client:
 
 ```typescript
