@@ -284,8 +284,9 @@ export class Search extends AppClient {
 
   private get = <T = any>(url: string, config: RequestConfig = {}) => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const segmentData: SegmentData | undefined = (this
-      .context! as CustomIOContext).segment
+    const segmentData: SegmentData | undefined = (
+      this.context! as CustomIOContext
+    ).segment
 
     const { channel: salesChannel = '' } = segmentData ?? {}
 
@@ -305,8 +306,9 @@ export class Search extends AppClient {
 
   private getRaw = <T = any>(url: string, config: RequestConfig = {}) => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const segmentData: SegmentData | undefined = (this
-      .context! as CustomIOContext).segment
+    const segmentData: SegmentData | undefined = (
+      this.context! as CustomIOContext
+    ).segment
 
     const { channel: salesChannel = '' } = segmentData ?? {}
 
@@ -351,9 +353,9 @@ export class Search extends AppClient {
     }
 
     if (specificationFilters && specificationFilters.length > 0) {
-      url += (specificationFilters.map(
+      url += specificationFilters.map(
         (filter: string) => `&fq=${filter}`
-      ) as unknown) as string
+      ) as unknown as string
     }
 
     if (priceRange) {

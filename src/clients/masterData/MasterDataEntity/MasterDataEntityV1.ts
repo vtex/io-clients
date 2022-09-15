@@ -143,7 +143,7 @@ export class MasterDataEntityV1<
      */
     return {
       mdToken,
-      data: (data as unknown) as Array<Pick<WithMetadata<TEntity>, K>>,
+      data: data as unknown as Array<Pick<WithMetadata<TEntity>, K>>,
     }
   }
 }

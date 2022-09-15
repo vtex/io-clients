@@ -28,7 +28,8 @@ export function buildSchemaDecorator(target: typeof MasterDataEntityV1): void {
 
     if (isMethodPromise) {
       classMethod.value = async function (...args: any[]): Promise<any> {
-        const entityConfiguration = CreateEntityConfigurationService.getInstance()
+        const entityConfiguration =
+          CreateEntityConfigurationService.getInstance()
 
         const context = Object.getOwnPropertyDescriptor(this, 'context')
 

@@ -23,10 +23,8 @@ describe('CreateEntityConfigurationService', () => {
       providerAppId: 'vtex.app-name@1.1.1',
     })
 
-    const {
-      getEntityDetails,
-      getSchema,
-    } = CreateEntityConfigurationService.getInstance()
+    const { getEntityDetails, getSchema } =
+      CreateEntityConfigurationService.getInstance()
 
     expect(getEntityDetails).not.toBeUndefined()
     expect(getSchema).not.toBeUndefined()
@@ -43,7 +41,8 @@ describe('CreateEntityConfigurationService', () => {
       providerAppId: 'vtex.app-name@1.1.1',
     })
 
-    const createEntityConfigurationService = CreateEntityConfigurationService.getInstance()
+    const createEntityConfigurationService =
+      CreateEntityConfigurationService.getInstance()
     const schema = await createEntityConfigurationService.getSchema(
       jest.fn(),
       {} as any
@@ -62,11 +61,10 @@ describe('CreateEntityConfigurationService', () => {
       providerAppId: 'vtex.app-name@1.1.1',
     })
 
-    const createEntityConfigurationService = CreateEntityConfigurationService.getInstance()
-    const {
-      app,
-      entityName,
-    } = createEntityConfigurationService.getEntityDetails()
+    const createEntityConfigurationService =
+      CreateEntityConfigurationService.getInstance()
+    const { app, entityName } =
+      createEntityConfigurationService.getEntityDetails()
     expect(app).toMatchObject({
       build: undefined,
       locator: 'vtex.app-name@1.1.1',

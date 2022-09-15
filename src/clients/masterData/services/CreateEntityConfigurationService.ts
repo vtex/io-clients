@@ -36,7 +36,8 @@ interface ConstructedCreateEntityConfigurationService {
 }
 
 export class CreateEntityConfigurationService
-  implements ConstructedCreateEntityConfigurationService {
+  implements ConstructedCreateEntityConfigurationService
+{
   private buildSchemaService: ({
     app,
     context,
