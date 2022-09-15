@@ -44,7 +44,7 @@ export type ScrollInput<K> = {
 
 export abstract class MasterDataEntity<
   TEntity extends Record<string, any>
-  > extends JanusClient {
+> extends JanusClient {
   abstract schema: string
   abstract dataEntity: string
   abstract get<K extends keyof WithMetadata<TEntity>>(

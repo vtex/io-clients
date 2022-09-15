@@ -12,9 +12,9 @@ export const masterDataFor = <TEntity extends Record<string, any>>(
   providerAppId?: Maybe<string>,
   masterdataBuilderMajor = 1
 ): new (
-    context: IOContext,
-    options?: InstanceOptions
-  ) => MasterDataEntity<TEntity> => {
+  context: IOContext,
+  options?: InstanceOptions
+) => MasterDataEntity<TEntity> => {
   CreateEntityConfigurationService.setInstance({
     builderMajor: masterdataBuilderMajor,
     entityName,

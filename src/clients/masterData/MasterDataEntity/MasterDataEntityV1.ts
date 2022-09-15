@@ -19,7 +19,7 @@ const versionDescriptor = (isProduction: boolean, workspace: string) =>
 @buildSchemaDecorator
 export class MasterDataEntityV1<
   TEntity extends Record<string, any>
-  > extends MasterDataEntity<TEntity> {
+> extends MasterDataEntity<TEntity> {
   public dataEntity: string
   public schema: string
   private inner: MasterData

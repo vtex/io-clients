@@ -45,10 +45,10 @@ class SchemaBuilders {
   public schemaBuilderExecutors: {
     [key: string]: () => Promise<string> | string
   } = {
-      executeSchemaBuilderDefault: this.schemaBuilderV1.bind(this),
-      executeSchemaBuilderV1: this.schemaBuilderV1.bind(this),
-      executeSchemaBuilderV2: this.schemaBuilderV2.bind(this),
-    }
+    executeSchemaBuilderDefault: this.schemaBuilderV1.bind(this),
+    executeSchemaBuilderV1: this.schemaBuilderV1.bind(this),
+    executeSchemaBuilderV2: this.schemaBuilderV2.bind(this),
+  }
 
   constructor({
     app,
