@@ -7,7 +7,7 @@ import type {
 import { parseAppId } from '@vtex/api'
 
 import type { buildSchemaService as IBuildSchemaService } from '.'
-import type { BuildSchemaServiceConstructorParams } from './BuildSchemaService'
+import type { BuildSchemaServiceConstructorParams } from './buildSchemaService'
 
 interface EntityConfigurationConstructorParams {
   buildSchemaService: typeof IBuildSchemaService
