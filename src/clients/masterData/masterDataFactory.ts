@@ -104,8 +104,14 @@ const GLOBAL = ''
  */
 const normalizeEntityName = (str: string) => str.replace(/(\.)|-|:/gi, '_')
 
+const removeStateHash = (workspace: string): string => {
+  const index = workspace.lastIndexOf('-')
+
+  return index === -1 ? workspace : workspace.substring(0, index)
+}
+
 const versionDescriptor = (isProduction: boolean, workspace: string) =>
-  isProduction ? GLOBAL : `-${workspace}`
+  isProduction ? GLOBAL : `-${removeStateHash(workspace)}`
 
 export const masterDataFor = <TEntity extends Record<string, any>>(
   entityName: string,
