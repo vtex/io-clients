@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - New masterdataFor decorator that interacts with masterdata builder 2.x
+- Add new parameter to masterdataFor in order to control the builder version in use. The parameter fallback is 1 (MD builder 1.x)
 
 ## [2.19.5] - 2022-04-28
 

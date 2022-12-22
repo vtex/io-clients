@@ -35,6 +35,8 @@ yarn add @vtex/clients
 
 > Note: Some of the methods might need some policies to be inserted on your application's `manifest.json` file.
 
+> Master Data Builder: There are two versions of Master Data Builder version 1.x and 2.x both can be used. Version 2.x presents a new feature to create schemas more intelligently, avoiding their excessive creation. To use version 2.x, it is important to make this explicit in the app's Manifest and pass the new major parameter in the masterDataFor function (e.g. masterDataFor<MyBookType>('books', undefined, 2))
+
 ## How to use
 
 1. Install this package on the `node/` folder of your VTEX IO app:
