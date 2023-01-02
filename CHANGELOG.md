@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.20.0] - 2023-01-02
+
 ### Added
 
 - New masterdataFor decorator that interacts with masterdata builder 2.x
@@ -197,3 +199,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.3-beta] - 2020-08-20
 
 ## [0.0.2-beta] - 2020-08-20
+
+
+[Unreleased]: https://github.com/vtex/io-clients/compare/v2.20.0...HEAD
+[2.20.0]: https://github.com/vtex/io-clients/compare/v2.19.5...v2.20.0
