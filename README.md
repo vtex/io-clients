@@ -35,6 +35,8 @@ yarn add @vtex/clients
 
 > Note: Some of the methods might need some policies to be inserted on your application's `manifest.json` file.
 
+> Master Data Builder: There are two versions of Master Data Builder version 1.x and 2.x both can be used. Version 2.x presents a new feature to create schemas more intelligently, avoiding their excessive creation. To use version 2.x, it is important to make this explicit in the app's Manifest and pass the new major parameter in the masterDataFor function (e.g. masterDataFor<MyBookType>('books', undefined, 2))
+
 ## How to use
 
 1. Install this package on the `node/` folder of your VTEX IO app:
@@ -77,6 +79,8 @@ const ContractsClient = vbaseFor<string, MyContractType>('contracts')
 export type ContractsClient = InstanceType<typeof Contracts>
 ```
 
+> 🚨 Warning: If you are NOT using the version 1.x of Masterdata builder, you should call masterDataFor passing the major version being used as the third parameter ```masterDataFor<MyBookType>('books', undefined, 2)```.
+
 3. Add new getters on the `Clients` class with the created Client:
 
 ```typescript
@@ -116,6 +120,15 @@ To discover and learn more about VTEX Core Commerce APIs, read [VTEX Developer P
 ## Contributing
 
 Feel free to **submit new Clients** to this package, as long as they help to connect with VTEX Core Commerce APIs.
+
+In order to test your new feature or fix using `vtex link` (command used for linking a service application in IO, for example), follow these steps:
+- Guarantee that `@vtex/api` version is the same in both IO service and `@vtex/clients`;
+- Run `yarn && yarn install-peers` in package;
+- Run `yarn build && yarn unlink && yarn link` in package;
+- Delete `node_modules` inside your service application (this step is not obligatory but might fix some issues);
+- You might need to remove the dependency `@vtex/clients` from your service's `package.json` to avoid conflicts;
+- Run `yarn unlink @vtex/clients && yarn link @vtex/clients && yarn` in your service;
+- Now you can link your service application with `vtex link`.
 
 ## Releasing
 
