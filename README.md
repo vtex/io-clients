@@ -66,7 +66,7 @@ yarn add @vtex/clients
 1. Import the helper method for the Factory you want to use:
 
 ```typescript
-  import { masterDataFor, vbaseFor } from '@vtex/clients
+  import { masterDataFor, vbaseFor } from '@vtex/clients'
 ```
 
 2. Following the instructions for each factory, use its method to create a Client class.
